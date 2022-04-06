@@ -3,7 +3,6 @@ from tabnanny import check
 import discord
 from discord.ext import commands
 import asyncio
-import random
 from discord.ext import tasks
 from discord.ext.commands import BucketType
 from datetime import datetime
@@ -20,8 +19,6 @@ from discord.utils import get
 from collections import Counter
 import collections
 import schedule
-import time
-from PIL import Image, ImageDraw, ImageFont
 from discord.ext.commands import MemberNotFound
 import sys
 import subprocess
