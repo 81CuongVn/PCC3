@@ -1,0 +1,10 @@
+Here is the message log for ticket: ticket-12
+----------
+
+PC Creator 3 | <@695229647021015040> <@&957069422433038438> <@&957069446533509120>
+ ¥£$ | ,close
+ PC Creator 3 | 
+ PC Creator 3 | Ok, didn't close the ticket.
+ Yui | ,close
+ PC Creator 3 | 
+ Yui | close
