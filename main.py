@@ -1,18 +1,12 @@
 
-from tabnanny import check
 import discord
 from discord.ext import commands
 import asyncio
 from discord.ext import tasks
-from discord.ext.commands import BucketType
 from datetime import datetime
-from datetime import timedelta
 from datetime import date
 import json
 from discord.ext.commands import CommandNotFound
-from discord.ui import Button, View
-from discord import Option
-from discord.ext.commands import MissingPermissions
 import os
 from discord.utils import get
 #from antispam import AntiSpamHandler, Options
