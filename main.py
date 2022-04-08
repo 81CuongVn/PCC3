@@ -16,6 +16,7 @@ import schedule
 from discord.ext.commands import MemberNotFound
 import sys
 import subprocess
+from decouple import config
 # from AntiSpamTrackerSubclass import MyCustomTracker
 
 
@@ -377,7 +378,7 @@ async def on_application_command_error(ctx, error):
 
 initial_extensions = []
 for directory in os.listdir('./cogs'):
-    if directory != '__pycache__':
+    if directory != '__pycache__' and directory != 'testing':
         for filename in os.listdir('./cogs/' + directory):
             #print(filename)
             if filename.endswith(".py"):
@@ -389,4 +390,4 @@ if __name__ == '__main__':
     for extension in initial_extensions:
         client.load_extension(extension)    
 
-client.run(os.environ['TOKEN_NYAN'])    
+client.run(config('TOKEN_NYAN'))    
