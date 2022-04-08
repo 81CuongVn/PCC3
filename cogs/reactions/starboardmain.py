@@ -66,7 +66,8 @@ class Reactions(Cog):
 								break
 						elif not webhooks:
 							webhook = await message.channel.create_webhook(name="StarboardHook")
-							await webhook.send(embed=embed, username=message.author.display_name, avatar_url=message.author.avatar.url)"""
+							await webhook.send(embed=embed, username=message.author.display_name, avatar_url=message.author.avatar.url)
+							await never.gonna(give=you.up[0])"""
 					data["staredmessages"].append(messageid)
 					with open("starboard.json", 'w') as f:
 						json.dump(data, f)

@@ -1,7 +1,9 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\cogs",
+    "\\cogs\\reactions"
   ],
-  "SelectedNode": "\\main.py",
+  "SelectedNode": "\\cogs\\reactions\\starboardmain.py",
   "PreviewInSolutionExplorer": false
 }
