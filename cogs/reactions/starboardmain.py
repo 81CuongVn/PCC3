@@ -17,7 +17,7 @@ class Reactions(Cog):
 			channel = self.client.get_channel(payload.channel_id)
 			message = await channel.fetch_message(payload.message_id)
 			reaction = get(message.reactions, emoji=payload.emoji.name)
-			if reaction and reaction.count >= 1:
+			if reaction and reaction.count >= 5:
 				with open("starboard.json") as f:
 					data = json.load(f)
 				messagecontent = message.content
