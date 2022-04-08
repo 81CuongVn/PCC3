@@ -55,15 +55,7 @@ class Reactions(Cog):
 							webhook = await starchannel.create_webhook(name="StarboardHook")
 							await webhook.send(embed=embed, username=message.author.display_name, avatar_url=message.author.avatar.url)
 					except:
-						starchannel = discord.utils.get(guild.channels, name="starboard")
-						webhooks = await starchannel.webhooks()
-						if webhooks:
-							for webhook in webhooks:
-								await webhook.send(embed=embed, username=message.author.display_name, avatar_url=message.author.avatar.url)
-								break
-						elif not webhooks:
-							webhook = await starchannel.create_webhook(name="StarboardHook")
-							await webhook.send(embed=embed, username=message.author.display_name, avatar_url=message.author.avatar.url)
+						return
 						#return
 						"""starchannel = await guild.create_text_channel("starboard")
 						webhooks = await starchannel.webhooks()
