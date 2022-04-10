@@ -35,9 +35,9 @@ class withdraw(commands.Cog):
         if verified_pwd == 'yes':
             bank_account[str(user.id)]["money"] += -1*amount
             users_coins[str(user.id)] += amount
-            with open("bank.json", "w") as f:
+            with open("json_files/bank.json", "w") as f:
                 json.dump(bank_account,f)
-            with open("usercoins.json", "w") as f:
+            with open("json_files/usercoins.json", "w") as f:
                 json.dump(users_coins,f)  
             await ctx.respond(f"You withdrew {amount}<:bot_icon:951868023503986699>", ephemeral=True)  
         else:

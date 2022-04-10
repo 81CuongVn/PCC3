@@ -50,7 +50,7 @@ class slots(commands.Cog):
             embed=discord.Embed(title="Slot Machine", colour=ctx.author.colour, timestamp=datetime.now())
             embed.add_field(name=f"{slot1}  {slot2}  {slot3}", value=f"You won **{t_amount}**<:bot_icon:951868023503986699> 🥳 \nYou had **{old_amount}**<:bot_icon:951868023503986699> \nNow you have **{new_amount}**<:bot_icon:951868023503986699>", inline=False)
             await ctx.respond(embed = embed)
-            with open("usercoins.json", "w") as f:
+            with open("json_files/usercoins.json", "w") as f:
                 json.dump(users_coins,f)
             return
         else:
@@ -59,7 +59,7 @@ class slots(commands.Cog):
             embed=discord.Embed(title="Slot Machine", colour=ctx.author.colour, timestamp=datetime.now())
             embed.add_field(name=f"{slot1}  {slot2}  {slot3}", value=f"You lost **{amount}**<:bot_icon:951868023503986699> 😕\nYou had **{old_amount}**<:bot_icon:951868023503986699> \nNow you have **{new_amount}**", inline=False)
             await ctx.respond(embed = embed)
-            with open("usercoins.json", "w") as f:
+            with open("json_files/usercoins.json", "w") as f:
                 json.dump(users_coins,f)
             return
           

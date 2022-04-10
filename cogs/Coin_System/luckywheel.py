@@ -47,7 +47,7 @@ class luckywheel(commands.Cog):
             prize_1 = -1*amount
             users_coins[str(user.id)] += prize_1
             
-        with open("usercoins.json", "w") as f:
+        with open("json_files/usercoins.json", "w") as f:
             json.dump(users_coins,f)
         embed= discord.Embed(title="Lucky wheel", color=member.color)
      

@@ -2,7 +2,7 @@ import discord, json
 from discord.ext import commands
 
 
-data_file_name = "data.json"
+data_file_name = "json_files/data.json"
 class PersistentButton(discord.ui.View):
     def __init__(self):
         super().__init__(timeout=None)
@@ -160,7 +160,7 @@ class TicketCog(commands.Cog):
                 await ctx.channel.delete()
                 index = data["ticket-channel-ids"].index(channel_id)
                 del data["ticket-channel-ids"][index]
-                with open('data.json', 'w') as f:
+                with open('json_files/data.json', 'w') as f:
                     json.dump(data, f)
                 fileObject = discord.File(f"tickets/{ticket_name}.txt")
                 await TicketCog.SendLog(self, ctx, fileObject)
@@ -188,7 +188,7 @@ class TicketCog(commands.Cog):
                     data["ticket-support-roles"].append(str(role_id.id))
                     if str(mentionRole) == "true":
                         data["roles-to-mention"].append(str(role_id.id))
-                    with open('data.json', 'w') as f:
+                    with open('json_files/data.json', 'w') as f:
                         json.dump(data, f)
                     em = discord.Embed(title="Add support", description="You have successfully added `{}` to the support team.".format(role_id.name), color=13565696)
                     await ctx.send(embed=em)
@@ -223,7 +223,7 @@ class TicketCog(commands.Cog):
                     index = valid_roles.index(str(role_id.id))
                     del valid_roles[index]
                     data["ticket-support-roles"] = valid_roles
-                    with open('data.json', 'w') as f:
+                    with open('json_files/data.json', 'w') as f:
                         json.dump(data, f)
                     em = discord.Embed(title="Delete Support", description="You have successfully removed `{}` from the support team.".format(role_id.name), color=13565696)
                     await ctx.send(embed=em)
@@ -253,7 +253,7 @@ class TicketCog(commands.Cog):
             if role_id not in data["roles-to-mention"]:
                 try:
                     data["roles-to-mention"].append(str(role_id.id))
-                    with open('data.json', 'w') as f:
+                    with open('json_files/data.json', 'w') as f:
                         json.dump(data, f)
                     em = discord.Embed(title="Add mention", description="You have successfully added `{}` to the list of mentioned roles.".format(role_id.name), color=13565696)
                     await ctx.send(embed=em)
@@ -288,7 +288,7 @@ class TicketCog(commands.Cog):
                     index = pinged_roles.index(str(role_id.id))
                     del pinged_roles[index]
                     data["roles-to-mention"] = pinged_roles
-                    with open('data.json', 'w') as f:
+                    with open('json_files/data.json', 'w') as f:
                         json.dump(data, f)
                     em = discord.Embed(title="Delete mention", description="You have successfully removed `{}` from the list of mentioned roles.".format(role.name), color=13565696)
                     await ctx.send(embed=em)

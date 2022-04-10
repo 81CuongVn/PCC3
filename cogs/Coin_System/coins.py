@@ -36,7 +36,7 @@ class messagecoins(commands.Cog):
 
 
     async def get_coins(self):
-        with open("usercoins.json", "r") as f:
+        with open("json_files/usercoins.json", "r") as f:
             users_coins = json.load(f)
         return users_coins
 
@@ -50,7 +50,7 @@ class messagecoins(commands.Cog):
             users_coins[str(user.id)] = {}
             users_coins[str(user.id)] = 0
 
-        with open("usercoins.json", "w") as f:
+        with open("json_files/usercoins.json", "w") as f:
             json.dump(users_coins,f)
         return True
 
@@ -60,7 +60,7 @@ class messagecoins(commands.Cog):
   
 
     async def lead(self, send, url):
-        with open("usercoins.json", "r") as f:
+        with open("json_files/usercoins.json", "r") as f:
             data = json.load(f)
 
             leaderboard = sorted(data.items(), key= lambda x: x[1], reverse=True)[:5]

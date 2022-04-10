@@ -26,7 +26,7 @@ class trading(commands.Cog):
 
         if what_you_give == "Part(s)":
 
-            with open("useritems.json", "r") as f:
+            with open("json_files/useritems.json", "r") as f:
                 useritems = json.load(f)
 
             if str(ctx.author.id) in useritems:    
@@ -95,9 +95,9 @@ class trading(commands.Cog):
                         trading_partner_list = trading_member[str(trading_partner)]
                         trading_author_list.append(new_trading_count)
                         trading_partner_list.append(new_trading_count)
-                        with open("trading_list.json", "w") as f:
+                        with open("json_files/trading_list.json", "w") as f:
                             json.dump(trading_list,f)
-                        with open("trading_member.json", "w") as f:
+                        with open("json_files/trading_member.json", "w") as f:
                             json.dump(trading_member,f)
                         return
                     else:
@@ -105,7 +105,7 @@ class trading(commands.Cog):
                         return    
 
                 if what_you_want == "Part(s)":
-                    with open("useritems.json", "r") as f:
+                    with open("json_files/useritems.json", "r") as f:
                         useritems = json.load(f)
                     if str(ctx.author.id) in useritems:
                         items_partner = useritems[str(trading_partner.id)]   
@@ -141,7 +141,7 @@ class trading(commands.Cog):
 
             if what_you_want == "Part(s)":
 
-                with open("useritems.json", "r") as f:
+                with open("json_files/useritems.json", "r") as f:
                     useritems = json.load(f)
 
                 items_partner = useritems[str(trading_partner.id)]   
@@ -204,12 +204,12 @@ class trading(commands.Cog):
 
 
     async def get_trading_list(self):
-        with open("trading_list.json", "r") as f:
+        with open("json_files/trading_list.json", "r") as f:
             trading_list = json.load(f)
         return trading_list
         
     async def get_trading(self):
-        with open("trading_member.json", "r") as f:
+        with open("json_files/trading_member.json", "r") as f:
             trading = json.load(f)
         return trading
 
@@ -221,7 +221,7 @@ class trading(commands.Cog):
         else:
             trading[str(member.id)] = []
     
-        with open("trading_member.json", "w") as f:
+        with open("json_files/trading_member.json", "w") as f:
             json.dump(trading,f)
         return True
 

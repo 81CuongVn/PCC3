@@ -8,7 +8,7 @@ from discord.commands import permissions
 
 class Shop_Select(discord.ui.View):
 
-    with open("shop.json", "r") as f:
+    with open("json_files/shop.json", "r") as f:
             items = json.load(f)
 
     options = []
@@ -21,18 +21,18 @@ class Shop_Select(discord.ui.View):
         options.append(discord.SelectOption(label=name, description=f"Price: {price} <:bot_icon:951868023503986699>"))
 
     async def get_coins(self):
-            with open("usercoins.json", "r") as f:
+            with open("json_files/usercoins.json", "r") as f:
                 users_coins = json.load(f)
             return users_coins
 
     async def get_useritems(self):
-                with open("useritems.json", "r") as f:
+                with open("json_files/useritems.json", "r") as f:
                     users_items = json.load(f)
                 return users_items
 
     async def sub_coins(self, user, subprice):
 
-        with open("usercoins.json", "r") as f:
+        with open("json_files/usercoins.json", "r") as f:
                 users_coins = json.load(f)
         user = str(user)
         if user in users_coins:
@@ -57,7 +57,7 @@ class Shop_Select(discord.ui.View):
             await interaction.response.send_message("Use /shop to use the shop", ephemeral=True)
 
 
-        with open("shop.json", "r") as f:
+        with open("json_files/shop.json", "r") as f:
             items = json.load(f)
         responder = str(interaction.user.id)
         item_name = select.values[0]
@@ -65,12 +65,12 @@ class Shop_Select(discord.ui.View):
             if item["item_name"] == item_name:
                 subprice = item["price"]
         status = await self.sub_coins(responder, subprice)
-        with open("usercoins.json", "r") as f:
+        with open("json_files/usercoins.json", "r") as f:
                 users_coins = json.load(f)
         if responder in users_coins:
             purse = users_coins[str(responder)]
             if status == 'successpurchase':
-                with open("useritems.json", "r") as f:
+                with open("json_files/useritems.json", "r") as f:
                         users_items = json.load(f)
                 twoitem = False
                 if responder in users_items:
@@ -79,18 +79,18 @@ class Shop_Select(discord.ui.View):
                             twoitem = True
 
                 async def newuseritem_member(self):
-                    with open("useritems.json", "r") as f:
+                    with open("json_files/useritems.json", "r") as f:
                         users_items = json.load(f)
                     if str(responder) in users_items:
                         currentitem = users_items[str(responder)]
                         currentitem = currentitem + [item_name]
                         users_items[str(responder)] = currentitem
-                        with open("useritems.json", "w") as f:
+                        with open("json_files/useritems.json", "w") as f:
                             json.dump(users_items, f)
                         return True
                     else:
                         users_items[str(responder)] = [f"{item_name}"]
-                        with open("useritems.json", "w") as f:
+                        with open("json_files/useritems.json", "w") as f:
                             json.dump(users_items, f)
                     return False
 
@@ -98,7 +98,7 @@ class Shop_Select(discord.ui.View):
                     subcoins = int(subprice)
                     purse -= subcoins
                     users_coins[str(responder)] = purse
-                    with open("usercoins.json", "w") as f:
+                    with open("json_files/usercoins.json", "w") as f:
                         json.dump(users_coins,f)
                     await newuseritem_member(self)
                     await interaction.message.edit(content=f"You bought a {item_name} for **{subprice}**<:bot_icon:951868023503986699> and have **{purse}**<:bot_icon:951868023503986699> remaining.", view=None)
@@ -119,17 +119,17 @@ class shop(commands.Cog):
         self.client = client
 
     async def get_items(self):
-        with open("shop.json", "r") as f:
+        with open("json_files/shop.json", "r") as f:
             items = json.load(f)
         return items
 
     async def get_coins(self):
-            with open("usercoins.json", "r") as f:
+            with open("json_files/usercoins.json", "r") as f:
                 users_coins = json.load(f)
             return users_coins
 
     async def get_useritems(self):
-                with open("useritems.json", "r") as f:
+                with open("json_files/useritems.json", "r") as f:
                     users_items = json.load(f)
                 return users_items
 
@@ -146,7 +146,7 @@ class shop(commands.Cog):
     @commands.slash_command(name="new_item")
     @permissions.has_any_role(951207540472029195, 951464246506565683)
     async def new_item(self, ctx, item_name : Option(str, 'Item Name', required=True), price: Option(int, 'Price (only numbers)', required=True), emoji: Option(str, required=False)):
-        shopjson = open("shop.json", "r")
+        shopjson = open("json_files/shop.json", "r")
         items = json.load(shopjson)
         if type(items) is dict:
             items = [items]
@@ -162,7 +162,7 @@ class shop(commands.Cog):
             'price': price,
             'emoji': emoji
             })
-            with open("shop.json", "w") as outshopjson:
+            with open("json_files/shop.json", "w") as outshopjson:
                 json.dump(items,outshopjson)
             await ctx.respond(f"Added {item_name} \nprice: {price} \nemoji: {emoji}\n\nIt will be added to /shop on the next restart.")
         else:
@@ -174,7 +174,7 @@ class shop(commands.Cog):
     @commands.slash_command(name="rem_item")
     @permissions.has_any_role(951207540472029195, 951464246506565683)
     async def rem_item(self, ctx, item_name : Option(str, 'Item Name', required=True)):
-        shopjson = open("shop.json", "r")
+        shopjson = open("json_files/shop.json", "r")
         items = json.load(shopjson)
         if type(items) is dict:
             items = [items]
@@ -197,7 +197,7 @@ class shop(commands.Cog):
     @commands.slash_command(name="list_item")
     @permissions.has_any_role(951207540472029195, 951464246506565683)
     async def list_item(self, ctx):
-        shopjson = open("shop.json", "r")
+        shopjson = open("json_files/shop.json", "r")
         items = json.load(shopjson)
         itemprint = []
         if type(items) is dict:

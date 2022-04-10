@@ -29,7 +29,7 @@ class banktransfer(commands.Cog):
         self.client = client
 
     async def get_coins(self):
-            with open("usercoins.json", "r") as f:
+            with open("json_files/usercoins.json", "r") as f:
                 users_coins = json.load(f)
             return users_coins
 
@@ -46,7 +46,7 @@ class banktransfer(commands.Cog):
         elif subtract == True:
             coinamount = messages_amt - amount
         users_coins[str(user.id)] = coinamount
-        with open("usercoins.json", "w") as f:
+        with open("json_files/usercoins.json", "w") as f:
             json.dump(users_coins,f)
         return True
         
@@ -71,7 +71,7 @@ class banktransfer(commands.Cog):
             users_coins[str(user.id)] = {}
             users_coins[str(user.id)] = 0
 
-        with open("usercoins.json", "w") as f:
+        with open("json_files/usercoins.json", "w") as f:
             json.dump(users_coins,f)
         return True
 
@@ -88,7 +88,7 @@ class banktransfer(commands.Cog):
 
 
     async def get_bank_data(self):
-            with open("bank.json", "r") as f:
+            with open("json_files/bank.json", "r") as f:
                 bank_account = json.load(f)
             return bank_account
   
@@ -131,10 +131,10 @@ class banktransfer(commands.Cog):
             bank_account[str(user.id)]["money"] = 0
             bank_account[str(user.id)]["password"] = password
 
-        file = open('bank.json', 'w', encoding='utf-8');
+        file = open('json_files/bank.json', 'w', encoding='utf-8');
         file.write(json.dumps(bank_account, cls=MyEncoder, indent=4))
         file.close()
-        #with open("bank.json", "w") as f:
+        #with open("json_files/bank.json", "w") as f:
         #    json.dump(bank_account,f)
         
         await send(f"Successfully created your bank account. (If you forget your Password, use `/reset_bank_password)`", ephemeral=True)

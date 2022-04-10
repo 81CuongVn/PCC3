@@ -200,7 +200,7 @@ class levelroles(commands.Cog):
 
 
     async def get_messages(self):
-        with open("userLevels.json", "r") as f:
+        with open("json_files/userLevels.json", "r") as f:
             users = json.load(f)
         return users   
 
@@ -214,7 +214,7 @@ class levelroles(commands.Cog):
             users[str(user.id)] = {}
             users[str(user.id)] = 0        
 
-        with open("userLevels.json", "w") as f:
+        with open("json_files/userLevels.json.json", "w") as f:
             json.dump(users,f)
         return True     
 
@@ -238,7 +238,7 @@ class levelroles(commands.Cog):
 
     async def lead(self, ctx, send):
         #self.lrs_stats()
-        with open("userLevels.json", "r") as f:
+        with open("json_files/userLevels.json", "r") as f:
             data = json.load(f)
             f = discord.File("/home/pi/Desktop/PC_Creator_2/dailymsgs.png")
 

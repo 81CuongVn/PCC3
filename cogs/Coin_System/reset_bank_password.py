@@ -17,7 +17,7 @@ class reset_bank_password(commands.Cog):
         password = await hash_password(new_password)
         bank_account[str(user.id)]["password"] = password.decode("utf-8")
 
-        file = open('bank.json', 'w', encoding='utf-8');
+        file = open('json_files/bank.json', 'w', encoding='utf-8');
         file.write(json.dumps(bank_account, indent=4))
         file.close()
 

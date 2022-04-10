@@ -24,7 +24,7 @@ class jsonEncoding(json.JSONEncoder):
         return json.JSONEncoder.default(self, obj)
 
 async def get_bank_data():
-        with open("bank.json", "r") as f:
+        with open("json_files/json_files/bank.json", "r") as f:
             bank_account = json.load(f)
         return bank_account
 
@@ -52,10 +52,10 @@ async def new_bank_account(self, ctx, send, member, password):
             bank_account[str(user.id)]["money"] = 0
             bank_account[str(user.id)]["password"] = password.decode("utf-8")
 
-        file = open('bank.json', 'w', encoding='utf-8');
+        file = open('json_files/bank.json', 'w', encoding='utf-8');
         file.write(json.dumps(bank_account, indent=4))
         file.close()
-        #with open("bank.json", "w") as f:
+        #with open("json_files/bank.json", "w") as f:
         #    json.dump(bank_account,f)
         return "Successfully created your bank account. If you forget your password, use `/reset_bank_password`"
 
@@ -74,7 +74,7 @@ async def update_bank(member, send, amount, mode):
             await send("You dont have enough money")
         else:
             bank_account[str(user.id)] += amount  
-            with open("bank.json", "w") as f:
+            with open("json_files/bank.json", "w") as f:
                 json.dump(bank_account,f)
           
     elif mode == "wallet":
@@ -108,7 +108,7 @@ async def change_coins(ctx, member, amount, subtract):
     elif subtract == True:
         coinamount = messages_amt - amount
     bank_account[str(user.id)]["money"] = coinamount
-    with open("bank.json", "w") as f:
+    with open("json_files/bank.json", "w") as f:
         json.dump(bank_account,f)
     return True
     
@@ -176,7 +176,7 @@ async def balance_command(ctx, send, member):
 async def lead(send, url):
     with open("usercoins.json", "r") as w:
         wallet = json.load(w)
-    with open("bank.json", "r") as b:
+    with open("json_files/bank.json", "r") as b:
         bank = json.load(b)
     wallet = sorted(wallet.items(), key= lambda x: x[1], reverse=True)[:5]
     bank = sorted(bank.items(), key= lambda x: x[1].get('money', 0), reverse=True)[:5]
@@ -202,7 +202,7 @@ async def lead(send, url):
 
         with open("usercoins.json", "r") as w:
             coinsystem = json.load(w)
-        with open("bank.json", "r") as b:
+        with open("json_files/bank.json", "r") as b:
             banksystem = json.load(b)
 
         richarray = []
@@ -291,7 +291,7 @@ async def set_things(member, mode, mode_2, amount):
             if mode_2 == "give":
                 content = f"Gave {member} {amount}<:bot_icon:951868023503986699> (mode: bank)"
                 bank_account[str(member.id)]["money"] += amount
-            with open("bank.json", "w") as f:
+            with open("json_files/bank.json", "w") as f:
                 json.dump(bank_account,f)
             return content
     if mode == "messages":
