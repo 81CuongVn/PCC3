@@ -108,4 +108,4 @@ if __name__ == '__main__':
     for extension in initial_extensions:
         client.load_extension(extension)    
 
-client.run(config('TOKEN_NYAN'))    
+client.run(config('TOKEN_NYAN'))
