@@ -24,7 +24,7 @@ class jsonEncoding(json.JSONEncoder):
         return json.JSONEncoder.default(self, obj)
 
 async def get_bank_data():
-        with open("json_files/json_files/bank.json", "r") as f:
+        with open("json_files/bank.json", "r") as f:
             bank_account = json.load(f)
         return bank_account
 
@@ -85,13 +85,13 @@ async def update_bank(member, send, amount, mode):
             return
         else:
             users_coins[str(user.id)] += amount
-            with open("usercoins.json", "w") as f:
+            with open("json_files/usercoins.json", "w") as f:
                 json.dump(users_coins,f)
 
         
          
 async def get_coins():
-        with open("usercoins.json", "r") as f:
+        with open("json_files/usercoins.json", "r") as f:
             users_coins = json.load(f)
         return users_coins
 
@@ -146,7 +146,7 @@ async def new_member(user):
         users_coins[str(user.id)] = {}
         users_coins[str(user.id)] = 0
 
-    with open("usercoins.json", "w") as f:
+    with open("json_files/usercoins.json", "w") as f:
         json.dump(users_coins,f)
     return True
 
@@ -174,7 +174,7 @@ async def balance_command(ctx, send, member):
 
 
 async def lead(send, url):
-    with open("usercoins.json", "r") as w:
+    with open("json_files/usercoins.json", "r") as w:
         wallet = json.load(w)
     with open("json_files/bank.json", "r") as b:
         bank = json.load(b)
@@ -200,7 +200,7 @@ async def lead(send, url):
         user_id_4th_bank = bank[3][0]
         user_id_5th_bank = bank[4][0]
 
-        with open("usercoins.json", "r") as w:
+        with open("json_files/usercoins.json", "r") as w:
             coinsystem = json.load(w)
         with open("json_files/bank.json", "r") as b:
             banksystem = json.load(b)
@@ -236,7 +236,7 @@ async def lead(send, url):
 
 
 async def get_useritems():
-    with open("useritems.json", "r") as f:
+    with open("json_files/useritems.json", "r") as f:
         users_items = json.load(f)
     return users_items  
 
@@ -276,7 +276,7 @@ async def set_things(member, mode, mode_2, amount):
         if mode_2 == "give":
             content = f"Gave {member} {amount}<:bot_icon:951868023503986699> (mode: wallet)"
             users_coins[str(member.id)] += amount
-        with open("usercoins.json", "w") as f:
+        with open("json_files/usercoins.json", "w") as f:
             json.dump(users_coins,f)
         return content
     if mode == "bank":
@@ -303,14 +303,14 @@ async def set_things(member, mode, mode_2, amount):
         if mode_2 == "give":
             content = f"Gave {member} {amount} messages (mode: messages)"
             users[str(member.id)] += amount
-        with open("userLevels.json", "w") as f:
+        with open("json_files/userLevels.json", "w") as f:
             json.dump(users,f)
         return content  
 
 
 
 async def get_messages():
-    with open("userLevels.json", "r") as f:
+    with open("json_files/userLevels.json", "r") as f:
         users = json.load(f)
     return users   
 
@@ -324,7 +324,7 @@ async def new_message_member(user):
         users[str(user.id)] = {}
         users[str(user.id)] = 0        
 
-    with open("userLevels.json", "w") as f:
+    with open("json_files/userLevels.json", "w") as f:
         json.dump(users,f)
     return True   
                 
