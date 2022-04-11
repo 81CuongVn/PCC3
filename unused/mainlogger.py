@@ -19,38 +19,39 @@ from decouple import config
 # from AntiSpamTrackerSubclass import MyCustomTracker
 
 other_log_channel=962765009006506024 #for main logging --> Default: 572673322891083776
+spammers = []
 
 class main_logger(commands.Cog):
     def __init__(self, client):
         self.client = client
-    
-    """@commands.Cog.listener()
-    async def on_ready():
+
+    @commands.Cog.listener()
+    async def on_ready(self):
 
         @tasks.loop(seconds = 30) # repeat every 10 seconds
         async def myLoop():
             await asyncio.sleep(30)
-            spammers.clear() 
+            spammers.clear()
 
-        myLoop.start()"""
+        myLoop.start()
 
-  
+
 
     @commands.Cog.listener()
     async def on_message_delete(self, message):
-	    #if message.author.bot:
-		    #return
+        if message.author.bot == True:
+            return
         channel = self.client.get_channel(other_log_channel)
         embed = discord.Embed(description=f"**Message sent by {message.author.mention} deleted in <#{message.channel.id}>** \nContent: `{message.content}`", color=0xff0000, timestamp=datetime.now())  
         try:
             embed.set_author(name=f"{message.author.display_name}", icon_url=message.author.avatar.url) 
         except:
-            embed.set_author(name=f"{message.author.display_name}")    
+            embed.set_author(name=f"{message.author.display_name}")
         embed.set_footer(text=f"Author: {message.author.id} | Message ID: {message.id}") 
         await channel.send(embed=embed)
 
     @commands.Cog.listener()
-    async def on_message_edit(self, message_before, message_after):    
+    async def on_message_edit(self, message_before, message_after):
         channel = self.client.get_channel(other_log_channel)
         if message_before.content == None or message_after.content == None:
             return
@@ -72,7 +73,7 @@ class main_logger(commands.Cog):
         weeks = int(delta_create_int/7)
         months = int(delta_create_int/30.4375)
         years = int(delta_create_int/365)
-    
+
         channel = self.client.get_channel(other_log_channel)
         embed = discord.Embed(description=f"{member.mention} {member}", color=0xff0000, timestamp=datetime.now())   
         embed.add_field(name="Account created at:", value=f"{member_created} MM-DD-YY") 
@@ -81,14 +82,14 @@ class main_logger(commands.Cog):
         try:
             embed.set_thumbnail(url=member.avatar.url)
         except:
-            pass    
-    
+            pass
+
         await channel.send(embed=embed)
 
 
     @commands.Cog.listener()
     async def on_member_leave(self, member):
-    
+
         channel = self.client.get_channel(other_log_channel)
         embed = discord.Embed(description=f"{member.mention} {member}", color=0x1eff00, timestamp=datetime.now())   
         embed.set_author(name=f"Member left")
@@ -97,7 +98,7 @@ class main_logger(commands.Cog):
             embed.set_thumbnail(url=member.avatar.url)
         except:
             pass
-    
+
         await channel.send(embed=embed)
 
 def setup(bot):
