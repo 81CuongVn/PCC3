@@ -49,6 +49,8 @@ class logs(commands.Cog):
         e.set_author(name=f"{before.author}", icon_url=f"{before.author.avatar.url}")
         e.set_footer(text=f"User ID: {after.author.id}")
         e.timestamp = datetime.now(pytz.timezone('Europe/Vienna'))
+        if before.author.bot:
+            return
         if before.content != after.content or before.attachments != after.attachments:
             e.description=f"**Message sent by {before.author.mention} edited in {before.channel.mention}.**\n[Jump to message](https://discord.com/channels/{after.guild.id}/{after.channel.id}/{after.id}/)"
             if before.content == after.content:
