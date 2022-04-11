@@ -1,7 +1,0 @@
-Here is the message log for ticket: ticket-2
-----------
-
-PC Creator 3 | 
- Yui | ,close
- PC Creator 3 | 
- Yui | close

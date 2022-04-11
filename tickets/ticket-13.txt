@@ -1,9 +1,0 @@
-Here is the message log for ticket: ticket-13
-----------
-
-PC Creator 3 | <@443769343138856961> <@&957069422433038438> <@&957069446533509120>
- Yui | Hi!
-How can I help you today?
- Yui | .close
- PC Creator 3 | 
- Yui | Close
