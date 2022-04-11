@@ -6,7 +6,7 @@ import json
 
  
 async def get_restriction():
-    with open("channel_restrictions.json", "r") as f:
+    with open("json_files/channel_restrictions.json", "r") as f:
         restriction = json.load(f)
     return restriction
 

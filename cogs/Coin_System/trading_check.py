@@ -2,7 +2,7 @@ import discord
 from discord.ext import commands
 from discord import Option
 import json
-from bank_functions import check_for_bank_account, get_bank_data, get_trading, get_trading_list, new_trading_member
+#from bank_functions import check_for_bank_account, get_bank_data, get_trading, get_trading_list, new_trading_member
 
 class trading_check(commands.Cog):
 
@@ -10,7 +10,7 @@ class trading_check(commands.Cog):
         self.client = client
 
 
-    @commands.command(name="ctrade")
+    """@commands.command(name="ctrade")
     async def ctrade(self, ctx):
         trading_member = await get_trading()
         trading_list = await get_trading_list()
@@ -25,7 +25,7 @@ class trading_check(commands.Cog):
                 print(trade_things)
                 #trade_things_list = []
                 #trade_things_list.append(trade_things)
-                #await ctx.send(trade_things)
+                #await ctx.send(trade_things)"""
 
 
 def setup(client):

@@ -1,4 +1,3 @@
-from sre_constants import SUCCESS
 import discord
 from discord.ext import commands
 import random
@@ -6,8 +5,6 @@ from discord.ui import Button, View
 import json
 from bank_functions import new_member, get_coins, update_bank
 from discord import Emoji, Option
-
-game_list = [["⬜","⬜","⬜","⬜","⬜","⬜","⬜","⬜","⬜"],[False,False,False,False,False,False,False,False,False]]
 
 def checkWinner(mark, board_check,gameover):
           winningConditions_1 = [
@@ -112,15 +109,14 @@ def button_update(ttt_list_update, return_list):
 class PersistentView(discord.ui.View):
     def __init__(self):
       super().__init__(timeout=None)
-    global game_list
-    print(game_list)
+
+    game_list=[["⬜","⬜","⬜","⬜","⬜","⬜","⬜","⬜","⬜"],[False,False,False,False,False,False,False,False,False]]
 
     @discord.ui.button(style=discord.ButtonStyle.secondary, emoji=game_list[0][0], row=1,custom_id="persistent_view:button_ttt_1_callback", disabled=game_list[1][0])
     
 
     async def button_ttt_1_callback(self, button: discord.ui.button,interaction:discord.Interaction):
       global mark
-      global game_list
       for ttt_list_2 in board:
         if ttt_list_2[2] == interaction.message.id and ttt_list_2[0] == interaction.user.id or ttt_list_2[2] == interaction.message.id and ttt_list_2[1] == interaction.user.id:
           if ttt_list_2[3] == interaction.user.id:
@@ -134,7 +130,7 @@ class PersistentView(discord.ui.View):
             view_ttt=None
             send = interaction.response.send_message
             if checkWinner(mark, ttt_list_2[4],gameOver) == False:
-              interaction.respond(f"<@{interaction.author.id}> win and get the entire money.")
+              interaction.respond(f"<@{interaction.author.id}> won and got the entire money.")
               await update_bank(interaction.user, send, 2*ttt_list_2[5], mode = "wallet")
             else:
               if ttt_list_2[3] == ttt_list_2[0]:
@@ -142,9 +138,9 @@ class PersistentView(discord.ui.View):
               else:
                 ttt_list_2[3] = ttt_list_2[0]
               return_list = [[],[]]
-              game_list = button_update(ttt_list_2[4], return_list)
-              print(game_list)
+              PersistentView.game_list = button_update(ttt_list_2[4], return_list)
               await interaction.message.edit(f"It was <@{interaction.user.id}> turn so now it's <@{ttt_list_2[3]}> turn.", view=PersistentView())
+              PersistentView.game_list = [["⬜","⬜","⬜","⬜","⬜","⬜","⬜","⬜","⬜"],[False,False,False,False,False,False,False,False,False]]
               print(board)
           else:
             await interaction.response.send_message("its not your turn")
@@ -166,14 +162,14 @@ class PersistentView(discord.ui.View):
             view_ttt=None
             send = interaction.response.send_message
             if checkWinner(mark, ttt_list_2[4],gameOver) == True:
-              interaction.respond(f"<@{interaction.author.id}> win and get the entire money.")
+              interaction.respond(f"<@{interaction.author.id}> won and got the entire money.")
               await update_bank(interaction.user, send, 2*ttt_list_2[5], mode = "wallet")
             else:
               if ttt_list_2[3] == ttt_list_2[0]:
                 ttt_list_2[3] = ttt_list_2[1]
               else:
                 ttt_list_2[3] = ttt_list_2[0]
-              await interaction.message.edit(f"It was <@{interaction.user.id}> turn so now it's <@{ttt_list_2[3]}> turn.", view=button_update(view_ttt=view_ttt, ttt_list_2=ttt_list_2))
+              await interaction.message.edit(f"It was <@{interaction.user.id}>'s turn so now it is <@{ttt_list_2[3]}>'s turn.", view=button_update(view_ttt=view_ttt, ttt_list_2=ttt_list_2))
 
     @discord.ui.button(style=discord.ButtonStyle.secondary, emoji="⬜", row=1,custom_id="persistent_view:button_ttt_3_callback")
     async def button_ttt_3_callback(self, button: discord.ui.button,interaction:discord.Interaction):
@@ -191,14 +187,14 @@ class PersistentView(discord.ui.View):
             view_ttt=None
             send = interaction.response.send_message
             if checkWinner(mark, ttt_list_2[4],gameOver) == True:
-              interaction.respond(f"<@{interaction.author.id}> win and get the entire money.")
+              interaction.respond(f"<@{interaction.author.id}> won and got the entire money.")
               await update_bank(interaction.user, send, 2*ttt_list_2[5], mode = "wallet")
             else:
               if ttt_list_2[3] == ttt_list_2[0]:
                 ttt_list_2[3] = ttt_list_2[1]
               else:
                 ttt_list_2[3] = ttt_list_2[0]
-              await interaction.message.edit(f"It was <@{interaction.user.id}> turn so now it's <@{ttt_list_2[3]}> turn.", view=button_update(view_ttt=view_ttt, ttt_list_2=ttt_list_2))
+              await interaction.message.edit(f"It was <@{interaction.user.id}>'s turn so now it's <@{ttt_list_2[3]}>'s turn.", view=button_update(view_ttt=view_ttt, ttt_list_2=ttt_list_2))
 
     @discord.ui.button(style=discord.ButtonStyle.secondary, emoji="⬜", row=2,custom_id="persistent_view:button_ttt_4_callback")
     async def button_ttt_4_callback(self, button: discord.ui.button,interaction:discord.Interaction):
@@ -216,14 +212,14 @@ class PersistentView(discord.ui.View):
             view_ttt=None
             send = interaction.response.send_message
             if checkWinner(mark, ttt_list_2[4],gameOver) == True:
-              interaction.respond(f"<@{interaction.author.id}> win and get the entire money.")
+              interaction.respond(f"<@{interaction.author.id}> won and got the entire money.")
               await update_bank(interaction.user, send, 2*ttt_list_2[5], mode = "wallet")
             else:
               if ttt_list_2[3] == ttt_list_2[0]:
                 ttt_list_2[3] = ttt_list_2[1]
               else:
                 ttt_list_2[3] = ttt_list_2[0]
-              await interaction.message.edit(f"It was <@{interaction.user.id}> turn so now it's <@{ttt_list_2[3]}> turn.", view=button_update(view_ttt=view_ttt, ttt_list_2=ttt_list_2))
+              await interaction.message.edit(f"It was <@{interaction.user.id}>'s turn so now it's <@{ttt_list_2[3]}>'s turn.", view=button_update(view_ttt=view_ttt, ttt_list_2=ttt_list_2))
 
     @discord.ui.button(style=discord.ButtonStyle.secondary, emoji="⬜", row=2,custom_id="persistent_view:button_ttt_5_callback")
     async def button_ttt_5_callback(self, button: discord.ui.button,interaction:discord.Interaction):
@@ -241,14 +237,14 @@ class PersistentView(discord.ui.View):
             view_ttt=None
             send = interaction.response.send_message
             if checkWinner(mark, ttt_list_2[4],gameOver) == True:
-              interaction.respond(f"<@{interaction.author.id}> win and get the entire money.")
+              interaction.respond(f"<@{interaction.author.id}> won and got the entire money.")
               await update_bank(interaction.user, send, 2*ttt_list_2[5], mode = "wallet")
             else:
               if ttt_list_2[3] == ttt_list_2[0]:
                 ttt_list_2[3] = ttt_list_2[1]
               else:
                 ttt_list_2[3] = ttt_list_2[0]
-              await interaction.message.edit(f"It was <@{interaction.user.id}> turn so now it's <@{ttt_list_2[3]}> turn.", view=button_update(view_ttt=view_ttt, ttt_list_2=ttt_list_2))
+              await interaction.message.edit(f"It was <@{interaction.user.id}>'s turn so now it's <@{ttt_list_2[3]}>'s turn.", view=button_update(view_ttt=view_ttt, ttt_list_2=ttt_list_2))
 
     @discord.ui.button(style=discord.ButtonStyle.secondary, emoji="⬜", row=2,custom_id="persistent_view:button_ttt_6_callback")
     async def button_ttt_6_callback(self, button: discord.ui.button,interaction:discord.Interaction):
@@ -266,14 +262,14 @@ class PersistentView(discord.ui.View):
             view_ttt=None
             send = interaction.response.send_message
             if checkWinner(mark, ttt_list_2[4],gameOver) == True:
-              interaction.respond(f"<@{interaction.author.id}> win and get the entire money.")
+              interaction.respond(f"<@{interaction.author.id}> won and got the entire money.")
               await update_bank(interaction.user, send, 2*ttt_list_2[5], mode = "wallet")
             else:
               if ttt_list_2[3] == ttt_list_2[0]:
                 ttt_list_2[3] = ttt_list_2[1]
               else:
                 ttt_list_2[3] = ttt_list_2[0]
-              await interaction.message.edit(f"It was <@{interaction.user.id}> turn so now it's <@{ttt_list_2[3]}> turn.", view=button_update(view_ttt=view_ttt, ttt_list_2=ttt_list_2))
+              await interaction.message.edit(f"It was <@{interaction.user.id}>'s turn so now it's <@{ttt_list_2[3]}>'s turn.", view=button_update(view_ttt=view_ttt, ttt_list_2=ttt_list_2))
 
     @discord.ui.button(style=discord.ButtonStyle.secondary, emoji="⬜", row=3,custom_id="persistent_view:button_ttt_7_callback")
     async def button_ttt_7_callback(self, button: discord.ui.button,interaction:discord.Interaction):
@@ -291,14 +287,14 @@ class PersistentView(discord.ui.View):
             view_ttt=None
             send = interaction.response.send_message
             if checkWinner(mark, ttt_list_2[4],gameOver) == True:
-              interaction.respond(f"<@{interaction.author.id}> win and get the entire money.")
+              interaction.respond(f"<@{interaction.author.id}> won and got the entire money.")
               await update_bank(interaction.user, send, 2*ttt_list_2[5], mode = "wallet")
             else:
               if ttt_list_2[3] == ttt_list_2[0]:
                 ttt_list_2[3] = ttt_list_2[1]
               else:
                 ttt_list_2[3] = ttt_list_2[0]
-              await interaction.message.edit(f"It was <@{interaction.user.id}> turn so now it's <@{ttt_list_2[3]}> turn.", view=button_update(view_ttt=view_ttt, ttt_list_2=ttt_list_2))
+              await interaction.message.edit(f"It was <@{interaction.user.id}>'s turn so now it's <@{ttt_list_2[3]}>'s turn.", view=button_update(view_ttt=view_ttt, ttt_list_2=ttt_list_2))
 
     @discord.ui.button(style=discord.ButtonStyle.secondary, emoji="⬜", row=3,custom_id="persistent_view:button_ttt_8_callback")
     async def button_ttt_8_callback(self, button: discord.ui.button,interaction:discord.Interaction):
@@ -317,14 +313,14 @@ class PersistentView(discord.ui.View):
             view_ttt=None
             send = interaction.response.send_message
             if checkWinner(mark, ttt_list_2[4],gameOver) == True:
-              interaction.respond(f"<@{interaction.author.id}> win and get the entire money.")
+              interaction.respond(f"<@{interaction.author.id}> won and got the entire money.")
               await update_bank(interaction.user, send, 2*ttt_list_2[5], mode = "wallet")
             else:
               if ttt_list_2[3] == ttt_list_2[0]:
                 ttt_list_2[3] = ttt_list_2[1]
               else:
                 ttt_list_2[3] = ttt_list_2[0]
-              await interaction.message.edit(f"It was <@{interaction.user.id}> turn so now it's <@{ttt_list_2[3]}> turn.", view=button_update(view_ttt=view_ttt, ttt_list_2=ttt_list_2))
+              await interaction.message.edit(f"It was <@{interaction.user.id}>'s turn so now it's <@{ttt_list_2[3]}>'s turn.", view=button_update(view_ttt=view_ttt, ttt_list_2=ttt_list_2))
 
     @discord.ui.button(style=discord.ButtonStyle.secondary, emoji="⬜", row=3,custom_id="persistent_view:button_ttt_9_callback")
     async def button_ttt_9_callback(self, button: discord.ui.button,interaction:discord.Interaction):
@@ -342,14 +338,14 @@ class PersistentView(discord.ui.View):
             view_ttt=None
             send = interaction.response.send_message
             if checkWinner(mark, ttt_list_2[4],gameOver) == True:
-              interaction.respond(f"<@{interaction.author.id}> win and get the entire money.")
+              interaction.respond(f"<@{interaction.author.id}> won and got the entire money.")
               await update_bank(interaction.user, send, 2*ttt_list_2[5], mode = "wallet")
             else:
               if ttt_list_2[3] == ttt_list_2[0]:
                 ttt_list_2[3] = ttt_list_2[1]
               else:
                 ttt_list_2[3] = ttt_list_2[0]
-              await interaction.message.edit(f"It was <@{interaction.user.id}> turn so now it's <@{ttt_list_2[3]}> turn.", view=button_update(view_ttt=view_ttt, ttt_list_2=ttt_list_2))
+              await interaction.message.edit(f"It was <@{interaction.user.id}>'s turn so now it's <@{ttt_list_2[3]}>'s turn.", view=button_update(view_ttt=view_ttt, ttt_list_2=ttt_list_2))
 
 class PersistentViewBot(commands.Bot):
     def __init__(self):
@@ -405,7 +401,7 @@ class tictactoe_buttons(commands.Cog):
             await ctx.respond(f"You dont have that much money (You have {coins_amt}<:bot_icon:951868023503986699>)")
             return
         if amount <= 0:
-          await ctx.respond(f"You cant use {amount}$. Use a number that is bigger than 0")
+          await ctx.respond(f"You cant use {amount}<:bot_icon:951868023503986699>. You have to use more than 0<:bot_icon:951868023503986699>")
           return
         amount_2 = amount
         player1 = ""
@@ -427,7 +423,7 @@ class tictactoe_buttons(commands.Cog):
         view = View()
         view.add_item(button_p2_accept)
         view.add_item(button_p2_declince)
-        start_message = await ctx.respond(f"<@{p2.id}>, click on the green button below this messages to accept this tic-tac-toe game and pay {amount}$ to enter or click on the red button to declince the game and pay nothing.", view=view)
+        start_message = await ctx.respond(f"<@{p2.id}>, click on the green button below this messages to accept this tic-tac-toe game and pay {amount}$ to enter, or click on the red button to declince the game and pay nothing.", view=view)
 
         new_games.append([
           ctx.author.id,
@@ -443,7 +439,7 @@ class tictactoe_buttons(commands.Cog):
             if game_start[3] == interaction.message.id:
               counter +=1
               if interaction.user != game_start[1]:
-                await  ctx.send(f"<@{interaction.user.id}>, you are not allowed to use this button start a own tictactoe game")
+                await  ctx.send(f"<@{interaction.user.id}>, you are not allowed to use this button! Start your own tictactoe game")
                 return
               if counter == len(new_games):
                 return
@@ -458,7 +454,7 @@ class tictactoe_buttons(commands.Cog):
                 await ctx.respond(f"You dont have that much money (You have {coins_amt}<:bot_icon:951868023503986699>)")
                 return
           else:
-                await interaction.response.edit_message(content="Game is started:", view=None)
+                await interaction.response.edit_message(content="Game has started:", view=None)
                 new_games.remove(game_start)
                 global gameOver
                 send = ctx.respond
@@ -474,7 +470,7 @@ class tictactoe_buttons(commands.Cog):
                       p3 = p2
                     global game_list
                     game_list = [["⬜","⬜","⬜","⬜","⬜","⬜","⬜","⬜","⬜"],[False,False,False,False,False,False,False,False,False]]
-                    ttt_start_msg = await ctx.send(f"Ok <@{p1.id}> and <@{p2_2.id}>, a game was started. It's <@{p3.id}> turn.",view=PersistentView())
+                    ttt_start_msg = await ctx.send(f"Ok <@{p1.id}> and <@{p2_2.id}>, the game has started. It's <@{p3.id}>'s turn.",view=PersistentView())
                     whois_turn = p3
                     board.append([
                         p1.id,
@@ -492,10 +488,10 @@ class tictactoe_buttons(commands.Cog):
           for game_start in new_games:
             if game_start[3] == interaction.message.id:
               if interaction.user != game_start[1]:
-                await  interaction.respond(f"<@{interaction.user.id}>, you are not allowed to use this button, start a own tictactoe game")
+                await  interaction.respond(f"<@{interaction.user.id}>, you are not allowed to use this button! Go start your own tictactoe game")
                 return
               else:
-                await interaction.response.edit_message(content=f"<@{p1.id}>, {p2_2} dont want to play a game.", view=None)
+                await interaction.response.edit_message(content=f"<@{p1.id}>!\n{p2_2} doesn't want to play a game.", view=None)
                 new_games.remove(game_start)
 
 
