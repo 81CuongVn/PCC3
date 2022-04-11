@@ -17,12 +17,15 @@ class logs(commands.Cog):
         e.set_author(name=f'{message.author}', icon_url=message.author.avatar.url)
         e.description=f"**Message sent by {message.author.mention} deleted in {message.channel.mention}.**"
         if len(message.content) > 1024:
-            content = message.content[:1021] + "..."
+            content = message.content[:1000] + "..."
             e.add_field(name="Message Content:", value=f"`{content}`")
         else:
             e.add_field(name="Message Content:", value=f"`{message.content}` \u200b")
         if len(message.attachments) > 0:
-            e.add_field(name="Number of attachments in the mesage:", value=f"{len(message.attachments)}", inline=False)
+            attachmentlinks = ""
+            for attachment in message.attachments:
+                attachmentlinks = attachmentlinks + attachment.url + "\n"
+            e.add_field(name="Attachment Links:", value=f"{attachmentlinks}", inline=False)
         e.set_footer(text=f"User ID: {message.author.id} | Message ID: {message.id}")
         e.timestamp = datetime.now(pytz.timezone('Europe/Vienna'))
 
@@ -42,22 +45,30 @@ class logs(commands.Cog):
     @commands.Cog.listener()
     async def on_message_edit(self, before, after):
         log_channel = self.bot.get_channel(MEMBER_LOGS)
-        e=discord.Embed(color=discord.Color.blue())
+        e=discord.Embed(color=discord.Color.orange())
         e.set_author(name=f"{before.author}", icon_url=f"{before.author.avatar.url}")
         e.set_footer(text=f"User ID: {after.author.id}")
         e.timestamp = datetime.now(pytz.timezone('Europe/Vienna'))
-        if before.content != after.content:
-            e.description=f"**Message sent by {message.author.mention} edited in {before.channel.mention}.**\n[Jump to message](https://discord.com/channels/{after.guild.id}/{after.channel.id}/{after.id}/)"
-            if len(before.content) > 1024:
-                content = before.content[:1021] + "..."
-                e.add_field(name="Before:", value=f"`{content}`")
+        if before.content != after.content or before.attachments != after.attachments:
+            e.description=f"**Message sent by {before.author.mention} edited in {before.channel.mention}.**\n[Jump to message](https://discord.com/channels/{after.guild.id}/{after.channel.id}/{after.id}/)"
+            if before.content == after.content:
+                e.add_field(name="Changes:", value=f"**`ONLY ATTACHMENTS REMOVED`**")
             else:
-                e.add_field(name="Before:", value=f"`{before.content}` \u200b")
-            if len(after.content) > 1024:
-                content = after.content[:1021] + "..."
-                e.add_field(name="After:", value=f"`{content}`")
-            else:
-                e.add_field(name="After:", value=f"`{after.content}` \u200b")
+                if len(before.content) > 1024:
+                    content = before.content[:1000] + "..."
+                    e.add_field(name="Before:", value=f"`{content}`")
+                else:
+                    e.add_field(name="Before:", value=f"`{before.content}` \u200b")
+                if len(after.content) > 1024:
+                    content = after.content[:1000] + "..."
+                    e.add_field(name="After:", value=f"`{content}`")
+                else:
+                    e.add_field(name="After:", value=f"`{after.content}` \u200b")
+            if len(before.attachments) > 0:
+                attachmentlinks = ""
+                for attachment in before.attachments:
+                    attachmentlinks = attachmentlinks + attachment.url + "\n"
+                e.add_field(name="Attachment Links:", value=f"{attachmentlinks}", inline=False)
             await log_channel.send(embed=e)
         else:
             if before.pinned == True and after.pinned == False:
@@ -145,7 +156,7 @@ class logs(commands.Cog):
     @commands.Cog.listener()
     async def on_member_update(self, before, after):
         log_channel = self.bot.get_channel(MEMBER_LOGS)
-        e=discord.Embed(color=discord.Color.blue())
+        e=discord.Embed(color=discord.Color.orange())
         e.set_author(name="Member Updated", icon_url=after.avatar.url)
         e.set_footer(text=f"User ID: {after.id}")
         e.timestamp = datetime.now(pytz.timezone('Europe/Vienna'))
@@ -232,7 +243,7 @@ class logs(commands.Cog):
     @commands.Cog.listener()
     async def on_voice_state_update(self, member, before, after):
         log_channel = self.bot.get_channel(MEMBER_LOGS)
-        e=discord.Embed()
+        e=discord.Embed(color=discord.Color.yellow())
         e.set_author(name=f"{member}", icon_url=member.avatar.url)
         e.timestamp = datetime.now(pytz.timezone('Europe/Vienna'))
         if before.channel != after.channel:
