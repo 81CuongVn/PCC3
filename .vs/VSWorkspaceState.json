@@ -1,7 +1,11 @@
 {
   "ExpandedNodes": [
     "",
-    "\\cogs"
+    "\\cogs",
+    "\\cogs\\logger",
+    "\\cogs\\ticketsystem",
+    "\\cogs\\uselessfeatures"
   ],
+  "SelectedNode": "\\cogs\\logger\\logger.py",
   "PreviewInSolutionExplorer": false
 }

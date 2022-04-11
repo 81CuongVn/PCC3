@@ -13,9 +13,9 @@ class botinfo(commands.Cog):
     def __init__(self, client):
         self.client = client
 
-    @commands.command(name="botstats")
+    @commands.command(name="botinfo")
     async def show_bot_stats(self, ctx):
-        embed = Embed(title="Bot stats", colour=ctx.author.colour, timestamp=datetime.now())
+        embed = Embed(title="Bot info", colour=ctx.author.colour, timestamp=datetime.now())
         embed.set_thumbnail(url=self.client.user.avatar)
 
         proc = Process()
@@ -31,7 +31,7 @@ class botinfo(commands.Cog):
             #cputype = cpuinfo.arch
 
         fields = [
-            ("Bot version:", "0.0.0.0.0.0.0.1", True),
+            ("Bot version:", "1.7.10-pre2", True),
             ("Python version:", python_version(), True),
             ("Discord-API version:", discord_version, False),
             ("Uptime:", uptime, False),
@@ -39,6 +39,8 @@ class botinfo(commands.Cog):
             ("CPU usage:", f"{cpuusage}%", True),
             ("CPU time:", cpu_time, True),
             ("Memory usage", f"{mem_usage:,.3f} MiB / {mem_total:,.0f} MiB ({mem_of_total:.0f}%):", False),
+            ("Release-Github-Repo:", "https://github.com/YES-German/PC_Creator_2", False),
+            ("Testing-Github-Repo:", "https://github.com/SleepyYui/PCC3", False),
         ]
 
         for name, value, inline in fields:

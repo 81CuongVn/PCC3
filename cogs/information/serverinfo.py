@@ -8,7 +8,7 @@ class serverinfo(commands.Cog):
     def __init__(self, client):
         self.client = client
 
-    @commands.command()
+    @commands.command(name="serverinfo")
     async def serverinfo(self, ctx):
         embed = Embed(title="Server Info", colour=ctx.guild.owner.colour, timestamp=datetime.now())
         embed.set_thumbnail(url=ctx.guild.icon)
@@ -17,6 +17,8 @@ class serverinfo(commands.Cog):
             len(list(filter(lambda m: str(m.status) == "dnd", ctx.guild.members))),
             len(list(filter(lambda m: str(m.status) == "offline", ctx.guild.members)))]
 
+        bans = await ctx.guild.bans().flatten()
+
         fields = [("Owner:", ctx.guild.owner, True),
             ("Region:", ctx.guild.region, True),
             ("Server ID:", ctx.guild.id, True),
@@ -24,7 +26,7 @@ class serverinfo(commands.Cog):
             ("Members:", len(ctx.guild.members), True),
             ("Humans:", len(list(filter(lambda m: not m.bot, ctx.guild.members))), True),
             ("Bots:", len(list(filter(lambda m: m.bot, ctx.guild.members))), True),
-            ("Banned members:", len(await ctx.guild.bans()), True),
+            ("Banned members:", len(bans), True),
              ("Members Statuses:", f"🟢 {statuses[0]}\n🟠 {statuses[1]}\n🔴 {statuses[2]}\n⚪ {statuses[3]}", False),
              ("Categories:", len(ctx.guild.categories), True),
              ("Text channels:", len(ctx.guild.text_channels), True),
