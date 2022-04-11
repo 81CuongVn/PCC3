@@ -468,8 +468,6 @@ class tictactoe_buttons(commands.Cog):
                       p3 = p1
                     elif p3_1 == 2:
                       p3 = p2
-                    global game_list
-                    game_list = [["⬜","⬜","⬜","⬜","⬜","⬜","⬜","⬜","⬜"],[False,False,False,False,False,False,False,False,False]]
                     ttt_start_msg = await ctx.send(f"Ok <@{p1.id}> and <@{p2_2.id}>, the game has started. It's <@{p3.id}>'s turn.",view=PersistentView())
                     whois_turn = p3
                     board.append([
