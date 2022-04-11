@@ -152,9 +152,14 @@ class logs(commands.Cog):
         r_before = [role.id for role in before.roles]
         r_after = [role.id for role in after.roles]
         if before.nick != after.nick:
-            e.description=f"{after.mention} Nickname changed."
+            e.description=f"{after.mention}'s Nickname changed."
             e.add_field(name="Before:", value=f"{before.nick}", inline=False)
             e.add_field(name="After:", value=f"{after.nick}", inline=False)
+            await log_channel.send(embed=e)
+        if before.avatar.url != after.avatar.url:
+            e.description=f"{after.mention}'s Avatar changed."
+            e.add_field(name="Before:", value=f"{before.avatar.url}", inline=False)
+            e.add_field(name="After:", value=f"{after.avatar.url}", inline=False)
             await log_channel.send(embed=e)
         if before.roles != after.roles:
             r = list(set(r_before) ^ set(r_after))
@@ -169,7 +174,7 @@ class logs(commands.Cog):
     async def on_guild_update(self, before, after):
         log_channel = self.bot.get_channel(SERVER_LOGS)
         e=discord.Embed(color=discord.Color.blue())
-        e.set_author(name="Server Updated", icon_url=after.icon_url)
+        e.set_author(name="Server Updated", icon_url=after.icon.url)
         e.timestamp = datetime.now(pytz.timezone('Europe/Vienna'))
         if before.name != after.name or before.region != after.region or before.afk_timeout != after.afk_timeout or before.afk_channel != after.afk_channel or before.icon != after.icon or before.owner_id != after.owner_id or before.banner != after.banner:
             if before.name != after.name:
@@ -181,11 +186,13 @@ class logs(commands.Cog):
             if before.afk_channel != after.afk_channel:
                 e.add_field(name="Server's afk channel changed:", value=f"**Before:** `{before.afk_channel}`\n**After:** `{after.afk_channel}`", inline=False)
             if before.icon != after.icon:
-                e.add_field(name="Server's icon changed:", value=f"**Before:** {before.icon_url_as(static_format='png')}\n**After:** {after.icon_url_as(static_format='png')}", inline=False)
+                e.add_field(name="Server's icon changed:", value=f"**Now:** {after.icon.url}\n**Before:**", inline=False)
+                e.set_image(url=before.icon.url)
             if before.owner_id != after.owner_id:
                 e.add_field(name="Server's owner changed:", value=f"**Before:** <@{before.owner_id}>\n**After:** <@{after.owner_id}>", inline=False)
             if before.banner != after.banner:
-                e.add_field(name="Server's banner changed:", value=f"**Before:** {before.banner_url_as(format='png')}\n**After:** {after.banner_url_as(format='png')}", inline=False)
+                e.add_field(name="Server's banner changed:", value=f"**Now:** {after.banner.url}\n**Before:**", inline=False)
+                e.set_image(url=before.banner.url)
             await log_channel.send(embed=e)
 
     @commands.Cog.listener()
