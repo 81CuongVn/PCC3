@@ -2,10 +2,9 @@
   "ExpandedNodes": [
     "",
     "\\cogs",
-    "\\cogs\\information",
-    "\\cogs\\logger",
-    "\\cogs\\uselessfeatures"
+    "\\cogs\\uselessfeatures",
+    "\\tickets"
   ],
-  "SelectedNode": "\\cogs\\information\\serverinfo.py",
+  "SelectedNode": "\\cogs\\Coin_System",
   "PreviewInSolutionExplorer": false
 }

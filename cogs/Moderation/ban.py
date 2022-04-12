@@ -56,7 +56,7 @@ class ban(commands.Cog):
                 warns[str(member.id)]["ban_count"] = 0
                 warns[str(member.id)]["kick_count"] = 0
 
-            with open("warnsjson_files/warns.json", "w") as f:
+            with open("json_files/warns.json", "w") as f:
                 json.dump(warns,f)
             return True     
 
