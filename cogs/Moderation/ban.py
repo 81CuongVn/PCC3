@@ -39,7 +39,7 @@ class ban(commands.Cog):
 
 
     async def get_warns(self):
-        with open("warnsjson_files/warns.json", "r") as f:
+        with open("json_files/warns.json", "r") as f:
                 warns = json.load(f)
         return warns
 
@@ -69,7 +69,7 @@ class ban(commands.Cog):
         warns[str(member.id)]["ban_count"] = warn_count_new
         warns[str(member.id)][f"ban {warn_count_new}"] = reason    
 
-        with open("warnsjson_files/warns.json", "w") as f:
+        with open("json_files/warns.json", "w") as f:
             json.dump(warns,f)            
 
 

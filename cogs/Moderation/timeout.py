@@ -65,7 +65,7 @@ class timeout(commands.Cog):
             raise error
 
     async def get_warns(self):
-        with open("warnsjson_files/warns.json", "r") as f:
+        with open("json_files/warns.json", "r") as f:
                 warns = json.load(f)
         return warns        
 
@@ -82,7 +82,7 @@ class timeout(commands.Cog):
                 warns[str(member.id)]["ban_count"] = 0
                 warns[str(member.id)]["kick_count"] = 0
 
-            with open("warnsjson_files/warns.json", "w") as f:
+            with open("json_files/warns.json", "w") as f:
                 json.dump(warns,f)
             return True     
 
@@ -95,7 +95,7 @@ class timeout(commands.Cog):
         warns[str(member.id)]["mute_count"] = warn_count_new
         warns[str(member.id)][f"mute {warn_count_new}"] = reason    
 
-        with open("warnsjson_files/warns.json", "w") as f:
+        with open("json_files/warns.json", "w") as f:
             json.dump(warns,f) 
 
 def setup(client):
