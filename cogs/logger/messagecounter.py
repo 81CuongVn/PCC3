@@ -35,8 +35,8 @@ class messagecounter(commands.Cog):
         if True:
             if not message.content.startswith(",") and not message.channel.id == other_log_channel and not message.channel.id == 748122380383027210 and not message.channel.id == 870068988254756894:    
                     if isinstance(message.channel, discord.DMChannel):
-                        if message.author != client.user:
-                            test_channel = client.get_channel(message_channel)
+                        if message.author != self.client.user:
+                            test_channel = self.client.get_channel(message_channel)
                             await test_channel.send(f'{message.author} sent "{message.content}" in DMs')
                         return
                     await self.new_member(message.author)
@@ -83,10 +83,10 @@ class messagecounter(commands.Cog):
             if Counter(spammers)[message.author.id] >= 3:
                 await message.channel.send(f"{message.author.mention} stop spamming that message. If you continue spamming, you will be **banned**. In case there are problems and you are not a scamer, send a DM to ¥£$#7660 (695229647021015040)", delete_after=10)       
             if Counter(spammers)[message.author.id] >= 4:
-                test_channel = client.get_channel(test_channel)
+                test_channel = self.client.get_channel(test_channel)
                 print(f"{message.author} wurde gebannt um {datetime.now().hour}:{datetime.now().minute}:{datetime.now().second}  -------> Informationen (Grund:Weirde Fehlfunktion): Spammer Liste:{spammers}")
                 await test_channel.send(f"{message.author} wurde gebannt um {datetime.now().hour}:{datetime.now().minute}:{datetime.now().second}  -------> Informationen (Grund:Weirde Fehlfunktion): Spammer Liste:{spammers}")
-                channel = client.get_channel(channel_channel)
+                channel = self.client.get_channel(channel_channel)
                 try:
                     await message.author.send(f"You were softbanned on the PC Creater server. In case you think this was a mistake from the bot, send a message to ¥£$#7660 (695229647021015040)")
                     await message.author.send(f"reason: Scam")
@@ -168,7 +168,7 @@ class messagecounter(commands.Cog):
     #
     #async def new_restriction():
     #
-    #    for guild in client.guilds:
+    #    for guild in self.client.guilds:
     #        for channel in guild.channels:
     #            print(channel.id, channel.name)
     #
