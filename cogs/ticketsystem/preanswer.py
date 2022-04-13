@@ -101,15 +101,15 @@ class PreAnswer(commands.Cog):
             if webhooks:
                 for webhook in webhooks:
                     await webhook.send(content=message, username=ctx.author.name, avatar_url=ctx.author.avatar.url)
-                    await ctx.respond("Success", ephemeral=True)
+                    #await ctx.respond("Success", ephemeral=True)
                     break
             elif not webhooks:
                 webhook = await ctx.message.channel.create_webhook(name="PreanswerHook")
                 message = message + "\nNo webhook existing, created new one"
                 await webhook.send(content=message, username=ctx.author.name, avatar_url=ctx.author.avatar.url)
-                await ctx.respond("Success, there was no webhook though so I had to create one.", ephemeral=True)
-            else:
-                await ctx.respond("Brok,\nSomehow at least...\nI mean you broke a if-else statement, I fear you...", ephemeral=True)
+                #await ctx.respond("Success, there was no webhook though so I had to create one.", ephemeral=True)
+            #else:
+                #await ctx.respond("Brok,\nSomehow at least...\nI mean you broke a if-else statement, I fear you...", ephemeral=True)
         else:
             await ctx.message.channel.send("**First of all:** How the heck did you find that command???\n**And second:** Why do you even try to use that if you are not a Bot-developer?\n||it is for debugging -_-||")
 
