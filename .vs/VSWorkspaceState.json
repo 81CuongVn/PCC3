@@ -2,9 +2,10 @@
   "ExpandedNodes": [
     "",
     "\\cogs",
+    "\\cogs\\logger",
+    "\\cogs\\Moderation",
     "\\cogs\\uselessfeatures",
     "\\tickets"
   ],
-  "SelectedNode": "\\cogs\\Coin_System",
   "PreviewInSolutionExplorer": false
 }

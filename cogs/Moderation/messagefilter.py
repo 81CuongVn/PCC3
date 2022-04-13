@@ -55,6 +55,7 @@ class messagefilter(commands.Cog):
                 for badword in muchusedarr:
                     badword2 = badword + " "
                     badword3 = badword
+                    badword4 = " " + badword
                     badword = " " + badword + " "
                     if badword.lower() in content.lower():
                         compiled = re.compile(re.escape(badword.lower()), re.IGNORECASE)
@@ -66,6 +67,10 @@ class messagefilter(commands.Cog):
                         swearword = True
                     if content.lower() == badword3.lower():
                         compiled = re.compile(re.escape(badword3.lower()), re.IGNORECASE)
+                        content = compiled.sub(replacement, content)
+                        swearword = True
+                    if content.lower()[-len(badword4):] == badword4:
+                        compiled = re.compile(re.escape(badword4.lower()), re.IGNORECASE)
                         content = compiled.sub(replacement, content)
                         swearword = True
                 if swearword == True:
