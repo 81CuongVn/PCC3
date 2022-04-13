@@ -38,14 +38,7 @@ async def on_ready():
     while True:
         schedule.run_pending()
         await asyncio.sleep(1)  
-    
-
-@client.command()
-async def testo(ctx):
-    await ctx.send(spammers)
-    await ctx.send(collections.Counter(spammers))  
-
-
+  
 
 @client.command(name="rsb")
 async def rsb(ctx):

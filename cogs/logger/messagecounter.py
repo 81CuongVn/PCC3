@@ -3,31 +3,36 @@ from discord.ext import commands
 import asyncio
 from discord.ext import tasks
 from datetime import datetime
-from datetime import date
 import json
-from discord.ext.commands import CommandNotFound
-import os
-from discord.utils import get
-#from antispam import AntiSpamHandler, Options
 from collections import Counter
 import collections
 import schedule
-from discord.ext.commands import MemberNotFound
-import sys
-import subprocess
-from decouple import config
-# from AntiSpamTrackerSubclass import MyCustomTracker
+from discord.commands import permissions
 
-test_channel=933813622952562718 #only mentioned once --> Default: 933813622952562718
-channel_channel=933768368970932254 #only mentioned once --> Default: 933768368970932254
-message_channel=802512035224223774 #for on_message --> Default: 802512035224223774
-other_log_channel=572673322891083776 #for main logging --> Default: 572673322891083776
+test_channel=962765009006506024 #only mentioned once --> Default: 933813622952562718
+channel_channel=962765009006506024 #only mentioned once --> Default: 933768368970932254
+message_channel=962765009006506024 #for on_message --> Default: 802512035224223774
+other_log_channel=962765009006506024 #for main logging --> Default: 572673322891083776
 spammers = []
 
 class messagecounter(commands.Cog):
     def __init__(self, client):
         self.client = client
 
+    @commands.Cog.listener()
+    async def on_ready(self):
+        @tasks.loop(seconds = 30) # repeat after every 10 seconds
+        async def myLoop():
+            await asyncio.sleep(30)
+            spammers.clear() 
+            #print(f"cleared at {datetime.now().hour}:{datetime.now().minute}:{datetime.now().second}")
+            #print(spammers)
+        myLoop.start()
+        #client.get_restriction = await get_restriction()
+        #await new_restriction()
+        while True:
+            schedule.run_pending()
+            await asyncio.sleep(1)  
 
 
     @commands.Cog.listener()
@@ -80,32 +85,33 @@ class messagecounter(commands.Cog):
                 #and ("@everyone" in message.content or "@here" in message.content or "everyone" in message.content or "here" in message.content))
                 if word in message.content and len(message.content) > 32 and not (".jpg" in message.content or ".png" in message.content):
                     spammers.append(message.author.id)   
+                    break
             if Counter(spammers)[message.author.id] >= 3:
-                await message.channel.send(f"{message.author.mention} stop spamming that message. If you continue spamming, you will be **banned**. In case there are problems and you are not a scamer, send a DM to ¥£$#7660 (695229647021015040)", delete_after=10)       
+                await message.channel.send(f"{message.author.mention} stop spamming that message. If you continue spamming, you will be **banned**. In case there are problems (you not being a scammer etc.) send a DM to ¥£$#7660 (695229647021015040)", delete_after=10)       
             if Counter(spammers)[message.author.id] >= 4:
-                test_channel = self.client.get_channel(test_channel)
-                print(f"{message.author} wurde gebannt um {datetime.now().hour}:{datetime.now().minute}:{datetime.now().second}  -------> Informationen (Grund:Weirde Fehlfunktion): Spammer Liste:{spammers}")
-                await test_channel.send(f"{message.author} wurde gebannt um {datetime.now().hour}:{datetime.now().minute}:{datetime.now().second}  -------> Informationen (Grund:Weirde Fehlfunktion): Spammer Liste:{spammers}")
+                test_channel = self.client.get_channel(other_log_channel)
+                print(f"{message.author} wurde gebannt um {datetime.now().hour}:{datetime.now().minute}:{datetime.now().second}  -------> Informationen (Grund:Spam/Scamming): Spammer Liste:{spammers}")
+                await test_channel.send(f"{message.author} was banned at {datetime.now().hour}:{datetime.now().minute}:{datetime.now().second}  -------> Info: (Reason:Spam/Scamming): Spammer-List:{spammers}")
                 channel = self.client.get_channel(channel_channel)
                 try:
-                    await message.author.send(f"You were softbanned on the PC Creater server. In case you think this was a mistake from the bot, send a message to ¥£$#7660 (695229647021015040)")
-                    await message.author.send(f"reason: Scam")
+                    await message.author.send(f"You were softbanned on the PC Creater server. In case there are problems (you not being a scammer etc.) send a DM to ¥£$#7660 (695229647021015040)")
+                    await message.author.send(f"reason: Spam/Scamming")
                 except:
                     return
                 embed = discord.Embed(title="Softbanned", color=13565696)
                 embed.add_field(name="Softbanned:", value=f"{message.author.mention}")
                 embed.add_field(name="Moderator", value=f"<@884402383923339295>")
-                embed.add_field(name="Reason:", value="Scam", inline=False)
+                embed.add_field(name="Reason:", value="Spam/Scamming", inline=False)
                 await channel.send(embed=embed)    
                 await message.channel.send(f"Softbanned {message.author.mention}", delete_after=10)
-                await message.author.ban(reason="Scam")  
-                await message.author.unban(reason="Scam")    
+                await message.author.ban(reason="Spam/Scamming")  
+                await message.author.unban(reason="Spam/Scamming")    
             member = message.author
-            for word in filtered_words:
+            """for word in filtered_words:
                 if word in message.content.lower() and not get(member.roles, id=589435378147262464) and not get(member.roles, id=934116557951475783) and not get(member.roles, id=659740600911921153):
                     await message.delete()
                     await message.channel.send("This word is banned here" ,delete_after=5.0)
-                    break
+                    break"""
             if message.channel.id == 572541644755435520:
                 if not message.content.startswith(",suggest"):
                     await message.delete()
@@ -191,6 +197,12 @@ class messagecounter(commands.Cog):
 
     async def get_test(self):
         print("TEST")
+
+    @commands.Cog.listener()
+    @permissions.has_any_role(951207540472029195, 632674518317531137, 589435378147262464, 951464246506565683) #botde, admin, mod, testserveradmin
+    async def testo(ctx):
+        await ctx.send(spammers)
+        await ctx.send(collections.Counter(spammers))
 
 def setup(bot):
     bot.add_cog(messagecounter(bot))
