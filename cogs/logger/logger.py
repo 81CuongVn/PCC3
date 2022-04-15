@@ -14,7 +14,10 @@ class logs(commands.Cog):
     async def on_message_delete(self, message):
         log_channel = self.bot.get_channel(MEMBER_LOGS)
         e=discord.Embed(color=discord.Color.red())
-        e.set_author(name=f'{message.author}', icon_url=message.author.avatar.url)
+        try:
+            e.set_author(name=f'{message.author}', icon_url=message.author.avatar.url)
+        except:
+            e.set_author(name=f'{message.author}')       
         e.description=f"**Message sent by {message.author.mention} deleted in {message.channel.mention}.**"
         if len(message.content) > 1024:
             content = message.content[:1000] + "..."
@@ -46,7 +49,10 @@ class logs(commands.Cog):
     async def on_message_edit(self, before, after):
         log_channel = self.bot.get_channel(MEMBER_LOGS)
         e=discord.Embed(color=discord.Color.orange())
-        e.set_author(name=f"{before.author}", icon_url=f"{before.author.avatar.url}")
+        try:
+            e.set_author(name=f"{before.author}", icon_url=f"{before.author.avatar.url}")
+        except:
+            e.set_author(name=f"{before.author}")    
         e.set_footer(text=f"User ID: {after.author.id}")
         e.timestamp = datetime.now(pytz.timezone('Europe/Vienna'))
         if before.author.bot:
@@ -134,7 +140,10 @@ class logs(commands.Cog):
     async def on_member_join(self, member):
         log_channel = self.bot.get_channel(MEMBER_LOGS)
         e=discord.Embed(color=discord.Color.green())
-        e.set_author(name="Member joined", icon_url=member.avatar.url)
+        try:
+            e.set_author(name="Member joined", icon_url=member.avatar.url)
+        except:    
+            e.set_author(name="Member joined")
         e.description=f"{member.mention} | `{member.name}#{member.discriminator}`"
         e.set_thumbnail(url=member.avatar.url)
         e.add_field(name="Account age:", value=member.created_at)
@@ -147,7 +156,10 @@ class logs(commands.Cog):
     async def on_member_remove(self, member):
         log_channel = self.bot.get_channel(MEMBER_LOGS)
         e=discord.Embed(color=discord.Color.red())
-        e.set_author(name="Member left", icon_url=member.avatar.url)
+        try:
+            e.set_author(name="Member left", icon_url=member.avatar.url)
+        except:
+            e.set_author(name="Member left") 
         e.description=f"{member.mention} | `{member.name}#{member.discriminator}`\nJoined at `{member.joined_at.date()}`"
         e.set_thumbnail(url=member.avatar.url)
         e.set_footer(text=f"User ID: {member.id}")
@@ -159,7 +171,10 @@ class logs(commands.Cog):
     async def on_member_update(self, before, after):
         log_channel = self.bot.get_channel(MEMBER_LOGS)
         e=discord.Embed(color=discord.Color.orange())
-        e.set_author(name="Member Updated", icon_url=after.avatar.url)
+        try:
+            e.set_author(name="Member Updated", icon_url=after.avatar.url)
+        except:
+            e.set_author(name="Member Updated")   
         e.set_footer(text=f"User ID: {after.id}")
         e.timestamp = datetime.now(pytz.timezone('Europe/Vienna'))
         r_before = [role.id for role in before.roles]
@@ -171,8 +186,14 @@ class logs(commands.Cog):
             await log_channel.send(embed=e)
         if before.avatar.url != after.avatar.url:
             e.description=f"{after.mention}'s Avatar changed."
-            e.add_field(name="Before:", value=f"{before.avatar.url}", inline=False)
-            e.add_field(name="After:", value=f"{after.avatar.url}", inline=False)
+            try:
+                e.add_field(name="Before:", value=f"{before.avatar.url}", inline=False)
+            except:
+                e.add_field(name="Before:", value="None", inline=False)
+            try:    
+                e.add_field(name="After:", value=f"{after.avatar.url}", inline=False)
+            except:
+                e.add_field(name="After:", value="None" ,inline=False)    
             await log_channel.send(embed=e)
         if before.roles != after.roles:
             r = list(set(r_before) ^ set(r_after))
@@ -246,7 +267,10 @@ class logs(commands.Cog):
     async def on_voice_state_update(self, member, before, after):
         log_channel = self.bot.get_channel(MEMBER_LOGS)
         e=discord.Embed(color=discord.Color.yellow())
-        e.set_author(name=f"{member}", icon_url=member.avatar.url)
+        try:
+            e.set_author(name=f"{member}", icon_url=member.avatar.url)
+        except:
+            e.set_author(name=f"{member}")
         e.timestamp = datetime.now(pytz.timezone('Europe/Vienna'))
         if before.channel != after.channel:
             if before.channel == None and after.channel != None:
