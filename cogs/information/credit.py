@@ -14,7 +14,7 @@ class credit(commands.Cog):
         embed.add_field(name="Bot Developer", value="<@713696771188195368>\n<@443769343138856961>", inline=False)
         embed.add_field(name="Bot host", value="<@695229647021015040>", inline=False)
         embed.add_field(name="Scores sheets", value="<@695229647021015040>\n<@713696771188195368>", inline=False)
-        embed.add_field(name="Ticket system", value="<@443769343138856961>", inline=False)
+        embed.add_field(name="Ticket system, message filter etc.", value="<@443769343138856961>", inline=False)
         embed.add_field(name="Coin system", value="<@443769343138856961>\n<@695229647021015040>\n<@713696771188195368>", inline=False)
         embed.add_field(name="Coin system help (ideas etc.)", value="<@761937966867152929>", inline=False)
 
@@ -28,7 +28,7 @@ class credit(commands.Cog):
         embed.add_field(name="Bot Developer", value="<@713696771188195368>\n<@443769343138856961>", inline=False)
         embed.add_field(name="Bot host", value="<@695229647021015040>", inline=False)
         embed.add_field(name="Scores sheets", value="<@695229647021015040>\n<@713696771188195368>", inline=False)
-        embed.add_field(name="Ticket system", value="<@443769343138856961>", inline=False)
+        embed.add_field(name="Ticket system, message filter etc.", value="<@443769343138856961>", inline=False)
         embed.add_field(name="Coin system", value="<@443769343138856961>\n<@695229647021015040>\n<@713696771188195368>", inline=False)
         embed.add_field(name="Coin system help (ideas etc.)", value="<@761937966867152929>", inline=False)
 
