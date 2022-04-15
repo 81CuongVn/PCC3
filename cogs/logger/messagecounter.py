@@ -9,10 +9,10 @@ import collections
 import schedule
 from discord.commands import permissions
 
-test_channel=962765009006506024 #only mentioned once --> Default: 933813622952562718
-channel_channel=962765009006506024 #only mentioned once --> Default: 933768368970932254
-message_channel=962765009006506024 #for on_message --> Default: 802512035224223774
-other_log_channel=962765009006506024 #for main logging --> Default: 572673322891083776
+test_channel=933813622952562718 #only mentioned once --> Default: 933813622952562718
+channel_channel=933768368970932254 #only mentioned once --> Default: 933768368970932254
+message_channel=802512035224223774 #for on_message --> Default: 802512035224223774
+other_log_channel=572673322891083776 #for main logging --> Default: 572673322891083776
 spammers = []
 
 class messagecounter(commands.Cog):

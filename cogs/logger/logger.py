@@ -3,8 +3,8 @@ import pytz
 from discord.ext import commands
 from datetime import datetime
 
-MEMBER_LOGS=962765009006506024 #for membersided logging --> Default: 572673322891083776 FOR MEMBER UPDATE
-SERVER_LOGS=962765009006506024 #for serversided logging --> Default: 572673322891083776 FOR SERVER UPDATES
+MEMBER_LOGS=572673322891083776 #for membersided logging --> Default: 572673322891083776 FOR MEMBER UPDATE
+SERVER_LOGS=572673322891083776 #for serversided logging --> Default: 572673322891083776 FOR SERVER UPDATES
 
 class logs(commands.Cog):
     def __init__(self, bot):
