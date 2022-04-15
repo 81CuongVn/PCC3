@@ -2,10 +2,8 @@
   "ExpandedNodes": [
     "",
     "\\cogs",
-    "\\cogs\\logger",
-    "\\cogs\\Moderation",
-    "\\cogs\\uselessfeatures",
     "\\tickets"
   ],
+  "SelectedNode": "\\.gitignore",
   "PreviewInSolutionExplorer": false
 }
