@@ -53,8 +53,7 @@ async def rsb(ctx):
             # cmd = "C:\\Users\\zockerbande\\Desktop\\Neuer Ordner\\PC_Creator_2\\restart.sh"
             # os.execl('restart.sh', '')
             #os.execv(sys.executable, ['python'] + sys.argv)
-            subprocess.call([sys.executable, os.path.realpath(__file__)] +
-sys.argv[1:])
+            subprocess.call([sys.executable, os.path.realpath(__file__)] + sys.argv[1:])
         else:
             await ctx.send("Canceled")
     else:

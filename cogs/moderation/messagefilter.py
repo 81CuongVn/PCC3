@@ -55,7 +55,7 @@ class messagefilter(commands.Cog):
                         compiled = re.compile(re.escape(badword3.lower()), re.IGNORECASE)
                         content = compiled.sub(replacement, content)
                         swearword = True
-                    if content.lower()[-len(badword4.lower():] == badword4.lower():
+                    if content.lower().endswith(badword4.lower()):
                         compiled = re.compile(re.escape(badword4.lower()), re.IGNORECASE)
                         content = compiled.sub(replacement, content)
                         swearword = True

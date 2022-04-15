@@ -2,8 +2,8 @@
   "ExpandedNodes": [
     "",
     "\\cogs",
+    "\\cogs\\ticketsystem",
     "\\tickets"
   ],
-  "SelectedNode": "\\.gitignore",
   "PreviewInSolutionExplorer": false
 }

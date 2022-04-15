@@ -30,15 +30,29 @@ class botinfo(commands.Cog):
             cpuusage = cpu_percent()
             #cputype = cpuinfo.arch
 
+        memusage = f"{mem_usage:,.3f}"
+        memusage = int(memusage.split(".")[0])
+        memtotal = str(f"{mem_total:,.0f}")
+        memotoal = int(memtotal.replace(",",""))
+
+        cputime = str(cpu_time)
+        lencputime = len(cputime)
+        cputime = cputime[:lencputime - 4] + "s"
+        cputime = cputime.split(":")[2]
+
+        uptime = str(uptime)
+        lenuptime = len(uptime)
+        uptime = uptime.split(".")[0]# + " HH/MM/SS"
+
         fields = [
             ("Bot version:", "1.7.10-pre2", True),
             ("Python version:", python_version(), True),
             ("Discord-API version:", discord_version, False),
             ("Uptime:", uptime, False),
-            ("CPU name:", processor, False),
+            ("CPU:", processor, False),
             ("CPU usage:", f"{cpuusage}%", True),
-            ("CPU time:", cpu_time, True),
-            ("Memory usage", f"{mem_usage:,.3f} MiB / {mem_total:,.0f} MiB ({mem_of_total:.0f}%):", False),
+            ("CPU timedelta:", cputime, True),
+            ("Memory usage", f"{memusage} MiB / {memotoal} MiB ({mem_of_total:.0f}%):", False),
             ("Release-Github-Repo:", "https://github.com/YES-German/PC_Creator_2", False),
             ("Testing-Github-Repo:", "https://github.com/SleepyYui/PCC3", False),
         ]
