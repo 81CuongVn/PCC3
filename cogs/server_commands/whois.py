@@ -6,12 +6,11 @@ from datetime import timedelta
 from datetime import date
 from discord.ext.commands import MemberNotFound
 import json
-from channel_restrictions_functions import test_187, new_restriction, get_restriction, check_server_restriction
 from discord import Option
 class whois(commands.Cog):
 
     def __init__(self, client):
-        self.client = client
+        self.client = clienthttps://github.com/SleepyYui/PCC3/blob/test/cogs/server_commands/whois.py
 
 
     @commands.command(name="whois")
@@ -27,7 +26,7 @@ class whois(commands.Cog):
 
     async def whois(self, ctx, send, member:discord.Member = None):
         #await test_187()
-        await new_restriction(ctx)
+        #await new_restriction(ctx)
         #await check_server_restriction(ctx)
         
         #if await check_server_restriction(ctx):  # the == True can be omitted
