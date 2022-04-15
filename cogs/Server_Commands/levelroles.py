@@ -240,7 +240,7 @@ class levelroles(commands.Cog):
         #self.lrs_stats()
         with open("json_files/userLevels.json", "r") as f:
             data = json.load(f)
-            f = discord.File("/home/pi/Desktop/PC_Creator_2/dailymsgs.png")
+            f = discord.File("dailymsgs.png")
 
             leaderboard = sorted(data.items(), key= lambda x: x[1], reverse=True)[:5]
             user_id_1st, msg_count_1st = leaderboard[0]
@@ -319,7 +319,7 @@ class levelroles(commands.Cog):
         lrs_picture.paste(line, (5, 46))
         lrs_picture_text = ImageDraw.Draw(lrs_picture)
         lrs_picture_text.fontmode = "1"
-        myFont = ImageFont.truetype('/home/pi/Desktop/PC_Creator_2/calibri.ttf', 20)
+        myFont = ImageFont.truetype('calibri.ttf', 20)
         x = 0
         y = 500/hunderter
         text = hunderter_1

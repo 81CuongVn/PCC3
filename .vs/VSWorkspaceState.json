@@ -5,6 +5,7 @@
     "\\cogs\\logger",
     "\\cogs\\Moderation",
     "\\cogs\\uselessfeatures",
+    "\\json_files",
     "\\tickets"
   ],
   "PreviewInSolutionExplorer": false
