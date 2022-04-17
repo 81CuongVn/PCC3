@@ -58,6 +58,26 @@ async def rsb(ctx):
             await ctx.send("Canceled")
     else:
         await ctx.send("HOW DARE YOU")
+        
+  
+@client.command(name="sdb")
+async def sdb(ctx):
+    if ctx.author.id == 443769343138856961 or ctx.author.id == 713696771188195368 or ctx.author.id == 695229647021015040:
+        await ctx.send("Do you really want to do that? This will stop the bot")
+        ans = await client.wait_for('message', check=lambda message: message.author == ctx.author)
+        #print(ans.content)
+        #print(ctx.author.id)
+        if int(ans.content) == int(ctx.author.id):
+            await ctx.send("Shutting down...")
+            # os.system('restart.sh')
+            # cmd = "C:\\Users\\zockerbande\\Desktop\\Neuer Ordner\\PC_Creator_2\\restart.sh"
+            # os.execl('restart.sh', '')
+            #os.execv(sys.executable, ['python'] + sys.argv)
+            sys.exit()
+        else:
+            await ctx.send("Canceled")
+    else:
+        await ctx.send("HOW DARE YOU")
 
 
 
