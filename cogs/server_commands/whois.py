@@ -10,7 +10,7 @@ from discord import Option
 class whois(commands.Cog):
 
     def __init__(self, client):
-        self.client = clienthttps://github.com/SleepyYui/PCC3/blob/test/cogs/server_commands/whois.py
+        self.client = client
 
 
     @commands.command(name="whois")

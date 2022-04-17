@@ -11,7 +11,7 @@ class manage_member_stats(commands.Cog):
         self.client = client
 
 
-    @commands.slash_command(name="manage_stats", description="Manage the coins or messages of a member", guild_ids=[951463924279181322])
+    @commands.slash_command(name="manage_stats", description="Bot dev only")#, guild_ids=[571031703661969430])
     @permissions.has_any_role(951207540472029195, 951464246506565683)
     async def manage_member_slash(self, ctx, member : Option(discord.Member, required=True), mode: Option(str, 'Choose the mode', choices=["Coins", "Bank", "Messages"], required=True),  mode_2: Option(str, "Choose the mode", choices=["Setzero", "Give", "Set"], required=True), amount : Option(int, required=False)):
         if mode == "Coins":
@@ -22,8 +22,8 @@ class manage_member_stats(commands.Cog):
 
         if mode == "Messages":
             mode = "messages"
-            if ctx.author.id != 695229647021015040:
-                await ctx.respond("You don't have the permissions to do that")
+            if ctx.author.id != 695229647021015040: 
+                await ctx.respond("https://www.youtube.com/watch?v=o-YBDTqX_ZU\nTutorial to make it work the next time.", ephemeral=True)
                 return
           
         if mode_2 == "Setzero":

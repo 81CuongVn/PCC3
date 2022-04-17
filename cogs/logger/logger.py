@@ -2,9 +2,13 @@ import discord
 import pytz
 from discord.ext import commands
 from datetime import datetime
+import json
 
-MEMBER_LOGS=572673322891083776 #for membersided logging --> Default: 572673322891083776 FOR MEMBER UPDATE
-SERVER_LOGS=572673322891083776 #for serversided logging --> Default: 572673322891083776 FOR SERVER UPDATES
+with open("json_files/mainconfig.json", encoding="utf-8-sig") as f:
+    mainconfig = json.load(f)
+
+MEMBER_LOGS=mainconfig["main_logging"] #572673322891083776 #for membersided logging --> Default: 572673322891083776 FOR MEMBER UPDATE
+SERVER_LOGS=mainconfig["secondary_logging"] #572673322891083776 #for serversided logging --> Default: 572673322891083776 FOR SERVER UPDATES
 
 class logs(commands.Cog):
     def __init__(self, bot):

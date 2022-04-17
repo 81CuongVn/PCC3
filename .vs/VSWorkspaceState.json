@@ -2,8 +2,9 @@
   "ExpandedNodes": [
     "",
     "\\cogs",
-    "\\cogs\\ticketsystem",
+    "\\cogs\\moderation",
     "\\tickets"
   ],
+  "SelectedNode": "\\cogs\\moderation\\unban.py",
   "PreviewInSolutionExplorer": false
 }
