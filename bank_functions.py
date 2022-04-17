@@ -328,3 +328,27 @@ async def new_message_member(user):
         json.dump(users,f)
     return True   
                 
+
+
+async def get_trading_list():
+    with open("json_files/trading_list.json", "r") as f:
+        trading_list = json.load(f)
+    return trading_list
+    
+async def get_trading():
+    with open("json_files/trading_member.json", "r") as f:
+        trading = json.load(f)
+    return trading
+
+async def new_trading_member(member):
+    trading = await get_trading()
+
+    if str(member.id) in trading:
+        return False
+    else:
+        trading[str(member.id)] = []
+
+    with open("json_files/trading_member.json", "w") as f:
+        json.dump(trading,f)
+    return True    
+                
