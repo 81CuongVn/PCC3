@@ -1,6 +1,6 @@
 # Welcome to PCC3
-## This is the Pre-Release repository for the Discord Bot of the Official PC CREATOR Discord Server.
-## You can get every information about how to use the bot by reading the ```readme.md```.
+#### This is the Pre-Release repository for the Discord Bot of the Official PC CREATOR Discord Server.
+You can get every information about how to use the bot by reading the ```readme.md```.
 
 
 # Contents of readme.md
