@@ -37,7 +37,7 @@ class messagecounter(commands.Cog):
 
     @commands.Cog.listener()
     async def on_message(self, message):
-        if True:
+        if not message.author.bot:
             if not message.content.startswith(",") and not message.channel.id == other_log_channel and not message.channel.id == 748122380383027210 and not message.channel.id == 870068988254756894:    
                     if isinstance(message.channel, discord.DMChannel):
                         if message.author != self.client.user:
@@ -67,12 +67,12 @@ class messagecounter(commands.Cog):
                     daily_messages_2 += test
                     daily_messages_3 = str(daily_messages_2)
                     data[64] = daily_messages_3
-                    with open ("counter-file.txt", "w") as cf:
+                    with open ("json_files/counter-file.txt", "w") as cf:
                         cf.writelines(data)
                         cf.close
             if message.author == self.client.user:
                 return
-            filtered_words = []#["fuck", "idiot", "shit", "fuck", "nigg", "fuk", "cunt", "cnut", "bitch", "dick", "d1ck", "pussy,", "asshole", "b1tch", "b!tch", "blowjob", "cock", "c0ck", "f u c k", "shlt", "fů", "cum", "shit" "ass", "fuc", "nigg", "fuk", "cunt", "cnut", "bitch", "dick",  "d1ck", "pussy", "asshole", "b1tch", "b!tch", "blowjob", "cock", "c0ck", "retard", "fag", "faggot"]
+
             topleveldomain = ["https://", "http://"] #"com", "org", "net"]
             #for word in topleveldomain:
             #     if word in message.content:
