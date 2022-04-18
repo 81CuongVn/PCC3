@@ -2,9 +2,8 @@
   "ExpandedNodes": [
     "",
     "\\cogs",
-    "\\cogs\\information",
-    "\\cogs\\ticketsystem"
+    "\\cogs\\coin_system"
   ],
-  "SelectedNode": "\\cogs\\information\\botinfo.py",
+  "SelectedNode": "\\cogs\\coin_system\\nuclearfallout.py",
   "PreviewInSolutionExplorer": false
 }
