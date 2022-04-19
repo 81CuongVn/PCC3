@@ -256,11 +256,16 @@ class levelroles(commands.Cog):
     @commands.command(name="refreshlrsstats")
     @permissions.has_any_role(951207540472029195, 951464246506565683)
     async def refreshlrsstats(self, ctx):
-        await ctx.send("Do you really want to do that? This can take up to 1 minute, **will set the leaderboard 1 day ahead** and could potentially break the leaderboard. **ONLY USE WHEN IT IS HAS NOT REFRESHED AT 1am CET!!!** Reply with your user-ID to confirm.")
-        ans = await self.client.wait_for('message', check=lambda message: message.author == ctx.author)
-        if int(ans.content) == int(ctx.author.id):
-            await self.awaitable_lrs_stats()
-            await ctx.send("done")
+        if ctx.author.id in [695229647021015040, 443769343138856961, 713696771188195368]:
+            await ctx.send("Do you really want to do that? This can take up to 1 minute, **will set the leaderboard 1 day ahead** and could potentially break the leaderboard. **ONLY USE WHEN IT IS HAS NOT REFRESHED AT 1am CET!!!** Reply with your user-ID to confirm.")
+            ans = await self.client.wait_for('message', check=lambda message: message.author == ctx.author)
+            if str(ans.content) == str(ctx.author.id):
+                await self.awaitable_lrs_stats()
+                await ctx.send("done")
+            else:
+                await ctx.send("Wrong ID")
+        else:
+            await ctx.send("F*** you")
 
     def lrs_stats(self):
         with open ("json_files/counter-file.txt", "r") as d_m:

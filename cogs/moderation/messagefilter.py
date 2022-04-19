@@ -47,7 +47,7 @@ class messagefilter(commands.Cog):
                 for badword in badwordarr:
                     if badword.lower() in content.lower():
                         compiled = re.compile(re.escape(badword.lower()), re.IGNORECASE)
-                        lengthofbadword = len(badword3) - 1
+                        lengthofbadword = len(badword) - 1
                         replacement = '٭' * lengthofbadword
                         replacement = badword[0] + replacement
                         content = compiled.sub(replacement, content)
