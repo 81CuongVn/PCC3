@@ -23,7 +23,7 @@ class manage_member_stats(commands.Cog):
         if mode == "Messages":
             mode = "messages"
             if ctx.author.id != 695229647021015040: 
-                await ctx.respond("https://www.youtube.com/watch?v=o-YBDTqX_ZU\nTutorial to make it work the next time.", ephemeral=True)
+                await ctx.respond("||https://www.youtube.com/watch?v=o-YBDTqX_ZU||\nTutorial to make it work the next time.", ephemeral=True)
                 return
           
         if mode_2 == "Setzero":
