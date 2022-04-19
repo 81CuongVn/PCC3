@@ -2,8 +2,8 @@
   "ExpandedNodes": [
     "",
     "\\cogs",
-    "\\cogs\\information"
+    "\\cogs\\moderation",
+    "\\cogs\\uselessfeatures"
   ],
-  "SelectedNode": "\\.breakpoints",
   "PreviewInSolutionExplorer": false
 }
