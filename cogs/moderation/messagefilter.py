@@ -36,7 +36,10 @@ class messagefilter(commands.Cog):
                 badwordarr = localbadwords #await self.get_badwords()
                 muchusedarr =localmuchusedbadwords #await self.get_muchusedbadwords()
                 author = message.author
-                webhooks = await message.channel.webhooks()
+                try:
+                    webhooks = await message.channel.webhooks()
+                except:
+                    webhooks = None
                 swearword = False
                 content = message.content
                 #replacement = ":heart:"
@@ -91,13 +94,17 @@ class messagefilter(commands.Cog):
                     if len(content) > 1000:
                         content = content[:1000]
                     content = content + explanation
-                    if webhooks:
-                        for webhook in webhooks:
+                    if webhooks != None:
+                        if webhooks:
+                            for webhook in webhooks:
+                                await webhook.send(content=content, username=author.display_name, avatar_url=author.avatar.url)
+                                break
+                        elif not webhooks:
+                            webhook = await message.channel.create_webhook(name="BadWordHook")
                             await webhook.send(content=content, username=author.display_name, avatar_url=author.avatar.url)
-                            break
-                    elif not webhooks:
-                        webhook = await message.channel.create_webhook(name="BadWordHook")
-                        await webhook.send(content=content, username=author.display_name, avatar_url=author.avatar.url)
+                        return True
+                    else:
+                        return True
                 return True
             return False
 
