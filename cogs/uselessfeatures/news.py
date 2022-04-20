@@ -14,11 +14,7 @@ class botnews_command(commands.Cog):
         embed=discord.Embed(title="Update 1.9", description="What is new?", color=13565696)
         embed.set_author(name="Yui", url="https://discordapp.com/users/443769343138856961", icon_url="https://cdn.discordapp.com/avatars/443769343138856961/a_0d00fcc52d83500cc2915ff9f19d877d.gif?size=1024")
         embed.add_field(name="Tic Tac Toe", value="We finally updated Tic Tac Toe to v2.\nYou can play with `/tic_tac_toe`", inline=False)
-<<<<<<< HEAD
-        embed.add_field(name="Notes", value="We added a `,note command`, so you can finally remember all the things you always forget.", inline=False)
-=======
-        embed.add_field(name="Notes", value="We added a `note` command, so you can finally remember all the things you always forget.", inline=False)
->>>>>>> 65321c0c8a72e9357533b9f422a010d35aeadc35
+        embed.add_field(name="Notes", value="We added a `,note` command, so you can finally remember all the things you always forget.", inline=False)
         embed.add_field(name="Bug fixes", value="We fixed many bugs, and made sure, that this release is mostly \"bug free\".", inline=False)
         embed.set_footer(text="Stay tuned for the next update. 😉")
         await ctx.send(embed=embed)
