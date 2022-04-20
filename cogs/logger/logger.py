@@ -168,7 +168,10 @@ class logs(commands.Cog):
         except:
             e.set_author(name="Member left") 
         e.description=f"{member.mention} | `{member.name}#{member.discriminator}`\nJoined at `{member.joined_at.date()}`"
-        e.set_thumbnail(url=member.avatar.url)
+        try:
+            e.set_thumbnail(url=member.avatar.url)
+        except:
+            pass    
         e.set_footer(text=f"User ID: {member.id}")
         e.timestamp = datetime.now(pytz.timezone('Europe/Vienna'))
 
@@ -203,6 +206,8 @@ class logs(commands.Cog):
                 except:
                     e.add_field(name="After:", value="None" ,inline=False)    
                 await log_channel.send(embed=e)
+            else:
+                pass    
         except:
             e.description=f"{after.mention}'s Avatar changed."
             try:
