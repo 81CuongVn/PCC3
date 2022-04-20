@@ -53,22 +53,22 @@ async def button_function(button_number,interaction):
                   gameOver = True
               
               if gameOver == True:
-                await interaction.message.edit(f"<@{interaction.user.id}> win and get the entire money.",view=None)
+                await interaction.message.edit(f"<@{interaction.user.id}> won and got the entire money.",view=None)
                 await update_bank(interaction.user, send, 2*ttt_list_2[5], mode = "wallet")
               elif y == 9:
                 await update_bank(ttt_list_2[0], send, ttt_list_2[5], mode = "wallet")
                 await update_bank(ttt_list_2[1], send, ttt_list_2[5], mode = "wallet")
-                await interaction.response.send_message(content="Nobody won so both got the money back.")
+                await interaction.response.send_message(content="It's a tie\nBoth of you got your entry money back")
               else:
                 if ttt_list_2[3] == ttt_list_2[0]:
                   ttt_list_2[3] = ttt_list_2[1]
                 else:
                   ttt_list_2[3] = ttt_list_2[0]
-                await interaction.message.edit(f"It was <@{interaction.user.id}> turn so now it's <@{ttt_list_2[3]}> turn.\n{game_list[0]}{game_list[1]}{game_list[2]}\n{game_list[3]}{game_list[4]}{game_list[5]}\n{game_list[6]}{game_list[7]}{game_list[8]}")
+                await interaction.message.edit(f"It was <@{interaction.user.id}>'s turn. Now it's your turn <@{ttt_list_2[3]}>.\n{game_list[0]}{game_list[1]}{game_list[2]}\n{game_list[3]}{game_list[4]}{game_list[5]}\n{game_list[6]}{game_list[7]}{game_list[8]}")
             else:
-              await interaction.response("On this field was already placed")
+              await interaction.response("This field is occupied")
           else:
-            await interaction.response.send_message("its not your turn")
+            await interaction.response.send_message("It is not your turn <@{interaction.user.id}>.")
 
 class PersistentView(discord.ui.View):
     def __init__(self):
@@ -117,11 +117,11 @@ class PersistentView(discord.ui.View):
         if ttt_list_2[2] == interaction.message.id:
           if ttt_list_2[0] == interaction.user.id:
             send = interaction.response.send_message
-            await interaction.message.edit(f"<@{ttt_list_2[0]}> gave up so <@{ttt_list_2[1]}> win and get the entire money.",view=None)
+            await interaction.message.edit(f"<@{ttt_list_2[0]}> gave up and let <@{ttt_list_2[1]}> get got the money.",view=None)
             await update_bank(ttt_list_2[1], send, 2*ttt_list_2[5], mode = "wallet")
           elif ttt_list_2[1] == interaction.user.id:
             send = interaction.response.send_message
-            await interaction.message.edit(f"<@{ttt_list_2[1]}> gave up so <@{ttt_list_2[0]}> win and get the entire money.",view=None)
+            await interaction.message.edit(f"<@{ttt_list_2[1]}> gave up and let <@{ttt_list_2[0]}> get the money.",view=None)
             await update_bank(ttt_list_2[0], send, 2*ttt_list_2[5], mode = "wallet")
 
 class PersistentViewBot(commands.Bot):
@@ -156,8 +156,8 @@ class tictactoe_buttons(commands.Cog):
     new_games = []
 
 
-    @commands.slash_command()
-    async def tictactoe_buttons(self, ctx, p2: Option(discord.Member, required=True), amount: Option(int, required=True)):
+    @commands.slash_command(name="tic_tac_toe")
+    async def tictactoe_buttons(self, ctx, opponent: Option(discord.Member, required=True), amount: Option(int, required=True)):
         global player1
         global player2
         global turn
@@ -167,6 +167,7 @@ class tictactoe_buttons(commands.Cog):
         global amount_2
         global new_games
 
+        p2 = opponent
         member = ctx.author      
         await new_member(member)
         user = member
@@ -178,7 +179,7 @@ class tictactoe_buttons(commands.Cog):
             await ctx.respond(f"You dont have that much money (You have {coins_amt}<:bot_icon:951868023503986699>)")
             return
         if amount <= 0:
-          await ctx.respond(f"You cant use {amount}$. Use a number that is bigger than 0")
+          await ctx.respond(f"You can't use {amount}<:bot_icon:951868023503986699>. Use more than 0")
           return
         amount_2 = amount
         player1 = ""
@@ -188,8 +189,8 @@ class tictactoe_buttons(commands.Cog):
 
         p1 = ctx.author
 
-        if p2 == ctx.author:
-                await ctx.respond("Enter 2 different names. No game was started.")
+        if p2 == ctx.author or p2.bot:
+                await ctx.respond("You can't play against yourself or a Bot.")
                 return
         p2_2 = p2
 
@@ -198,7 +199,7 @@ class tictactoe_buttons(commands.Cog):
         view = View()
         view.add_item(button_p2_accept)
         view.add_item(button_p2_declince)
-        start_message = await ctx.send(f"<@{p2.id}>, click on the green button below this messages to accept this tic-tac-toe game and pay {amount}$ to enter or click on the red button to declince the game and pay nothing.", view=view)
+        start_message = await ctx.send(f"<@{p2.id}>, press the green button below this message to accept the invite to this tic-tac-toe game. You will have to pay {amount}<:bot_icon:951868023503986699> to enter. You can decline by pressing the red button.", view=view)
 
         new_games.append([
           ctx.author.id,
@@ -223,7 +224,7 @@ class tictactoe_buttons(commands.Cog):
                       await ctx.send(f"You dont have that much money (You have {coins_amt}<:bot_icon:951868023503986699>)")
                       return
                 else:
-                      await interaction.response.edit_message(content="Game is started:", view=None)
+                      await interaction.response.edit_message(content="The game started:", view=None)
                       new_games.remove(game_start)
                       global gameOver
                       send = ctx.respond
@@ -237,7 +238,7 @@ class tictactoe_buttons(commands.Cog):
                             p3 = p1
                           elif p3_1 == 2:
                             p3 = p2
-                          ttt_start_msg = await ctx.send(f"Ok <@{p1.id}> and <@{p2_2.id}>, a game was started. It's <@{p3.id}> turn.\n⬜⬜⬜\n⬜⬜⬜\n⬜⬜⬜",view=PersistentView())
+                          ttt_start_msg = await ctx.send(f"<@{p1.id}> vs <@{p2_2.id}>\nIt's <@{p3.id}> turn.\n⬜⬜⬜\n⬜⬜⬜\n⬜⬜⬜",view=PersistentView())
                           whois_turn = p3
                           board.append([
                               p1.id,
@@ -255,10 +256,10 @@ class tictactoe_buttons(commands.Cog):
           for game_start in new_games:
             if game_start[3] == interaction.message.id:
               if interaction.user != game_start[1]:
-                await  interaction.respond(f"<@{interaction.user.id}>, you are not allowed to use this button, start a own tictactoe game")
+                await  interaction.respond(f"<@{interaction.user.id}>, you can't use this. Go start your own game.")
                 return
               else:
-                await interaction.response.edit_message(content=f"<@{p1.id}>, {p2_2} dont want to play a game.", view=None)
+                await interaction.response.edit_message(content=f"{p2_2} declined the offer.", view=None)
                 new_games.remove(game_start)
 
 
