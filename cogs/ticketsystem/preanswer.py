@@ -65,42 +65,76 @@ class PreAnswer(commands.Cog):
 
         webhooks = await ctx.channel.webhooks()
         try:
-            if fileObj:
-                if webhooks:
-                    for webhook in webhooks:
+            try:
+                if fileObj:
+                    if webhooks:
+                        for webhook in webhooks:
+                            if webhook.name == "PreanswerHook":
+                                await webhook.send(content=message, username=ctx.author.display_name, avatar_url=ctx.author.avatar.url, file=fileObj)
+                                await ctx.respond("Success", ephemeral=True)
+                                hook = True
+                                break
+                            else:
+                                hook = False
+                        if hook == False:
+                            webhook = await ctx.channel.create_webhook(name="PreanswerHook")
+                            await webhook.send(content=message, username=ctx.author.display_name, avatar_url=ctx.author.avatar.url, file=fileObj)
+                            await ctx.respond("Success, there was no fitting webhook though so I had to create one.", ephemeral=True)
+                    elif not webhooks:
+                        webhook = await ctx.channel.create_webhook(name="PreanswerHook")
                         await webhook.send(content=message, username=ctx.author.display_name, avatar_url=ctx.author.avatar.url, file=fileObj)
-                        await ctx.respond("Success", ephemeral=True)
-                        break
-                elif not webhooks:
-                    webhook = await ctx.channel.create_webhook(name="PreanswerHook")
-                    await webhook.send(content=message, username=ctx.author.display_name, avatar_url=ctx.author.avatar.url, file=fileObj)
-                    await ctx.respond("Success, there was no webhook though so I had to create one.", ephemeral=True)
+                        await ctx.respond("Success, there was no webhook though so I had to create one.", ephemeral=True)
+                    else:
+                        await ctx.respond("I do not know how you did that, but you somehow broke an if-else statement.", ephemeral=True)
                 else:
-                    await ctx.respond("I do not know how you did that, but you somehow broke an if-else statement.", ephemeral=True)
-            else:
+                    if webhooks:
+                        for webhook in webhooks:
+                            if webhook.name == "PreanswerHook":
+                                await webhook.send(content=message, username=ctx.author.display_name, avatar_url=ctx.author.avatar.url)
+                                await ctx.respond("Success", ephemeral=True)
+                                hook = True
+                                break
+                            else:
+                                hook = False
+                        if hook == False:
+                            webhook = await ctx.channel.create_webhook(name="PreanswerHook")
+                            await webhook.send(content=message, username=ctx.author.display_name, avatar_url=ctx.author.avatar.url)
+                            await ctx.respond("Success, there was no fitting webhook though so I had to create one.", ephemeral=True)
+                    elif not webhooks:
+                        webhook = await ctx.channel.create_webhook(name="PreanswerHook")
+                        await webhook.send(content=message, username=ctx.author.display_name, avatar_url=ctx.author.avatar.url)
+                        await ctx.respond("Success, there was no webhook though so I had to create one.", ephemeral=True)
+                    else:
+                        await ctx.respond("I do not know how you did that, but you somehow broke an if-else statement.", ephemeral=True)
+            except:
+                webhook = await ctx.channel.create_webhook(name="PreanswerHook")
+                await webhook.send(content=message, username=ctx.author.display_name, avatar_url=ctx.author.avatar.url, file=fileObj)
+                await ctx.respond("Success, there an error, so i created a new hook.", ephemeral=True)
+        except:
+            try:
                 if webhooks:
                     for webhook in webhooks:
+                        if webhook.name == "PreanswerHook":
+                            await webhook.send(content=message, username=ctx.author.display_name, avatar_url=ctx.author.avatar.url)
+                            await ctx.respond("Success", ephemeral=True)
+                            hook = True
+                            break
+                        else:
+                            hook = False
+                    if hook == False:
+                        webhook = await ctx.channel.create_webhook(name="PreanswerHook")
                         await webhook.send(content=message, username=ctx.author.display_name, avatar_url=ctx.author.avatar.url)
-                        await ctx.respond("Success", ephemeral=True)
-                        break
+                        await ctx.respond("Success, there was no fitting webhook though so I had to create one.", ephemeral=True)
                 elif not webhooks:
                     webhook = await ctx.channel.create_webhook(name="PreanswerHook")
                     await webhook.send(content=message, username=ctx.author.display_name, avatar_url=ctx.author.avatar.url)
                     await ctx.respond("Success, there was no webhook though so I had to create one.", ephemeral=True)
                 else:
                     await ctx.respond("I do not know how you did that, but you somehow broke an if-else statement.", ephemeral=True)
-        except:
-            if webhooks:
-                for webhook in webhooks:
-                    await webhook.send(content=message, username=ctx.author.display_name, avatar_url=ctx.author.avatar.url)
-                    await ctx.respond("Success", ephemeral=True)
-                    break
-            elif not webhooks:
+            except:
                 webhook = await ctx.channel.create_webhook(name="PreanswerHook")
                 await webhook.send(content=message, username=ctx.author.display_name, avatar_url=ctx.author.avatar.url)
-                await ctx.respond("Success, there was no webhook though so I had to create one.", ephemeral=True)
-            else:
-                await ctx.respond("I do not know how you did that, but you somehow broke an if-else statement.", ephemeral=True)
+                await ctx.respond("Success, there an error, so i created a new hook.", ephemeral=True)
 
     @commands.command(name="getwebhookstest")
     async def getwebhooks(self, ctx, message=None):
