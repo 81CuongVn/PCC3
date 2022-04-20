@@ -168,6 +168,7 @@ class logs(commands.Cog):
         except:
             e.set_author(name="Member left") 
         e.description=f"{member.mention} | `{member.name}#{member.discriminator}`\nJoined at `{member.joined_at.date()}`"
+        #test
         try:
             e.set_thumbnail(url=member.avatar.url)
         except:
