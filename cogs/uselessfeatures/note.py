@@ -18,7 +18,7 @@ class note(Cog):
 		with open("json_files/notes.json", "r") as f:
 			notes = json.load(f)
 		if str(user.id) not in notes:
-			if True:
+			if note != "":
 				notes[str(user.id)] = {}
 				notes[str(user.id)]["1"] = note
 				notes[str(user.id)]["2"] = ""
@@ -28,8 +28,10 @@ class note(Cog):
 				with open("json_files/notes.json", "w") as f:
 					json.dump(notes,f)
 				await ctx.send("Noted")
+			else:
+				await ctx.send("You can't note nothing.")
 		else:
-			if True:
+			if note != "":
 				if notes[str(user.id)]["1"] == "":
 					notes[str(user.id)]["1"] = note
 				elif notes[str(user.id)]["2"] == "":
@@ -46,6 +48,8 @@ class note(Cog):
 				with open("json_files/notes.json", "w") as f:
 					json.dump(notes,f)
 				await ctx.send("Noted")
+			else:
+				await ctx.send("You can't note nothing.")
 		
 
 	@commands.command(name="notes")
@@ -57,7 +61,10 @@ class note(Cog):
 			with open("json_files/notes.json", encoding="utf-8-sig") as f:
 				notes = json.load(f)
 			userid = str(ctx.author.id)
-			await ctx.send("<@" + str(ctx.author.id) + ">, your Notes:\n\n**Note** `1`**:** " + notes[userid]["1"] + "\n**Note** `2`**:** " + notes[userid]["2"] + "\n**Note** `3`**:** " + notes[userid]["3"] + "\n**Note** `4`**:** " + notes[userid]["4"] + "\n**Note** `5`**:** " + notes[userid]["5"])
+			if userid in notes:
+				await ctx.send("<@" + str(ctx.author.id) + ">, your Notes:\n\n**Note** `1`**:** " + notes[userid]["1"] + "\n**Note** `2`**:** " + notes[userid]["2"] + "\n**Note** `3`**:** " + notes[userid]["3"] + "\n**Note** `4`**:** " + notes[userid]["4"] + "\n**Note** `5`**:** " + notes[userid]["5"])
+			else:
+				await ctx.send("You don't have anything noted.")
 		elif subcommand == "delete":
 			if True:
 				if note != None:
