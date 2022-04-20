@@ -125,6 +125,7 @@ class trading(commands.Cog):
                     
             else:
                 await ctx.respond("Use `/create_bank_account` to create a bank account", ephemeral=True)
+                #trading[str(ctx.author.id)]["trade_counter"]
                 return     
 
 
