@@ -37,6 +37,7 @@ class help_command(commands.Cog):
         embed_server.add_field(name=f",staff", value="Sends an embed with all staff members", inline=False)
         embed_server.add_field(name=f",ping", value="Will return the ping of the bot", inline=False)
         embed_server.add_field(name=f",uptime", value="shows the uptime of the bot", inline=False)
+        embed_server.add_field(name=f",note", value="Note stuff", inline=False)
 
         button_back.disabled = True
         message = await ctx.send(embed=embed, view=view, delete_after=60)  
