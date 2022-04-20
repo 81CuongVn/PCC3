@@ -1,5 +1,6 @@
 from datetime import datetime, timedelta
 from random import choice
+from types import NoneType
 from discord import Embed
 from discord.ext.commands import Cog
 import discord, json
@@ -12,7 +13,7 @@ class note(Cog):
 		self.client = client
 
 	@commands.command(name="note")
-	async def notethis(self, ctx, note): #DAS DING IST CURSED, ÄNDERT NIX BITTE
+	async def notethis(self, ctx, note): #DAS DING IST CURSED, AENDERT NIX BITTE
 		user = ctx.author
 		with open("json_files/notes.json", "r") as f:
 			notes = json.load(f)
@@ -44,7 +45,38 @@ class note(Cog):
 					await ctx.send(f"You can't have more than 5 notes.\nUse `.notes list` to list your notes, and `.notes delete X` to delete a note (with X as your note-number).\n<@{user.id}>")
 				with open("json_files/notes.json", "w") as f:
 					json.dump(notes,f)
+		await ctx.send("Noted")
 
+	@commands.command(name="notes")
+	async def notethis(self, ctx, subcommand, note = "nope"):
+		user = ctx.author
+		if subcommand == "help":
+			await ctx.send("Note commands:\n**note** note something\n**notes list** list all your notes\n**notes delete** delete a note")
+		elif subcommand == "list":
+			with open("json_files/notes.json", encoding="utf-8-sig") as f:
+				notes = json.load(f)
+			userid = str(ctx.author.id)
+			await ctx.send("<@" + ctx.author.id + ">\nYour Notes:\nNote 1: " + notes[userid]["1"] + "\nNote 2: " + notes[userid]["2"] + "\nNote 3: " + notes[userid]["3"] + "\nNote 4: " + notes[userid]["4"] + "\nNote 5: " + notes[userid]["5"])
+		elif subcommand == "delete":
+			if True:
+				if note != "nope":
+					#note2 = int(note)
+					print(note)
+					if note != "1" and note != "2" and note != "3" and note != "4" and note != "5":
+						await ctx.send("correct use: `notes delete X` with X as a Number between 1 and 5.")
+						print(note)
+					else:
+						with open("json_files/notes.json", encoding="utf-8-sig") as f:
+							notes = json.load(f)
+						notes[str(user.id)][note] = ""
+						with open("json_files/notes.json", "w") as f:
+							json.dump(notes,f)
+				#else:
+					#await ctx.send("correct use: `notes delete X` with X as a Number between 1 and 5.")
+			#except:
+				#await ctx.send("correct use: `notes delete X` with X as a Number between 1 and 5.")
+		else:
+			await ctx.send("Invalid syntax. Use **.notes help** to get help.")
 
 
 def setup(bot):
