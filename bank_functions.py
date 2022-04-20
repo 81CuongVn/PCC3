@@ -62,31 +62,37 @@ async def new_bank_account(self, ctx, send, member, password):
 
 async def update_bank(member, send, amount, mode):
 
-    user = member
+    try:
+        user = member.id
+    except:
+        user = member
 
     bank_account = await get_bank_data()
     users_coins = await get_coins()
 
     if mode == "bank":
-        bank_money_amount = bank_account[str(user.id)]["money"]
+        bank_money_amount = bank_account[str(user)]["money"]
 
-        if amount > bank_money_amount:
-            await send("You dont have enough money")
-        else:
-            bank_account[str(user.id)] += amount  
-            with open("json_files/bank.json", "w") as f:
-                json.dump(bank_account,f)
+        if amount <= 0:
+            if amount > bank_money_amount:
+                await send("You dont have enough money")
+                return
+        
+        bank_account[str(user)] += amount  
+        with open("json_files/bank.json", "w") as f:
+            json.dump(bank_account,f)
           
     elif mode == "wallet":
-        wallet_money_amount = users_coins[str(user.id)]
+        wallet_money_amount = users_coins[str(user)]
 
-        if amount > wallet_money_amount:
-            await send("You dont have enough money")
-            return
-        else:
-            users_coins[str(user.id)] += amount
-            with open("json_files/usercoins.json", "w") as f:
-                json.dump(users_coins,f)
+        if amount <= 0:
+            if amount > wallet_money_amount:
+                await send("You dont have enough money")
+                return
+        
+        users_coins[str(user)] += amount
+        with open("json_files/usercoins.json", "w") as f:
+            json.dump(users_coins,f)
 
         
          
