@@ -1,4 +1,4 @@
-﻿from datetime import datetime, timedelta
+from datetime import datetime, timedelta
 from random import choice
 from discord import Embed
 from discord.ext.commands import Cog
