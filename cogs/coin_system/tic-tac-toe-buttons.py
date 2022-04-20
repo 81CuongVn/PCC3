@@ -1,4 +1,4 @@
-from dis import disco
+#from dis import disco
 import discord
 from discord.ext import commands
 import random
@@ -255,7 +255,7 @@ class tictactoe_buttons(commands.Cog):
           for game_start in new_games:
             if game_start[3] == interaction.message.id:
               if interaction.user != game_start[1]:
-                await  interaction.respond(f"<@{interaction.user.id}>, you are not allowed to use this button. Go start your own tictactoe game")
+                await  interaction.respond(f"<@{interaction.user.id}>, you are not allowed to use this button, start a own tictactoe game")
                 return
               else:
                 await interaction.response.edit_message(content=f"<@{p1.id}>, {p2_2} dont want to play a game.", view=None)
