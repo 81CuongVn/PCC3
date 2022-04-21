@@ -33,7 +33,10 @@ class levelroles(commands.Cog):
         await self.lrs(ctx , send, member)    
             
     async def lrs(self, ctx, send, member):
-        await self.new_member(ctx.author)
+        if member == None:
+            await self.new_member(ctx.author)
+        else:
+            await self.new_member(member)    
 
         if member == None:
             member = ctx.author
