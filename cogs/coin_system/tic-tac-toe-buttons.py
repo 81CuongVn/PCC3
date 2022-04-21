@@ -68,7 +68,7 @@ async def button_function(button_number,interaction):
             else:
               await interaction.response("This field is occupied")
           else:
-            await interaction.response.send_message("It is not your turn <@{interaction.user.id}>.")
+            await interaction.response.send_message(f"It is not your turn <@{interaction.user.id}>.")
 
 class PersistentView(discord.ui.View):
     def __init__(self):
