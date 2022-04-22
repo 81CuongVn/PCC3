@@ -37,8 +37,8 @@ class messagecounter(commands.Cog):
 
     @commands.Cog.listener()
     async def on_message(self, message):
-        if not message.author.bot:
-            if not message.content.startswith(",") and not message.channel.id == other_log_channel and not message.channel.id == 748122380383027210 and not message.channel.id == 870068988254756894:    
+        if not message.author.bot and not ctx.channel.type == discord.ChannelType.private:
+            if not message.content.startswith(",") and not message.channel.id == other_log_channel and not message.channel.id == 748122380383027210 and not message.channel.id == 870068988254756894 and ctx.guild.id == 571031703661969430:    
                     if isinstance(message.channel, discord.DMChannel):
                         if message.author != self.client.user:
                             test_channel = self.client.get_channel(message_channel)

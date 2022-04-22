@@ -19,6 +19,7 @@ from discord.ext.commands import MemberNotFound
 import sys
 import subprocess
 from decouple import config
+import backup
 # from AntiSpamTrackerSubclass import MyCustomTracker
 
 
@@ -33,6 +34,7 @@ client.remove_command('help')
 
 @client.event
 async def on_ready():
+    schedule.every().day.at("00:00").do(backup.backthisup, "json_files", "../pcc3_backups")
     print("Bot is online")
     await client.change_presence(activity=discord.Streaming(name="Playing PC Creator 2", url="https://www.youtube.com/watch?v=o9qoiH0Am7o"))
     client.start_time = datetime.now()
@@ -40,7 +42,7 @@ async def on_ready():
     #await new_restriction()
     while True:
         schedule.run_pending()
-        await asyncio.sleep(1)  
+        await asyncio.sleep(1)
   
 
 @client.command(name="rsb")
@@ -82,7 +84,18 @@ async def sdb(ctx):
     else:
         await ctx.send("HOW DARE YOU")
 
-
+@client.command(name="bub")
+async def bub(ctx):
+    if ctx.author.id == 443769343138856961 or ctx.author.id == 713696771188195368 or ctx.author.id == 695229647021015040:
+        await ctx.send("Do you really want to do that? This will backup the User-Files")
+        ans = await client.wait_for('message', check=lambda message: message.author == ctx.author)
+        if int(ans.content) == int(ctx.author.id):
+            backup.backthisup("json_files", "../pcc3_backups")
+            await ctx.send("Backup successful...\nMaybe")
+        else:
+            await ctx.send("Canceled")
+    else:
+        await ctx.send("HOW DARE YOU")
 
 
    
