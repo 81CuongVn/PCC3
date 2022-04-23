@@ -1,4 +1,4 @@
-﻿certifi==2021.10.8
+certifi==2021.10.8
 charset-normalizer==2.0.12
 distlib==0.3.4
 docopt==0.6.2
@@ -18,3 +18,4 @@ py-cpuinfo==8.0.0
 psutil==5.9.0
 discord-webhook-0.15.0
 pytz
+bs4
