@@ -13,7 +13,9 @@ class youtube(commands.Cog):
 
     
     @commands.command()
-    async def youtube(self, ctx, *, search):
+    async def youtube(self, ctx, *, search=None):
+        if search == None:
+            search = "never gonna give you up"
         searchwp = search.replace(" ", "+")
         html = urllib.request.urlopen("https://www.youtube.com/results?search_query=" + searchwp)
         video_ids = re.findall(r"watch\?v=(\S{11})", html.read().decode())
