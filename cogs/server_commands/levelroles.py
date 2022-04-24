@@ -219,24 +219,12 @@ class levelroles(commands.Cog):
 
         with open("json_files/userLevels.json", "w") as f:
             json.dump(users,f)
-        return True     
-
-    #@commands.command()
-    #async def test(self, ctx, member:discord.Member):
-    #    date_now = date.today()
-    #    join_date = member.joined_at.date()
-    #    delta = date_now - join_date
-    #    await ctx.send(delta.days)
+        return True
 
 
-    @commands.command(aliases=["leaderboard", "lead"])
+    @commands.command(aliases=["messageleaderboard", "msglead", "lead"])
     async def lead_command(self, ctx):
         send = ctx.send
-        await self.lead(ctx, send)
-
-    @commands.slash_command(name="leaderboard", description="Shows the ,lrs leaderboard")
-    async def lead_slash(self, ctx):
-        send = ctx.respond
         await self.lead(ctx, send)
 
     async def lead(self, ctx, send):
@@ -439,4 +427,4 @@ class levelroles(commands.Cog):
         
 
 def setup(client):
-    client.add_cog(levelroles(client))            
+    client.add_cog(levelroles(client))

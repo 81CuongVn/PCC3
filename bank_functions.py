@@ -311,7 +311,20 @@ async def set_things(member, mode, mode_2, amount):
             users[str(member.id)] += amount
         with open("json_files/userLevels.json", "w") as f:
             json.dump(users,f)
-        return content  
+        return content
+    if mode == "xp":
+        await new_member(member)
+        with open("json_files/levelsystem.json", "r") as f:
+            user_coins = json.load(f)
+        if mode_2 == "set":
+            content = f"Set {member}'s XP to {amount}"
+            users_coins[str(member.id)] = amount
+        if mode_2 == "give":
+            content = f"Gave {member} {amount} XP"
+            users_coins[str(member.id)] += amount
+        with open("json_files/levelsystem.json", "w") as f:
+            json.dump(users_coins,f)
+        return content
 
 
 
