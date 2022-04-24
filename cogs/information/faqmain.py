@@ -12,7 +12,7 @@ class faqmain(commands.Cog):
     
     @commands.command()
     async def faq_ask(self, ctx, *, reason=None): 
-        if ctx.channel.name in ["faq_ask"]:
+        if ctx.channel.name in ["faq-ask"]:
             if reason == None or reason.lower() == "suggestion":
                 await ctx.send("You have to use ,faq_ask with a question", delete_after=10)
             else:
@@ -23,12 +23,12 @@ class faqmain(commands.Cog):
                 await message.add_reaction("✅")
                 await message.add_reaction("❌")
         else:
-            await ctx.send("This command only works in #faq_ask", delete_after=10)
+            await ctx.send("This command only works in #faq-ask", delete_after=10)
 
 
     @commands.slash_command(name="faq_ask", description="Ask things in relation with PCC / PCC2")
     async def faq_ask_slash(self, ctx, question: Option(str, required=True)): 
-        if ctx.channel.name in ["faq_ask"]:
+        if ctx.channel.name in ["faq-ask"]:
             await ctx.respond("Added your Question, we may answer it soon in #faq", ephemeral=True)
             embed=discord.Embed(title="Suggestion:", description=question, color=discord.Color.blurple, timestamp=datetime.utcnow())   
             embed.set_author(name=f"{ctx.author.display_name} ({ctx.author.id})", icon_url=ctx.author.avatar.url)
@@ -37,7 +37,7 @@ class faqmain(commands.Cog):
             await message.add_reaction("❌")
 
         else:
-            await ctx.respond("This command only works in #faq_ask", ephemeral=True)
+            await ctx.respond("This command only works in #faq-ask", ephemeral=True)
 
     @commands.slash_command(name="faq_answer", description="For Moderators / Admins to answer questions")
     @permissions.has_any_role(951207540472029195, 589435378147262464, 632674518317531137, 951464246506565683)
