@@ -15,7 +15,7 @@ class timeout(commands.Cog):
 
 
     @commands.slash_command(name = 'timeout', description = "mutes/timeouts a member")
-    @permissions.has_any_role(589435378147262464, 648546626637398046, 632674518317531137, 571032502181822506)#, guild_id="571031703661969430")
+    @permissions.has_any_role(589435378147262464, 648546626637398046, 632674518317531137, 571032502181822506, 697002610892341298)#, guild_id="571031703661969430")
     async def timeout(self, ctx, member: Option(discord.Member, required = True), reason: Option(str, required = False), days: Option(int, max_value = 27, required = False), hours: Option(int, required = False), minutes: Option(int, required = False), seconds: Option(int, required = False)):
         await self.new_warn_member(member)
         channel = self.client.get_channel(933768368970932254)

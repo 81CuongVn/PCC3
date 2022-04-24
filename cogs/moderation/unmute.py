@@ -11,7 +11,7 @@ class unmute(commands.Cog):
 
 
     @commands.slash_command(name = 'unmute', description = "unmutes/untimeouts a member")
-    @permissions.has_any_role(589435378147262464, 648546626637398046, 632674518317531137, 571032502181822506)#, guild_id="571031703661969430")
+    @permissions.has_any_role(589435378147262464, 648546626637398046, 632674518317531137, 571032502181822506, 697002610892341298)#, guild_id="571031703661969430")
     async def unmute(self, ctx, member: Option(discord.Member, required = True), reason: Option(str, required = False)):
         if reason == None:
             await member.remove_timeout()

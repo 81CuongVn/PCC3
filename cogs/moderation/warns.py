@@ -11,7 +11,7 @@ class warns(commands.Cog):
 
  
     @commands.slash_command(name="warn", description="For Moderation")
-    @permissions.has_any_role(589435378147262464, 648546626637398046, 632674518317531137, 571032502181822506)
+    @permissions.has_any_role(589435378147262464, 648546626637398046, 632674518317531137, 571032502181822506, 697002610892341298)
     async def warn(self, ctx, member: Option(discord.Member, required = True), reason: Option(str, required=True)):    
 
         await self.new_warn_member(member)

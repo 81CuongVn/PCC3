@@ -2,8 +2,9 @@
   "ExpandedNodes": [
     "",
     "\\cogs",
-    "\\cogs\\logger",
+    "\\cogs\\server_commands",
     "\\cogs\\uselessfeatures"
   ],
+  "SelectedNode": "\\requirements.txt",
   "PreviewInSolutionExplorer": false
 }
