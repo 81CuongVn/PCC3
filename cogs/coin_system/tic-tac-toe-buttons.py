@@ -256,7 +256,7 @@ class tictactoe_buttons(commands.Cog):
           for game_start in new_games:
             if game_start[3] == interaction.message.id:
               if interaction.user != game_start[1]:
-                await  interaction.message.channel.send(f"<@{interaction.user.id}>, you can't use this. Go start your own game.")
+                await  interaction.message.channel.send(f"<@{interaction.user.id}>, you can't use this. Go start your own game.", delete_after=10)
                 return
               else:
                 await interaction.response.edit_message(content=f"{p2_2} declined the offer.", view=None)
