@@ -3,6 +3,8 @@ from discord.ext import commands
 from discord.commands import permissions
 from discord import Option
 
+rolelist = [589435378147262464, 632674518317531137]
+
 class ppra(commands.Cog):
 
     def __init__(self, client):
@@ -18,11 +20,14 @@ class ppra(commands.Cog):
 
 
     @commands.slash_command(name="ppra", description="Adds PRO PLAYER role to a member")
-    @permissions.has_any_role(589435378147262464, 648546626637398046, 632674518317531137, 571032502181822506)
     async def ppra_slash(self, ctx, member: Option(discord.Member, required = True)):
-        role = ctx.guild.get_role(775736993018806322)
-        await ctx.respond(f"Added role **PRO PLAYER** to **{member}**")
-        await member.add_roles(role)    
+        user = ctx.author
+        if any(role.id in rolelist for role in user.roles):
+            role = ctx.guild.get_role(775736993018806322)
+            await ctx.respond(f"Added role **PRO PLAYER** to **{member}**")
+            await member.add_roles(role) 
+        else:
+            await ctx.respond("No U")
 
 
 def setup(client):

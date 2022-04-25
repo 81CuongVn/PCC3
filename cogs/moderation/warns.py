@@ -4,6 +4,8 @@ from discord.commands import permissions
 from discord import Option
 import json
 
+rolelist = [589435378147262464, 648546626637398046, 632674518317531137, 571032502181822506, 697002610892341298]
+
 class warns(commands.Cog):
 
     def __init__(self, client):
@@ -11,13 +13,15 @@ class warns(commands.Cog):
 
  
     @commands.slash_command(name="warn", description="For Moderation")
-    @permissions.has_any_role(589435378147262464, 648546626637398046, 632674518317531137, 571032502181822506, 697002610892341298)
     async def warn(self, ctx, member: Option(discord.Member, required = True), reason: Option(str, required=True)):    
+        user = ctx.author
+        if any(role.id in rolelist for role in user.roles):
+            await self.new_warn_member(member)
+            await self.update_warns(member, reason)
+            await ctx.respond(f"Warned {member.mention} for {reason}")
+        else:
+            await ctx.respond("No U")
 
-        await self.new_warn_member(member)
-        await self.update_warns(member, reason)
-
-        await ctx.respond(f"Warned {member.mention} for {reason}")   
 
 
     @commands.slash_command(name="modlogs", description="Check the warns/mutes etc. of a member")      

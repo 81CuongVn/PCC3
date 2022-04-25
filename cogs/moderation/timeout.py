@@ -8,6 +8,8 @@ from discord import Option
 from discord.commands import permissions
 import json
 
+rolelist = [589435378147262464, 648546626637398046, 632674518317531137, 571032502181822506, 697002610892341298]
+
 class timeout(commands.Cog):
 
     def __init__(self, client):
@@ -15,47 +17,50 @@ class timeout(commands.Cog):
 
 
     @commands.slash_command(name = 'timeout', description = "mutes/timeouts a member")
-    @permissions.has_any_role(589435378147262464, 648546626637398046, 632674518317531137, 571032502181822506, 697002610892341298)#, guild_id="571031703661969430")
     async def timeout(self, ctx, member: Option(discord.Member, required = True), reason: Option(str, required = False), days: Option(int, max_value = 27, required = False), hours: Option(int, required = False), minutes: Option(int, required = False), seconds: Option(int, required = False)):
-        await self.new_warn_member(member)
-        channel = self.client.get_channel(933768368970932254)
-        if member.id == ctx.author.id:
-            await ctx.respond("You can't timeout yourself!")
-            return
-        if member.guild_permissions.moderate_members:
-            await ctx.respond("You can't do this, this person is a moderator!")
-            return
-        if days == None:
-            days = 0
-        if hours == None:
-            hours = 0
-        if minutes == None:
-            minutes = 0
-        if seconds == None:
-            seconds = 0
-        duration = timedelta(days = days, hours = hours, minutes = minutes, seconds = seconds)
-        if duration >= timedelta(days = 28): #added to check if time exceeds 28 days
-            await ctx.respond("You can't mute someone for more than 28 days!", ephemeral = True) #responds, but only the author can see the response
-            return
-        if reason == None:
-            await member.timeout_for(duration)
-            embed = discord.Embed(title="Timeout", color=13565696)
-            embed.add_field(name="Muted", value=f"{member.mention}")
-            embed.add_field(name="Moderator", value=f"{ctx.author.mention}")
-            embed.add_field(name="Duration", value=f"**{days}** days, **{hours}** hours,\n**{minutes}** minutes, and **{seconds}** second",inline=False)
-            embed.add_field(name="Reason:", value="No reason ...")
-            await ctx.respond(f"Muted <@{member.id}> for {days} days, {hours} hours, {minutes} minutes, and {seconds} seconds by <@{ctx.author.id}>.")
-            await channel.send(embed=embed)
+        user = ctx.author
+        if any(role.id in rolelist for role in user.roles):
+            await self.new_warn_member(member)
+            channel = self.client.get_channel(933768368970932254)
+            if member.id == ctx.author.id:
+                await ctx.respond("You can't timeout yourself!")
+                return
+            if member.guild_permissions.moderate_members:
+                await ctx.respond("You can't do this, this person is a moderator!")
+                return
+            if days == None:
+                days = 0
+            if hours == None:
+                hours = 0
+            if minutes == None:
+                minutes = 0
+            if seconds == None:
+                seconds = 0
+            duration = timedelta(days = days, hours = hours, minutes = minutes, seconds = seconds)
+            if duration >= timedelta(days = 28): #added to check if time exceeds 28 days
+                await ctx.respond("You can't mute someone for more than 28 days!", ephemeral = True) #responds, but only the author can see the response
+                return
+            if reason == None:
+                await member.timeout_for(duration)
+                embed = discord.Embed(title="Timeout", color=13565696)
+                embed.add_field(name="Muted", value=f"{member.mention}")
+                embed.add_field(name="Moderator", value=f"{ctx.author.mention}")
+                embed.add_field(name="Duration", value=f"**{days}** days, **{hours}** hours,\n**{minutes}** minutes, and **{seconds}** second",inline=False)
+                embed.add_field(name="Reason:", value="No reason ...")
+                await ctx.respond(f"Muted <@{member.id}> for {days} days, {hours} hours, {minutes} minutes, and {seconds} seconds by <@{ctx.author.id}>.")
+                await channel.send(embed=embed)
+            else:
+                await member.timeout_for(duration, reason = reason)
+                embed = discord.Embed(title="Timeout", color=13565696)
+                embed.add_field(name="Muted", value=f"{member.mention}")
+                embed.add_field(name="Moderator", value=f"{ctx.author.mention}")
+                embed.add_field(name="Duration", value=f"**{days}** days, **{hours}** hours,\n**{minutes}** minutes, and **{seconds}** second",inline=False)
+                embed.add_field(name="Reason:", value=reason)
+                await channel.send(embed=embed)
+                await ctx.respond(f"Muted <@{member.id}> for {days} days, {hours} hours, {minutes} minutes, and {seconds} seconds by <@{ctx.author.id}> for '{reason}'.")
+            await self.update_warns(member, reason)
         else:
-            await member.timeout_for(duration, reason = reason)
-            embed = discord.Embed(title="Timeout", color=13565696)
-            embed.add_field(name="Muted", value=f"{member.mention}")
-            embed.add_field(name="Moderator", value=f"{ctx.author.mention}")
-            embed.add_field(name="Duration", value=f"**{days}** days, **{hours}** hours,\n**{minutes}** minutes, and **{seconds}** second",inline=False)
-            embed.add_field(name="Reason:", value=reason)
-            await channel.send(embed=embed)
-            await ctx.respond(f"Muted <@{member.id}> for {days} days, {hours} hours, {minutes} minutes, and {seconds} seconds by <@{ctx.author.id}> for '{reason}'.")
-        await self.update_warns(member, reason)
+            await ctx.respond("No U")
           
     @timeout.error
     async def timeouterror(ctx, error):
