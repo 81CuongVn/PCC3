@@ -10,7 +10,7 @@ class softban(commands.Cog):
         self.client = client
 
 
-    @commands.slash_command(name="softban", description="For moderation
+    @commands.slash_command(name="softban", description="For moderation")
     async def ban(self, ctx, member : discord.Member, reason="No reason ..."):
         user = ctx.author
         if any(role.id in rolelist for role in user.roles):
