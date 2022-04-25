@@ -39,7 +39,7 @@ class kick(commands.Cog):
                 await member.kick(reason=reason)
             await self.update_warns(member, reason)
         else:
-            await ctx.respond("No U")
+            return
 
 
     async def get_warns(self):

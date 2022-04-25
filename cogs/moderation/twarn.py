@@ -40,8 +40,7 @@ class twarn(commands.Cog):
             else:
                 await ctx.send("You can't use this command here")
         else:
-            await ctx.send("No U")
-
+            return
 
     
 

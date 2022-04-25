@@ -23,7 +23,7 @@ class unmute(commands.Cog):
                 await member.remove_timeout(reason = reason)
                 await ctx.respond(f"<@{member.id}> has been untimed out by <@{ctx.author.id}> for '{reason}'.")
         else:
-            await ctx.respond("No U")
+            return
 
     @unmute.error
     async def unmuteerror(ctx, error):

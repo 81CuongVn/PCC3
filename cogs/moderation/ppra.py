@@ -27,7 +27,7 @@ class ppra(commands.Cog):
             await ctx.respond(f"Added role **PRO PLAYER** to **{member}**")
             await member.add_roles(role) 
         else:
-            await ctx.respond("No U")
+            return
 
 
 def setup(client):

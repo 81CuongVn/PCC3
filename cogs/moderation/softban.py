@@ -38,7 +38,7 @@ class softban(commands.Cog):
                 await member.ban(reason=reason)  
                 await member.unban(reason=reason)
         else:
-            await ctx.respond("No U")
+            return
 
 def setup(client):
     client.add_cog(softban(client))

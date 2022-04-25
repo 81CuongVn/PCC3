@@ -20,7 +20,7 @@ class warns(commands.Cog):
             await self.update_warns(member, reason)
             await ctx.respond(f"Warned {member.mention} for {reason}")
         else:
-            await ctx.respond("No U")
+            return
 
 
 

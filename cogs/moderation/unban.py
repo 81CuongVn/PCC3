@@ -20,7 +20,7 @@ class unban(commands.Cog):
                 await ctx.guild.unban(user)
                 await ctx.send(f"Unbanned {member_name}")
                 return
-        await ctx.send(f"Can't find {member}")  
+        await ctx.send(f"Can't find {member}")
         
 
 def setup(client):

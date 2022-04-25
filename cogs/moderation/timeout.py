@@ -60,7 +60,7 @@ class timeout(commands.Cog):
                 await ctx.respond(f"Muted <@{member.id}> for {days} days, {hours} hours, {minutes} minutes, and {seconds} seconds by <@{ctx.author.id}> for '{reason}'.")
             await self.update_warns(member, reason)
         else:
-            await ctx.respond("No U")
+            return
           
     @timeout.error
     async def timeouterror(ctx, error):
