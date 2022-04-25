@@ -2,9 +2,17 @@
   "ExpandedNodes": [
     "",
     "\\cogs",
+<<<<<<< Updated upstream
     "\\cogs\\moderation",
     "\\cogs\\uselessfeatures"
   ],
   "SelectedNode": "\\requirements.txt",
+=======
+    "\\cogs\\advanced_systems",
+    "\\cogs\\uselessfeatures",
+    "\\unused"
+  ],
+  "SelectedNode": "\\cogs\\advanced_systems\\logger.py",
+>>>>>>> Stashed changes
   "PreviewInSolutionExplorer": false
 }
