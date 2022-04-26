@@ -53,13 +53,16 @@ class levelsys(commands.Cog):
                     users = json.load(f)
                 countnumber = 0
                 sortedusers = sorted(users.items(), key= lambda x: x[1], reverse=True)[:5]
+                #print(sortedusers)
                 pos = ctx.guild.member_count
                 for entry in sortedusers:
                     countnumber += 1
                     user_id, xp_count = entry
+                    #print(str(user_id) + " " + str(user.id))
                     if str(user_id) == str(user.id):
+                        #print(str(user_id) + " " + str(user.id))
                         pos = countnumber
-                    break
+                        break
 
                 nextxp = levelnum[0]
                 for userlevel in level[::-1]:
