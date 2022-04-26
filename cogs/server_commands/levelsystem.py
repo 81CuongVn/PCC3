@@ -104,6 +104,7 @@ class levelsys(commands.Cog):
 
     @commands.command()
     async def transferlrstoxp(self, ctx, member:discord.Member):
+        user = member
         with open("json_files/userLevels.json", "r") as f:
             userlrs = json.load(f)
         with open(lsj, "r") as f:
@@ -111,7 +112,7 @@ class levelsys(commands.Cog):
         userlrs = userlrs[str(user.id)]
         userxp[str(user.id)] = round(userlrs * 2.5)
         with open(lsj, "w") as f:
-            json.dump(users,f)
+            json.dump(userxp,f)
         await ctx.send(f"Converted {userlrs} messages to {userxp[str(user.id)]}")
 
     async def new_member(self, user):

@@ -21,7 +21,7 @@ class levelroles(commands.Cog):
         schedule.every().day.at("00:00").do(self.lrs_stats) 
         
      
-    @commands.command(aliases=["levelroles", "lrs", "rank"])
+    """@commands.command(aliases=["levelroles", "lrs", "rank"])
     async def lrs_normal_command(self, ctx, member:discord.Member = None):
         send = ctx.send
         await self.lrs(ctx , send, member)
@@ -219,7 +219,7 @@ class levelroles(commands.Cog):
 
         with open("json_files/userLevels.json", "w") as f:
             json.dump(users,f)
-        return True
+        return True"""
 
 
     @commands.command(aliases=["messageleaderboard", "msglead", "lead"])
