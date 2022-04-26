@@ -55,7 +55,7 @@ class levelsys(commands.Cog):
                 sortedusers = sorted(users.items(), key= lambda x: x[1], reverse=True)[:5]
                 #print(sortedusers)
                 pos = ctx.guild.member_count
-                for entry in sortedusers:
+                for entry in sortedusers[:1000]:
                     countnumber += 1
                     user_id, xp_count = entry
                     #print(str(user_id) + " " + str(user.id))

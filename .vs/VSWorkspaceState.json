@@ -2,10 +2,8 @@
   "ExpandedNodes": [
     "",
     "\\cogs",
-    "\\cogs\\coin_system",
-    "\\cogs\\information",
     "\\cogs\\server_commands"
   ],
-  "SelectedNode": "\\unused",
+  "SelectedNode": "\\cogs\\server_commands\\levelsystem.py",
   "PreviewInSolutionExplorer": false
 }
