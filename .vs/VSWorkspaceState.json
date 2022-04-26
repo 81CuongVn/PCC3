@@ -2,9 +2,10 @@
   "ExpandedNodes": [
     "",
     "\\cogs",
-    "\\cogs\\moderation",
-    "\\unused"
+    "\\cogs\\coin_system",
+    "\\cogs\\information",
+    "\\cogs\\server_commands"
   ],
-  "SelectedNode": "\\cogs\\moderation\\twarn.py",
+  "SelectedNode": "\\unused",
   "PreviewInSolutionExplorer": false
 }

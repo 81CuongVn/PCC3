@@ -3,8 +3,8 @@ from discord.ext import commands
 import discord
 from discord import Option
 import json
-from discord.ui import Button, View, Select
-from bank_functions import check_for_bank_account, get_bank_data
+from discord.ui import View, Select
+from bank_functions import get_bank_data
 
 
 class trading(commands.Cog):
@@ -46,15 +46,15 @@ class trading(commands.Cog):
                     items_list.append(discord.SelectOption(label=items_shown[i]))
                     i += 1
 
-                item_select = Select(placeholder="Choose one option", min_values=1, max_values=i, options=items_list)
+                item_select = Select(placeholder="Choose an option", min_values=1, max_values=i, options=items_list)
 
                 view = View()
                 view.add_item(item_select)
 
-                await ctx.respond("Choose the part you want to sell", view=view)
+                await ctx.respond("Choose the part you want to sell.", view=view)
 
             else:
-                await ctx.respond("You don't have any items")
+                await ctx.respond("You don't have any items.")
                 return
 
 
@@ -62,16 +62,16 @@ class trading(commands.Cog):
             bank_account = await get_bank_data()
             if str(ctx.author.id) in bank_account:  
                 money_you_have = bank_account[str(ctx.author.id)]["money"]
-                await ctx.respond(f"You have {money_you_have}<:bot_icon:951868023503986699>\nHow much money you want to give?")
+                await ctx.respond(f"You have {money_you_have}<:bot_icon:951868023503986699>\nHow much money do you want to pay?")
                 global ans1
                 ans1 = await self.client.wait_for('message', check=lambda message: message.author == ctx.author)
                 ans1 = ans1.content
                 try:
                     ans1 = int(ans1)
                 except:
-                    await ctx.send("You can't use letters or numbers with a ,")
+                    await ctx.send("You can't use letters or numbers with a ,.")
                     return
-                await ctx.send(f"You want to pay {ans1}<:bot_icon:951868023503986699>")
+                await ctx.send(f"You will pay {ans1}<:bot_icon:951868023503986699>.")
                 
 
                 if what_you_want == "Money":
@@ -84,9 +84,9 @@ class trading(commands.Cog):
                         try:
                             ans2 = int(ans2)
                         except:
-                            await ctx.send("You can't use letters or numbers with a ,")
+                            await ctx.send("You can't use letters or numbers with a ,.")
                             return
-                        await ctx.send(f"You want to get {ans2}<:bot_icon:951868023503986699>") 
+                        await ctx.send(f"You will get {ans2}<:bot_icon:951868023503986699>") 
                         old_trading_count = trading_list["trading_count"]
                         new_trading_count = old_trading_count + 1
                         trading_list["trading_count"] = new_trading_count
@@ -107,7 +107,7 @@ class trading(commands.Cog):
                             json.dump(trading_member,f)
                         return
                     else:
-                        await ctx.send("Your trading partner doesn't have a bank account")
+                        await ctx.send("Your trading partner does not have a bank account.")
                         return    
 
                 if what_you_want == "Part(s)":
@@ -131,24 +131,24 @@ class trading(commands.Cog):
                             items_list_partner.append(discord.SelectOption(label=items_shown_partner[h]))
                             h += 1
 
-                        item_select_partner2 = Select(placeholder="Choose one option", min_values=1, max_values=h, options=items_list_partner)
+                        item_select_partner2 = Select(placeholder="Choose an option", min_values=1, max_values=h, options=items_list_partner)
                         partner_choose_part = View()
                         partner_choose_part.add_item(item_select_partner2)
 
-                        await ctx.send("Choose what you want to buy", view=partner_choose_part)      
+                        await ctx.send("Choose an item you want to buy.", view=partner_choose_part)      
                     else:
-                        await ctx.send("Your trading partner has no items")
+                        await ctx.send("Your trading partner has no items.")
                         return                 
                     
             else:
-                await ctx.respond("Use `/create_bank_account` to create a bank account", ephemeral=True)
+                await ctx.respond("Use `/create_bank_account` to create a bank account.", ephemeral=True)
                 #trading[str(ctx.author.id)]["trade_counter"]
                 return   
 
         #global item_select_callback
         async def item_select_partner2_callback(interaction:discord.Interaction):
             if interaction.user != ctx.author:
-                await ctx.send(f"<@{interaction.user.id}> you cant do that")
+                await ctx.send(f"<@{interaction.user.id}> you can't do that.")
                 return True
 
             #print("OK")
@@ -193,14 +193,14 @@ class trading(commands.Cog):
 
         async def item_select_callback(interaction:discord.Interaction):
             if interaction.user != ctx.author:
-                await ctx.send(f"<@{interaction.user.id}> you cant do that")
+                await ctx.send(f"<@{interaction.user.id}> you can't do that.")
                 return True
 
             if what_you_give == "Part(s)":
                 global item_you_give
                 item_you_give = item_select.values
                 every_item_you_give = ", ".join(item_you_give)
-                await interaction.message.edit(content=f"You want to sell **{every_item_you_give}**", view=None)
+                await interaction.message.edit(content=f"You want to sell **{every_item_you_give}**.", view=None)
 
             if what_you_want == "Part(s)":
 
@@ -224,12 +224,12 @@ class trading(commands.Cog):
                     items_list_partner.append(discord.SelectOption(label=items_shown_partner[l]))
                     l += 1
 
-                item_select_partner = Select(placeholder="Choose one option", min_values=1, max_values=l, options=items_list_partner)
+                item_select_partner = Select(placeholder="Choose an option", min_values=1, max_values=l, options=items_list_partner)
 
                 partner_choose_part = View()
                 partner_choose_part.add_item(item_select_partner)
 
-                await interaction.message.channel.send("Choose what you want to buy", view=partner_choose_part)
+                await interaction.message.channel.send("Choose the item you want to buy.", view=partner_choose_part)
 
 
             if what_you_want == "Money":
@@ -243,10 +243,10 @@ class trading(commands.Cog):
                     try:
                         ans3 = int(ans3)
                     except:
-                        await interaction.message.channel.send("You can't use letters or numbers with a ,")
+                        await interaction.message.channel.send("You can't use letters or numbers with a ,.")
                         return True   
                     if ans3 == ans3:    
-                        await ctx.send(f"You want to get {ans3}<:bot_icon:951868023503986699>")
+                        await ctx.send(f"You want to get {ans3}<:bot_icon:951868023503986699>.")
                         old_trading_count = trading_list["trading_count"]
                         new_trading_count = old_trading_count + 1
                         trading_list["trading_count"] = new_trading_count
@@ -270,7 +270,7 @@ class trading(commands.Cog):
                         await interaction.message.channel.send("An error occured")
                         return True
                 else:
-                    await interaction.message.channel.send("Your trading partner doesn't have a bank account")
+                    await interaction.message.channel.send("Your trading partner doesn not have a bank account.")
                     return True
                            
 

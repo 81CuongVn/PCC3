@@ -1,8 +1,7 @@
-from code import interact
+
 import json
 import discord
-from bank_functions import check_for_bank_account, get_bank_data, get_trading, get_trading_list, new_trading_member, update_bank2, get_coins
-from discord import Option
+from bank_functions import get_trading, get_trading_list, update_bank2, get_coins
 from discord.ext import commands
 from discord.ui import Button, View
 
@@ -47,7 +46,7 @@ class trading_check(commands.Cog):
             view1.add_item(button_decline)
             view1.add_item(button_accept)
             view1.add_item(button_next)
-            await ctx.respond("Use `/trading` if you want to trade your stuff", ephemeral=True)
+            await ctx.respond("Use `/trading` if you want to trade your stuff.", ephemeral=True)
             await self.check_trade(ctx, i, send, view1)
 
 
@@ -60,7 +59,7 @@ class trading_check(commands.Cog):
         length = len(open_trades)
         #await ctx.send(open_trades)
         if len(open_trades) == 0:
-            await ctx.send("You have no trade offers")
+            await ctx.send("You have no trade offers.")
             return
         else:
             global i
@@ -255,7 +254,7 @@ class trading_check(commands.Cog):
 
                 if len(missing_parts) != 0:
                     missing_parts_shown = ", ".join(missing_parts)
-                    await interaction.message.channel.send(f"You don't have the following parts: **{missing_parts_shown}**")    
+                    await interaction.message.channel.send(f"You don't have the following items: **{missing_parts_shown}**.")    
                     return True    
 
                 #print("weird")    
@@ -279,7 +278,7 @@ class trading_check(commands.Cog):
                         
                     if len(missing_parts_partner) != 0:
                         missing_parts_partner_shown = ", ".join(missing_parts_partner)
-                        await interaction.message.channel.send(f"Your partner doesn't own the following parts: **{missing_parts_partner_shown}**")    
+                        await interaction.message.channel.send(f"Your partner doesn't own the following items: **{missing_parts_partner_shown}**")    
                         return True     
 
                     z = 0
@@ -312,7 +311,7 @@ class trading_check(commands.Cog):
                     items_partner = useritems[str(trading_partner)] 
 
                     if want_money > wallet_money_amount_partner:
-                        await interaction.message.channel.send("Your trading partner doesnt have enough money in their wallet")
+                        await interaction.message.channel.send("Your trading partner does not have enough money in their wallet")
                         return True
 
                     z = 0
@@ -349,7 +348,7 @@ class trading_check(commands.Cog):
                 wallet_money_amount = users_coins[str(ctx.author.id)]
 
                 if give_money > wallet_money_amount:
-                    await interaction.message.channel.send("Your dont have enough money in your wallet")
+                    await interaction.message.channel.send("Your don't have enough money in your wallet.")
                     return True
 
 
@@ -375,7 +374,7 @@ class trading_check(commands.Cog):
 
                     if len(missing_parts_partner) != 0:
                         missing_parts_partner_shown = ", ".join(missing_parts_partner)
-                        await interaction.message.channel.send(f"Your partner doesn't own the following parts: **{missing_parts_partner_shown}**")    
+                        await interaction.message.channel.send(f"Your partner doesn't own the following items: **{missing_parts_partner_shown}**.")    
                         return True     
 
                     w = 0
@@ -413,7 +412,7 @@ class trading_check(commands.Cog):
                         wallet_money_amount = users_coins[str(ctx.author.id)]
 
                         if give_money > wallet_money_amount:
-                            await interaction.message.channel.send("Your dont have enough money in your wallet")
+                            await interaction.message.channel.send("Your dont have enough money in your wallet.")
                             return True
 
                         want_money = trading_list[f"trade_{actual_trade_id}"]["want_coins_amount"]
@@ -421,7 +420,7 @@ class trading_check(commands.Cog):
                         wallet_money_amount_partner = users_coins[str(trading_partner)]
 
                         if want_money > wallet_money_amount_partner:
-                            await interaction.message.channel.send("Your trading partner doesnt have enough money in their wallet")
+                            await interaction.message.channel.send("Your trading partner does not have enough money in their wallet.")
                             return True
 
                         mode = "wallet"    
