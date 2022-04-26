@@ -17,7 +17,7 @@ class faqmain(commands.Cog):
                 await ctx.send("You have to use ,faq_ask with a question", delete_after=10)
             else:
                 await ctx.message.delete()
-                embed=discord.Embed(title="Question:", description=reason, color=discord.Color.blurple(), timestamp=datetime.utcnow())   
+                embed=discord.Embed(title="Question:", description=reason, color=13565696, timestamp=datetime.utcnow())   
                 embed.set_author(name=f"{ctx.author.display_name} ({ctx.author.id})", icon_url=ctx.author.avatar.url)
                 message = await ctx.send(embed=embed)
                 await message.add_reaction("✅")
@@ -30,7 +30,7 @@ class faqmain(commands.Cog):
     async def faq_ask_slash(self, ctx, question: Option(str, required=True)): 
         if ctx.channel.name in ["faq-ask"]:
             await ctx.respond("Added your Question, we may answer it soon in #faq", ephemeral=True)
-            embed=discord.Embed(title="Suggestion:", description=question, color=discord.Color.blurple, timestamp=datetime.utcnow())   
+            embed=discord.Embed(title="Suggestion:", description=question, color=13565696, timestamp=datetime.utcnow())   
             embed.set_author(name=f"{ctx.author.display_name} ({ctx.author.id})", icon_url=ctx.author.avatar.url)
             message = await ctx.send(embed=embed)
             await message.add_reaction("✅")
