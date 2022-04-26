@@ -18,7 +18,7 @@ class Reactions(Cog):
 			message = await channel.fetch_message(payload.message_id)
 			reaction = get(message.reactions, emoji=payload.emoji.name)
 			if reaction and reaction.count >= 5:
-				with open("starboardjson_files/starboard.json") as f:
+				with open("json_files/starboard.json") as f:
 					data = json.load(f)
 				messagecontent = message.content
 				messageid = payload.message_id
@@ -69,7 +69,7 @@ class Reactions(Cog):
 							await webhook.send(embed=embed, username=message.author.display_name, avatar_url=message.author.avatar.url)
 							await never.gonna(give=you.up[0])"""
 					data["staredmessages"].append(messageid)
-					with open("starboardjson_files/starboard.json", 'w') as f:
+					with open("json_files/starboard.json", 'w') as f:
 						json.dump(data, f)
 
 

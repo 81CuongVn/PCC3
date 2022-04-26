@@ -26,7 +26,7 @@ python main.py
 ### ATTENTION
 Using the bot for the first time causes a few errors.
 
-Setting a logging cannel in ```cogs/logger``` in BOTH python files, resolves all except one.
+Setting a logging channel in ```cogs/logger``` in BOTH python files, resolves all except one.
 
 The last one one can be fixed by creating a Ticket-Channel and typing ```.create_ticket```
 

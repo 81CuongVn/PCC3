@@ -4,6 +4,8 @@ from discord import Option
 import json
 from discord.commands import permissions
 
+rolelist = [697728131003580537]
+
 class twarn(commands.Cog):
 
     def __init__(self, client):
@@ -12,31 +14,33 @@ class twarn(commands.Cog):
 
     @commands.command(name="twarn", description="For Moderation")
     async def twarn(self, ctx, member: discord.Member):
+        user = ctx.author
+        if any(role.id in rolelist for role in user.roles):
+            if member==None:
+                await ctx.send("Please use `,twarn @member`")
+                return
 
-        if member==None:
-            await ctx.send("Please use `,twarn @member`")
-            return
+            category = discord.utils.get(ctx.author.guild.categories, name="TICKETS")
+            role = discord.utils.get(ctx.guild.roles, name="Helper")
 
-        category = discord.utils.get(ctx.author.guild.categories, name="TICKETS")
-        role = discord.utils.get(ctx.guild.roles, name="Helper")
+            if ctx.channel.category == category:
 
-        if ctx.channel.category == category:
-
-            if role in ctx.author.roles:
+                if role in ctx.author.roles:
                 
-                reason = "Useless ticket"
+                    reason = "Useless ticket"
 
-                await self.new_warn_member(member)
-                await self.update_warns(member, reason)
+                    await self.new_warn_member(member)
+                    await self.update_warns(member, reason)
 
-                await ctx.send(f"Warned {member.mention} for {reason}")   
+                    await ctx.send(f"Warned {member.mention} for {reason}")   
+
+                else:
+                    await ctx.send("You don't have the permissions to use this comman")    
 
             else:
-                await ctx.send("You don't have the permissions to use this comman")    
-
+                await ctx.send("You can't use this command here")
         else:
-            await ctx.send("You can't use this command here")        
-
+            return
 
     
 

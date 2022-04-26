@@ -57,7 +57,7 @@ class slots(commands.Cog):
             new_amount = users_coins[str(member.id)] + -1*amount
             users_coins[str(member.id)] += -1*amount  
             embed=discord.Embed(title="Slot Machine", colour=ctx.author.colour, timestamp=datetime.now())
-            embed.add_field(name=f"{slot1}  {slot2}  {slot3}", value=f"You lost **{amount}**<:bot_icon:951868023503986699> 😕\nYou had **{old_amount}**<:bot_icon:951868023503986699> \nNow you have **{new_amount}**", inline=False)
+            embed.add_field(name=f"{slot1}  {slot2}  {slot3}", value=f"You lost **{amount}**<:bot_icon:951868023503986699> 😕\nYou had **{old_amount}**<:bot_icon:951868023503986699> \nNow you have **{new_amount}**<:bot_icon:951868023503986699>", inline=False)
             await ctx.respond(embed = embed)
             with open("json_files/usercoins.json", "w") as f:
                 json.dump(users_coins,f)

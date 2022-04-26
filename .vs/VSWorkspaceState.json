@@ -2,9 +2,9 @@
   "ExpandedNodes": [
     "",
     "\\cogs",
-    "\\cogs\\server_commands",
-    "\\cogs\\uselessfeatures"
+    "\\cogs\\moderation",
+    "\\unused"
   ],
-  "SelectedNode": "\\requirements.txt",
+  "SelectedNode": "\\cogs\\moderation\\twarn.py",
   "PreviewInSolutionExplorer": false
 }

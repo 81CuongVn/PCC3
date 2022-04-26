@@ -18,7 +18,7 @@ class Shop_Select(discord.ui.View):
         price = item_list["price"]
         emoji = item_list["emoji"]
 
-        options.append(discord.SelectOption(label=name, description=f"Price: {price} <:bot_icon:951868023503986699>"))
+        options.append(discord.SelectOption(label=name, description=f"Price: {price}"))
 
     async def get_coins(self):
             with open("json_files/usercoins.json", "r") as f:
@@ -94,7 +94,7 @@ class Shop_Select(discord.ui.View):
                             json.dump(users_items, f)
                     return False
 
-                if twoitem != True:
+                if True: #twoitem != #Double items enabled due to the Update
                     subcoins = int(subprice)
                     purse -= subcoins
                     users_coins[str(responder)] = purse
@@ -102,8 +102,8 @@ class Shop_Select(discord.ui.View):
                         json.dump(users_coins,f)
                     await newuseritem_member(self)
                     await interaction.message.edit(content=f"You bought a {item_name} for **{subprice}**<:bot_icon:951868023503986699> and have **{purse}**<:bot_icon:951868023503986699> remaining.", view=None)
-                else:
-                    await interaction.message.edit(content=f"You can't buy a {item_name} for **{subprice}**<:bot_icon:951868023503986699> because you already have it", view=None)
+                #else:
+                    #await interaction.message.edit(content=f"You can't buy a {item_name} for **{subprice}**<:bot_icon:951868023503986699> because you already have it", view=None)
             elif status == 'failpurchase':
                 await interaction.message.edit(content=f"You do not have enough money for **{item_name}**. It costs **{subprice}**<:bot_icon:951868023503986699> and you only have **{purse}**<:bot_icon:951868023503986699>", view=None)
             elif status == 'nocoins':

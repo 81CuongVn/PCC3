@@ -12,7 +12,6 @@ class unban(commands.Cog):
     async def unban(self, ctx, *, member):
         banned_users = await ctx.guild.bans()
         member_name, member_disc = member.split('#')
-
         for banned_entry in banned_users:
             user = banned_entry.user
 
@@ -21,8 +20,7 @@ class unban(commands.Cog):
                 await ctx.guild.unban(user)
                 await ctx.send(f"Unbanned {member_name}")
                 return
-
-        await ctx.send(f"Can't find {member}")  
+        await ctx.send(f"Can't find {member}")
         
 
 def setup(client):

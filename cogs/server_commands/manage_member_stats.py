@@ -13,7 +13,7 @@ class manage_member_stats(commands.Cog):
 
     @commands.slash_command(name="manage_stats", description="Bot dev only")#, guild_ids=[571031703661969430])#, guild_ids=[571031703661969430])
     @permissions.has_any_role(951207540472029195, 951464246506565683)
-    async def manage_member_slash(self, ctx, member : Option(discord.Member, required=True), mode: Option(str, 'Choose the mode', choices=["Coins", "Bank", "Messages"], required=True),  mode_2: Option(str, "Choose the mode", choices=["Setzero", "Give", "Set"], required=True), amount : Option(int, required=False)):
+    async def manage_member_slash(self, ctx, member : Option(discord.Member, required=True), mode: Option(str, 'Choose the mode', choices=["Coins", "Bank", "Messages", "xp"], required=True),  mode_2: Option(str, "Choose the mode", choices=["Setzero", "Give", "Set"], required=True), amount : Option(int, required=False)):
         if mode == "Coins":
             mode = "wallet"
           
