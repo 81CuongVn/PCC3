@@ -371,3 +371,43 @@ async def new_trading_member(member):
         json.dump(trading,f)
     return True    
                 
+
+async def update_bank2(member, amount, mode):
+
+    try:
+        user = member.id
+    except:
+        user = member
+
+    bank_account = await get_bank_data()
+    users_coins = await get_coins()
+
+    if mode == "bank":
+        bank_money_amount = bank_account[str(user)]["money"]
+
+        if amount <= 0:
+            if amount > bank_money_amount:
+                error = "error"
+                content = "You dont have enough money"
+                return content, error
+        
+        bank_account[str(user)] += amount  
+        with open("json_files/bank.json", "w") as f:
+            json.dump(bank_account,f)
+          
+    elif mode == "wallet":
+        wallet_money_amount = users_coins[str(user)]
+
+        if amount <= 0:
+            if amount > wallet_money_amount:
+                error = "error"
+                content = "You dont have enough money"
+                return content, error
+        
+        users_coins[str(user)] += amount
+        with open("json_files/usercoins.json", "w") as f:
+            json.dump(users_coins,f)
+
+    error = "All fine"
+    return error        
+
