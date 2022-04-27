@@ -104,25 +104,32 @@ async def bub(ctx):
 async def on_command_error(ctx, error):
     if isinstance(error, commands.CommandOnCooldown):
         await ctx.send(f'This command is on cooldown, you can use it in {round(error.retry_after, 2)}')     
-
-
-@client.event
-async def on_command_error(ctx, error):
-    if isinstance(error, CommandNotFound):
+    elif isinstance(error, CommandNotFound):
         return
-
-    if isinstance(error, MemberNotFound):
+    elif isinstance(error, MemberNotFound):
         await ctx.send("Can't find this member")
         return
-    raise error    
+    else:
+        try:
+            channel = client.get_channel(933813622952562718)
+        except:
+            channel = client.get_channel(951562519217065984)
+        await channel.send("A command_error occured:\n" + error)
+        return
+
 
 @client.event
 async def on_application_command_error(ctx, error):
     if isinstance(error, commands.CommandOnCooldown):
         await ctx.respond(error)
+        return
     else:
-        raise error
-
+        try:
+            channel = client.get_channel(933813622952562718)
+        except:
+            channel = client.get_channel(951562519217065984)
+        await channel.send("A application_command_error occured:\n" + error)
+        return
 
 initial_extensions = []
 for directory in os.listdir('./cogs'):

@@ -198,27 +198,27 @@ class logs(commands.Cog):
         try:    
             if before.avatar.url != after.avatar.url:
                 e.description=f"{after.mention}'s Avatar changed."
-                try:
-                    e.add_field(name="Before:", value=f"{before.avatar.url}", inline=False)
-                except:
-                    e.add_field(name="Before:", value="None", inline=False)
-                try:    
-                    e.add_field(name="After:", value=f"{after.avatar.url}", inline=False)
-                except:
-                    e.add_field(name="After:", value="None" ,inline=False)    
+                #try:
+                e.add_field(name="Before:", value=f"{before.avatar.url}", inline=False)
+                #except:
+                    #e.add_field(name="Before:", value="None", inline=False)
+                #try:    
+                e.add_field(name="After:", value=f"{after.avatar.url}", inline=False)
+                #except:
+                    #e.add_field(name="After:", value="None" ,inline=False)    
                 await log_channel.send(embed=e)
             else:
                 pass    
         except:
             e.description=f"{after.mention}'s Avatar changed."
-            try:
-                e.add_field(name="Before:", value=f"{before.avatar.url}", inline=False)
-            except:
-                e.add_field(name="Before:", value="None", inline=False)
-            try:    
-                e.add_field(name="After:", value=f"{after.avatar.url}", inline=False)
-            except:
-                e.add_field(name="After:", value="None" ,inline=False)    
+            #try:
+            e.add_field(name="Before:", value=f"{before.avatar.url}", inline=False)
+            #except:
+                #e.add_field(name="Before:", value="None", inline=False)
+            #try:    
+            e.add_field(name="After:", value=f"{after.avatar.url}", inline=False)
+            #except:
+                #e.add_field(name="After:", value="None" ,inline=False)    
             await log_channel.send(embed=e)            
         if before.roles != after.roles:
             r = list(set(r_before) ^ set(r_after))
