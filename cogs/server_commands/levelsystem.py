@@ -48,7 +48,7 @@ class levelsys(commands.Cog):
     async def ranklist(self, ctx, unused=None):
         user = ctx.author
         if True:
-            try:
+            #try:
                 with open(lsj, "r") as f:
                     users = json.load(f)
                 countnumber = 0
@@ -87,8 +87,8 @@ class levelsys(commands.Cog):
                 embed.add_field(name="Progress Bar", value=boxes * ":blue_square:" + (20-boxes) * ":white_large_square:", inline=False)
                 embed.set_thumbnail(url=ctx.author.avatar.url)
                 await ctx.channel.send(embed=embed)
-            except:
-                await ctx.channel.send("Something went wrong... Please try again.")
+            #except:
+                #await ctx.channel.send("Something went wrong... Please try again.")
 
     @commands.command(aliases=["xplead", "xpleaderboard"])
     async def leaderboard(self, ctx, unused=None):
