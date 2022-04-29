@@ -5,6 +5,10 @@
     "\\cogs\\server_commands"
   ],
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
+=======
+  "SelectedNode": "\\cogs\\moderation\\ban.py",
+>>>>>>> Stashed changes
 =======
   "SelectedNode": "\\cogs\\moderation\\ban.py",
 >>>>>>> Stashed changes
