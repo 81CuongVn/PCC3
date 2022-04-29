@@ -7,12 +7,12 @@ class main(commands.Cog):
         self.client = client
 
 
-    @commands.command()
+    """@commands.command()
     async def main(self, ctx):
-        await ctx.send("https://cdn.discordapp.com/attachments/838857610358292532/912455051182755880/main.png")
+        await ctx.send("https://cdn.discordapp.com/attachments/838857610358292532/912455051182755880/main.png")"""
 
 
-    @commands.slash_command(name="main_pcc1", description="Shows a picture of the main screen in game with information about the buttons")
+    @commands.slash_command(name="main_screen_pcc1", description="Shows a picture of the main screen in game with information about the buttons")
     async def main_slash_pcc1(self, ctx):
         await ctx.respond("https://cdn.discordapp.com/attachments/838857610358292532/912455051182755880/main.png")    
 

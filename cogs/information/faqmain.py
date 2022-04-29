@@ -10,7 +10,7 @@ class faqmain(commands.Cog):
     def __init__(self, client):
         self.client = client
     
-    @commands.command()
+    """@commands.command()
     async def faq_ask(self, ctx, *, reason=None): 
         if ctx.channel.name in ["faq-ask"]:
             if reason == None or reason.lower() == "suggestion":
@@ -23,7 +23,7 @@ class faqmain(commands.Cog):
                 await message.add_reaction("✅")
                 await message.add_reaction("❌")
         else:
-            await ctx.send("This command only works in #faq-ask", delete_after=10)
+            await ctx.send("This command only works in #faq-ask", delete_after=10)"""
 
 
     @commands.slash_command(name="faq_ask", description="Ask things in relation with PCC / PCC2")

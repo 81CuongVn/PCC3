@@ -15,7 +15,7 @@ class google(commands.Cog):
     def __init__(self, client):
         self.client = client
 
-    @commands.command()
+    """@commands.command()
     async def google(self, ctx, *, search=None):
         if search == None:
             search = "google"
@@ -25,7 +25,7 @@ class google(commands.Cog):
         soup = BeautifulSoup(content, 'html.parser')
         search = soup.find(id = 'search')
         first_link = search.find('a')
-        await ctx.send(first_link['href'])
+        await ctx.send(first_link['href'])"""
 
     @commands.slash_command(name="google", description="Google Search")
     async def google_slash(self, ctx, search: Option(str, required = True)):

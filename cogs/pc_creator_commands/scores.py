@@ -4,7 +4,7 @@ from discord.ui import Button, View
 from discord import Option
 
 
-class DroppDownMenu(discord.ui.View):
+"""class DroppDownMenu(discord.ui.View):
     @discord.ui.select(placeholder="Choose one option", min_values=1, max_values=1, options=[
        discord.SelectOption(label="CPU", description="The CPUs scores list"),
         discord.SelectOption(label="GPU", description="The GPUs scores list"),
@@ -22,14 +22,14 @@ class DroppDownMenu(discord.ui.View):
             await interaction.response.send_message("https://media.discordapp.net/attachments/838857610358292532/931919636461654046/CPU-Scores_Super_Dark_Mode_3.jpg")        
             await interaction.followup.send("https://media.discordapp.net/attachments/838857610358292532/931919674134904982/GPU_Scores_Super_Dark_Mode_5.jpg")
             await interaction.followup.send("https://media.discordapp.net/attachments/838857610358292532/931919651070423100/RAM_scores_Super_Dark_Mode_4.jpg")
-
+"""
 class scores(commands.Cog):
 
     def __init__(self, client):
         self.client = client
 
     
-    @commands.command()
+    """@commands.command()
     async def scores(self, ctx, reason = None):
         try:
             if reason.lower() == "cpu":
@@ -73,7 +73,7 @@ class scores(commands.Cog):
         button_cpu.callback = button_cpu_callback
         button_gpu.callback = button_gpu_callback
         button_ram.callback = button_ram_callback
-        button_all.callback = button_all_callback
+        button_all.callback = button_all_callback"""
 
     @commands.slash_command(name='scores_pcc1', description='Shows charts with benchmark of CPUs, GPUs or RAM')
     async def pcc1_scores_slash(self, ctx, part: Option(str, 'Choose the parts you need', choices=['CPU', 'GPU', 'RAM', 'All'], required=True)):

@@ -10,11 +10,11 @@ class richlist(commands.Cog):
         self.client = client
 
 
-    @commands.command(aliases=["richlist"])
+    """@commands.command(aliases=["richlist"])
     async def rich_command(self, ctx):
         send = ctx.send
         url=ctx.guild.icon.url
-        await lead(send, url)
+        await lead(send, url)"""
 
     @commands.slash_command(name="richlist", description="Who is the richest")
     async def rich_slash(self, ctx):

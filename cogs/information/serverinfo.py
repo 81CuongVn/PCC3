@@ -8,7 +8,7 @@ class serverinfo(commands.Cog):
     def __init__(self, client):
         self.client = client
 
-    @commands.command(name="serverinfo")
+    @commands.slash_command(name="serverinfo")
     async def serverinfo(self, ctx):
         embed = Embed(title="Server Info", colour=ctx.guild.owner.colour, timestamp=datetime.now())
         embed.set_thumbnail(url=ctx.guild.icon)
@@ -38,7 +38,7 @@ class serverinfo(commands.Cog):
         for name, value, inline in fields:
             embed.add_field(name=name, value=value, inline=inline)
 
-        await ctx.send(embed=embed)
+        await ctx.respond(embed=embed)
 
 def setup(bot):
     bot.add_cog(serverinfo(bot))

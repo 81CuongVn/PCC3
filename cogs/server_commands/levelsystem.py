@@ -44,8 +44,8 @@ class levelsys(commands.Cog):
                         else:
                             break
  
-    @commands.command(aliases=["xp", "rank", "xprank"])
-    async def ranklist(self, ctx, unused=None):
+    @commands.slash_command(name="xp")
+    async def ranklist(self, ctx, unused: Option(str, required = True)):
         user = ctx.author
         if True:
             #try:
@@ -86,12 +86,12 @@ class levelsys(commands.Cog):
                 embed.add_field(name="Rank", value=f"{pos}/{ctx.guild.member_count}", inline=True)
                 embed.add_field(name="Progress Bar", value=boxes * ":blue_square:" + (20-boxes) * ":white_large_square:", inline=False)
                 embed.set_thumbnail(url=ctx.author.avatar.url)
-                await ctx.channel.send(embed=embed)
+                await ctx.channel.respond(embed=embed)
             #except:
                 #await ctx.channel.send("Something went wrong... Please try again.")
 
-    @commands.command(aliases=["xplead", "xpleaderboard"])
-    async def leaderboard(self, ctx, unused=None):
+    @commands.slash_command(name="xplead")
+    async def leaderboard(self, ctx, unused: Option(str, required = True)):
         with open(lsj, "r") as f:
             data = json.load(f)
 
@@ -103,9 +103,9 @@ class levelsys(commands.Cog):
             user_id_5th, msg_count_5th = leaderboard[4]
             embed= discord.Embed(title="Leaderboard", color=13565696)
             embed.add_field(name="Top users by XP", value=f"`1.` <@{user_id_1st}>: {msg_count_1st} \n`2.` <@{user_id_2nd}>: {msg_count_2nd} \n`3.` <@{user_id_3rd}>: {msg_count_3rd} \n`4.` <@{user_id_4th}>: {msg_count_4th} \n`5.` <@{user_id_5th}>: {msg_count_5th}")
-            await ctx.send(embed=embed) 
+            await ctx.respond(embed=embed) 
 
-    @commands.command()
+    """@commands.command()
     async def transferlrstoxp(self, ctx, member:discord.Member):
         user = member
         with open("json_files/userLevels.json", "r") as f:
@@ -116,7 +116,7 @@ class levelsys(commands.Cog):
         userxp[str(user.id)] = round(userlrs * 2.5)
         with open(lsj, "w") as f:
             json.dump(userxp,f)
-        await ctx.send(f"Converted {userlrs} messages to {userxp[str(user.id)]}")
+        await ctx.send(f"Converted {userlrs} messages to {userxp[str(user.id)]}")"""
 
     async def new_member(self, user):
         users = await self.get_levels()

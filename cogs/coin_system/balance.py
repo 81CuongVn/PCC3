@@ -10,12 +10,12 @@ class balance(commands.Cog):
         self.client = client
 
 
-    @commands.command(aliases=["balance", "bal", "coins"])
-    async def bal_normal_command(self, ctx, member:discord.Member = None):
-        if member == None:
-          member = ctx.author
-        send = ctx.send
-        await balance_command(ctx, send, member)
+    #@commands.command(aliases=["balance", "bal", "coins"])
+    #async def bal_normal_command(self, ctx, member:discord.Member = None):
+    #    if member == None:
+    #      member = ctx.author
+    #    send = ctx.send
+    #    await balance_command(ctx, send, member)
 
 
     @commands.slash_command(name="balance", description="Displays how much money you own")

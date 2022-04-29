@@ -65,7 +65,7 @@ class suggestions_pcc2(commands.Cog):
             await message.add_reaction("❌")
 
         else:
-            await ctx.send("This command only works in <#940691696918880326>", delete_after=10)     
+            await ctx.respond("This command only works in <#940691696918880326>", delete_after=10)     
 
 
 def setup(client):

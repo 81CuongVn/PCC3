@@ -7,7 +7,7 @@ class credit(commands.Cog):
         self.client = client
 
 
-    @commands.command(name="credits")
+    """@commands.command(name="credits")
     async def credit(self, ctx):
         embed = discord.Embed(title="Credits", color=13565696)
         embed.add_field(name="Bot Owner/Developer", value="<@695229647021015040>", inline=False)
@@ -18,7 +18,7 @@ class credit(commands.Cog):
         embed.add_field(name="Coin system", value="<@443769343138856961>\n<@695229647021015040>\n<@713696771188195368>", inline=False)
         embed.add_field(name="Coin system help (ideas etc.)", value="<@761937966867152929>", inline=False)
 
-        await ctx.send(embed=embed)
+        await ctx.send(embed=embed)"""
 
 
     @commands.slash_command(name="credits", description="Shows bot devs/owner")

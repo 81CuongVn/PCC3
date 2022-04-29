@@ -4,5 +4,9 @@
     "\\cogs",
     "\\cogs\\server_commands"
   ],
+<<<<<<< Updated upstream
+=======
+  "SelectedNode": "\\cogs\\moderation\\ban.py",
+>>>>>>> Stashed changes
   "PreviewInSolutionExplorer": false
 }

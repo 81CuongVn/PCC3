@@ -7,7 +7,7 @@ class staff(commands.Cog):
         self.client = client
 
 
-    @commands.command()
+    """@commands.command()
     async def staff(self, ctx):
         helper_role = discord.utils.get(ctx.channel.guild.roles, id=697728131003580537)
         botdev_role = discord.utils.get(ctx.channel.guild.roles, id=951207540472029195)
@@ -19,7 +19,7 @@ class staff(commands.Cog):
         embed.add_field(name="Bot Developer", value=f"<@695229647021015040>,\n<@443769343138856961>, \n<@713696771188195368>\n\nIf you encounter any problems with the <@884402383923339295>-Bot, feel free to report them to a {botdev_role.mention}")
         embed.set_footer(text="Some users are not displayed here because their activity on Discord is not moderation-oriented.")
 
-        await ctx.send(embed=embed)
+        await ctx.send(embed=embed)"""
 
 
     @commands.slash_command(name="staff", description="Sends an embed with all staff members")

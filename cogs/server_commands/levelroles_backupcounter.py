@@ -222,9 +222,9 @@ class levelroles(commands.Cog):
         return True"""
 
 
-    @commands.command(aliases=["messageleaderboard", "msglead", "lead"])
+    @commands.slash_command(name="lead")
     async def lead_command(self, ctx):
-        send = ctx.send
+        send = ctx.respond
         await self.lead(ctx, send)
 
     async def lead(self, ctx, send):

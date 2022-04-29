@@ -13,7 +13,7 @@ class botinfo(commands.Cog):
     def __init__(self, client):
         self.client = client
 
-    @commands.command(name="botinfo")
+    @commands.slash_command(name="botinfo")
     async def show_bot_stats(self, ctx):
         embed = Embed(title="Bot info", colour=ctx.author.colour, timestamp=datetime.now())
         embed.set_thumbnail(url=self.client.user.avatar)
@@ -60,7 +60,7 @@ class botinfo(commands.Cog):
         for name, value, inline in fields:
             embed.add_field(name=name, value=value, inline=inline)
 
-        await ctx.send(embed=embed)
+        await ctx.respond(embed=embed)
 
 def setup(bot):
     bot.add_cog(botinfo(bot))

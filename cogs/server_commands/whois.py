@@ -13,10 +13,10 @@ class whois(commands.Cog):
         self.client = client
 
 
-    @commands.command(name="whois")
+    """@commands.command(name="whois")
     async def whois_normal_command(self, ctx, member:discord.Member = None):
         send = ctx.send
-        await self.whois(ctx , send, member)
+        await self.whois(ctx , send, member)"""
 
 
     @commands.slash_command(name="whois", description="Gives information about the mumber such as join date")

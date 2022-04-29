@@ -11,7 +11,8 @@ class ping_bot_problem(commands.Cog):
     @commands.slash_command(name="bot_problem", description="Only if the Bot has major problems")
     async def ping_bot_problem(self, ctx, reason: Option(str, required = True)):
         embed = discord.Embed(title=None, description=reason, color=13565696)
-        await ctx.respond(f"<@&951207540472029195>", embed=embed)
+        await ctx.respond(f"<@&951207540472029195>")
+        await ctx.send(embed=embed)
     
 
 

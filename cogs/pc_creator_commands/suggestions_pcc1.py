@@ -9,7 +9,7 @@ class suggestions_pcc1(commands.Cog):
     def __init__(self, client):
         self.client = client
     
-    @commands.command()
+    """@commands.command()
     #@commands.cooldown(1, 18000, commands.BucketType.user)
     async def suggest(self, ctx, *, reason=None): 
         #count_yes = 0
@@ -34,7 +34,7 @@ class suggestions_pcc1(commands.Cog):
                 await message.add_reaction("❌")
 
         else:
-            await ctx.send("This command only works in #suggestions", delete_after=10)        
+            await ctx.send("This command only works in #suggestions", delete_after=10)     """   
 
 
     @commands.slash_command(name="suggest_pcc1", description="Suggest things for PCC in #suggestions")
@@ -50,7 +50,7 @@ class suggestions_pcc1(commands.Cog):
             await message.add_reaction("❌")
 
         else:
-            await ctx.send("This command only works in <#572541644755435520>", delete_after=10)  
+            await ctx.respond("This command only works in <#572541644755435520>", delete_after=10)  
 
 
 def setup(client):

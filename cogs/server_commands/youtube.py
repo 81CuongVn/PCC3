@@ -12,7 +12,7 @@ class youtube(commands.Cog):
 
 
     
-    @commands.command()
+    """@commands.command()
     async def youtube(self, ctx, *, search=None):
         if search == None:
             search = "never gonna give you up"
@@ -20,7 +20,7 @@ class youtube(commands.Cog):
         html = urllib.request.urlopen("https://www.youtube.com/results?search_query=" + searchwp)
         video_ids = re.findall(r"watch\?v=(\S{11})", html.read().decode())
         print(video_ids[0])
-        await ctx.send("https://www.youtube.com/watch?v=" + video_ids[0])
+        await ctx.send("https://www.youtube.com/watch?v=" + video_ids[0])"""
 
     @commands.slash_command(name="youtube", description="YouTube Video Search")
     async def youtube_slash(self, ctx, search: Option(str, required = True)):

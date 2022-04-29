@@ -7,9 +7,9 @@ class levels(commands.Cog):
         self.client = client
 
 
-    @commands.command()
+    """@commands.command()
     async def levels(self, ctx):
-        await ctx.send("https://cdn.discordapp.com/attachments/748122380383027210/883432420567834754/Levels.jpg")
+        await ctx.send("https://cdn.discordapp.com/attachments/748122380383027210/883432420567834754/Levels.jpg")"""
 
 
 
