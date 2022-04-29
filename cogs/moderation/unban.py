@@ -1,5 +1,6 @@
 import discord
 from discord.ext import commands
+from discord import Option
 
 class unban(commands.Cog):
 
@@ -7,7 +8,7 @@ class unban(commands.Cog):
         self.client = client
 
 
-    @commands.slash_command(name="unban")
+    @commands.slash_command(name="unban", description="For Moderation")
     @commands.has_permissions(ban_members = True)
     async def unban(self, ctx, *, member: Option(str, required = True)):
         banned_users = await ctx.guild.bans()

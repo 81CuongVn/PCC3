@@ -1,5 +1,6 @@
 import discord
 from discord.ext import commands
+from discord import Option
 
 class customcpu(commands.Cog):
 
@@ -7,7 +8,7 @@ class customcpu(commands.Cog):
         self.client = client
 
 
-    @commands.slash_command(name="CustomCpu")
+    @commands.slash_command(name="CustomCpu", description="custom cpu")
     async def customcpu(self, ctx):
         embed = discord.Embed(title="~~This is how custom CPUs where made~~", color=13565696)
         embed.set_image(url="https://images-ext-2.discordapp.net/external/uADQCXXNQ6xx3QHW8_cPLJ8w0kGUg1oiQDmxSVAvjGQ/https/media.discordapp.net/attachments/571031705109135361/809885303119675482/Screenshot_2021-02-12-17-34-34-411_com.ultraandre.pccreator.jpg?width=930&height=441")
