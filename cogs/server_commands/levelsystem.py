@@ -90,7 +90,7 @@ class levelsys(commands.Cog):
             embed.add_field(name="Rank", value=f"{pos}/{ctx.guild.member_count}", inline=True)
             embed.add_field(name="Progress Bar", value=boxes * ":blue_square:" + (20-boxes) * ":white_large_square:", inline=False)
             embed.set_thumbnail(url=ctx.author.avatar.url)
-            await ctx.channel.respond(embed=embed)
+            await ctx.respond(embed=embed)
             #except:
                 #await ctx.channel.send("Something went wrong... Please try again.")
 
