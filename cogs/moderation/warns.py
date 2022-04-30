@@ -26,10 +26,10 @@ class warns(commands.Cog):
 
     @commands.slash_command(name="modlogs", description="Check the warns/mutes etc. of a member")      
     async def modlogs(self, ctx, member: Option(discord.Member, required = False)):
-        if member.id not in []:
-
-            if member == None:
+        if member == None:
                 member = ctx.author
+
+        if member.id not in [1]:
 
             await self.new_warn_member(member)
             warns = await self.get_warns()
