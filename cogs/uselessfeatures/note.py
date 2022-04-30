@@ -9,11 +9,11 @@ from discord.utils import get
 from discord import Option
 import datetime
 
-class note(Cog):
+class note(commands.Cog):
 	def __init__(self, client):
 		self.client = client
 
-	@commands.slash_command(name="note")
+	"""@commands.slash_command(name="note")
 	async def notethis(self, ctx, note: Option(required = True)): #DAS DING IST CURSED, AENDERT NIX BITTE
 		user = ctx.author
 		with open("json_files/notes.json", "r") as f:
@@ -86,7 +86,7 @@ class note(Cog):
 				#await ctx.send("correct use: `notes delete X` with X as a Number between 1 and 5.")
 		else:
 			await ctx.respond("Invalid argument. Use **/notes help** to get help.")
-
+"""
 
 def setup(bot):
 	bot.add_cog(note(bot))
