@@ -12,7 +12,7 @@ class trading_check(commands.Cog):
         self.client = client
 
 
-    @commands.slash_command(name="check_trades", description="Check your trades")
+    """@commands.slash_command(name="check_trades", description="Check your trades")
     async def check_trades_slash(self, ctx):
         trading_member = await get_trading()
         trading_list = await get_trading_list()
@@ -86,15 +86,7 @@ class trading_check(commands.Cog):
             view1.add_item(button_next)
             await self.check_trade(ctx, i, send, view1)
             
-            #for i in range(len(open_trades)):
-            """trade_id = open_trades[i]
-                trade_things = trading_list[f"trade_{trade_id}"]
-                trade_number = i
-                print(trade_things)
-                trade_number = discord.Embed"""
-                #trade_things_list = []
-                #trade_things_list.append(trade_things)
-                #await ctx.send(trade_things)"""
+
 
 
     async def check_trade(self, ctx, i, send, view1):
@@ -494,6 +486,7 @@ class trading_check(commands.Cog):
         button_back.callback = button_back_callback   
         button_decline.callback = button_decline_callback
         button_accept.callback = button_accept_callback
+"""
 
 
 def setup(client):

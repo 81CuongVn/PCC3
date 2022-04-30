@@ -3,6 +3,7 @@ import discord
 from discord.ext import commands
 import asyncio
 import random
+from discord.commands import Option
  
 bot_channel = 962765009006506024
 forbidden_channels = []
@@ -45,48 +46,51 @@ class levelsys(commands.Cog):
                             break
  
     @commands.slash_command(name="xp")
-    async def ranklist(self, ctx, unused: Option(str, required = True)):
-        user = ctx.author
+    async def ranklist(self, ctx, member: Option(discord.Member, required = True)):
+        if member == None:
+            user = ctx.author
+        else:
+            user = member
         if True:
             #try:
-                with open(lsj, "r") as f:
-                    users = json.load(f)
-                countnumber = 0
-                sortedusers = sorted(users.items(), key= lambda x: x[1], reverse=True)[:5]
-                #print(sortedusers)
-                pos = ctx.guild.member_count
-                for entry in sortedusers[:1000]:
-                    countnumber += 1
-                    user_id, xp_count = entry
+            with open(lsj, "r") as f:
+                users = json.load(f)
+            countnumber = 0
+            sortedusers = sorted(users.items(), key= lambda x: x[1], reverse=True)[:5]
+            #print(sortedusers)
+            pos = ctx.guild.member_count
+            for entry in sortedusers[:1000]:
+                countnumber += 1
+                user_id, xp_count = entry
+                #print(str(user_id) + " " + str(user.id))
+                if str(user_id) == str(user.id):
                     #print(str(user_id) + " " + str(user.id))
-                    if str(user_id) == str(user.id):
-                        #print(str(user_id) + " " + str(user.id))
-                        pos = countnumber
+                    pos = countnumber
+                    break
+
+            nextxp = levelnum[0]
+            for userlevel in level[::-1]:
+                if userlevel.lower() in [y.name.lower() for y in ctx.author.roles]:
+                    if not level[::-1][0].lower() in [y.name.lower() for y in ctx.author.roles]:
+                        position = level.index(userlevel)
+                        nextxp = levelnum[position + 1]
+                        boxes = users[str(user.id)] / nextxp
+                        boxes = boxes * 100
+                        boxes = boxes / 5
+                        boxes = round(boxes)
+                        break
+                    else:
+                        boxes = 20
+                        nextxp = users[str(user.id)]
                         break
 
-                nextxp = levelnum[0]
-                for userlevel in level[::-1]:
-                    if userlevel.lower() in [y.name.lower() for y in ctx.author.roles]:
-                        if not level[::-1][0].lower() in [y.name.lower() for y in ctx.author.roles]:
-                            position = level.index(userlevel)
-                            nextxp = levelnum[position + 1]
-                            boxes = users[str(user.id)] / nextxp
-                            boxes = boxes * 100
-                            boxes = boxes / 5
-                            boxes = round(boxes)
-                            break
-                        else:
-                            boxes = 20
-                            nextxp = users[str(user.id)]
-                            break
-
-                embed = discord.Embed(title=f"{ctx.author.display_name}'s level stats", color=13565696)
-                embed.add_field(name="Name", value=ctx.author.mention, inline=True)
-                embed.add_field(name="XP", value=f"{users[str(user.id)]}/{nextxp}", inline=True)
-                embed.add_field(name="Rank", value=f"{pos}/{ctx.guild.member_count}", inline=True)
-                embed.add_field(name="Progress Bar", value=boxes * ":blue_square:" + (20-boxes) * ":white_large_square:", inline=False)
-                embed.set_thumbnail(url=ctx.author.avatar.url)
-                await ctx.channel.respond(embed=embed)
+            embed = discord.Embed(title=f"{ctx.author.display_name}'s level stats", color=13565696)
+            embed.add_field(name="Name", value=ctx.author.mention, inline=True)
+            embed.add_field(name="XP", value=f"{users[str(user.id)]}/{nextxp}", inline=True)
+            embed.add_field(name="Rank", value=f"{pos}/{ctx.guild.member_count}", inline=True)
+            embed.add_field(name="Progress Bar", value=boxes * ":blue_square:" + (20-boxes) * ":white_large_square:", inline=False)
+            embed.set_thumbnail(url=ctx.author.avatar.url)
+            await ctx.channel.respond(embed=embed)
             #except:
                 #await ctx.channel.send("Something went wrong... Please try again.")
 

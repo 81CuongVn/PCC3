@@ -13,7 +13,7 @@ class trading(commands.Cog):
         self.client = client
 
 
-    @commands.slash_command(name="trading", description="Trade parts", guild_ids=[951463924279181322])
+    """@commands.slash_command(name="trading", description="Trade parts", guild_ids=[951463924279181322])
     async def trading_slash(self, ctx, trading_partner : Option(discord.Member, required=True), what_you_give: Option(str, choices=['Part(s)', 'Money'], required=True), what_you_want: Option(str, choices=['Part(s)', 'Money'], required=True)):
         await self.new_trading_member(ctx.author)
         await self.new_trading_member(trading_partner)
@@ -347,7 +347,7 @@ class trading(commands.Cog):
     
         with open("json_files/trading_member.json", "w") as f:
             json.dump(trading,f)
-        return True
+        return True"""
 
 
 def setup(client):
