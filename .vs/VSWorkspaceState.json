@@ -2,19 +2,9 @@
   "ExpandedNodes": [
     "",
     "\\cogs",
+    "\\cogs\\moderation",
     "\\cogs\\server_commands"
   ],
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-=======
-  "SelectedNode": "\\cogs\\moderation\\ban.py",
->>>>>>> Stashed changes
-=======
-  "SelectedNode": "\\cogs\\moderation\\ban.py",
->>>>>>> Stashed changes
-=======
-  "SelectedNode": "\\cogs\\server_commands\\levelsystem.py",
->>>>>>> Stashed changes
+  "SelectedNode": "\\cogs\\moderation\\warns.py",
   "PreviewInSolutionExplorer": false
 }
