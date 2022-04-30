@@ -114,7 +114,7 @@ async def on_command_error(ctx, error):
             channel = client.get_channel(933813622952562718)
         except:
             channel = client.get_channel(951562519217065984)
-        await channel.send("A command_error occured:\n" + error)
+        await channel.send(f"A command_error occured:\n{error}")
         return
 
 
@@ -128,7 +128,7 @@ async def on_application_command_error(ctx, error):
             channel = client.get_channel(933813622952562718)
         except:
             channel = client.get_channel(951562519217065984)
-        await channel.send("A application_command_error occured:\n" + error)
+        await channel.send(f"A application_command_error occured:\n{error}")
         return
 
 initial_extensions = []
