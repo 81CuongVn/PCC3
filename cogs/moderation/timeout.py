@@ -23,10 +23,10 @@ class timeout(commands.Cog):
             await self.new_warn_member(member)
             channel = self.client.get_channel(933768368970932254)
             if member.id == ctx.author.id:
-                await ctx.respond("You can't timeout yourself!")
+                await ctx.respond("You can't timeout yourself!", ephemeral=True)
                 return
             if member.guild_permissions.moderate_members:
-                await ctx.respond("You can't do this, this person is a moderator!")
+                await ctx.respond("You can't do this, this person is a moderator!", ephemeral=True)
                 return
             if days == None:
                 days = 0
@@ -37,8 +37,8 @@ class timeout(commands.Cog):
             if seconds == None:
                 seconds = 0
             duration = timedelta(days = days, hours = hours, minutes = minutes, seconds = seconds)
-            if duration >= timedelta(days = 28): #added to check if time exceeds 28 days
-                await ctx.respond("You can't mute someone for more than 28 days!", ephemeral = True) #responds, but only the author can see the response
+            if duration >= timedelta(days = 28):
+                await ctx.respond("You can't mute someone for more than 27 days, 23 hours, 59 minutes and 59 seconds!", ephemeral=True)
                 return
             if reason == None:
                 await member.timeout_for(duration)
@@ -47,7 +47,7 @@ class timeout(commands.Cog):
                 embed.add_field(name="Moderator", value=f"{ctx.author.mention}")
                 embed.add_field(name="Duration", value=f"**{days}** days, **{hours}** hours,\n**{minutes}** minutes, and **{seconds}** second",inline=False)
                 embed.add_field(name="Reason:", value="No reason ...")
-                await ctx.respond(f"Muted <@{member.id}> for {days} days, {hours} hours, {minutes} minutes, and {seconds} seconds by <@{ctx.author.id}>.")
+                await ctx.respond(f"Muted <@{member.id}> for {days} days, {hours} hours, {minutes} minutes, and {seconds} seconds by <@{ctx.author.id}>.", delete_after=10)
                 await channel.send(embed=embed)
             else:
                 await member.timeout_for(duration, reason = reason)
@@ -57,7 +57,7 @@ class timeout(commands.Cog):
                 embed.add_field(name="Duration", value=f"**{days}** days, **{hours}** hours,\n**{minutes}** minutes, and **{seconds}** second",inline=False)
                 embed.add_field(name="Reason:", value=reason)
                 await channel.send(embed=embed)
-                await ctx.respond(f"Muted <@{member.id}> for {days} days, {hours} hours, {minutes} minutes, and {seconds} seconds by <@{ctx.author.id}> for '{reason}'.")
+                await ctx.respond(f"Muted <@{member.id}> for {days} days, {hours} hours, {minutes} minutes, and {seconds} seconds by <@{ctx.author.id}> for '{reason}'.", delete_after=10)
             await self.update_warns(member, reason)
         else:
             return
@@ -65,7 +65,7 @@ class timeout(commands.Cog):
     @timeout.error
     async def timeouterror(ctx, error):
         if isinstance(error, MissingPermissions):
-            await ctx.respond("You can't do this! You need to have moderate members permissions!")
+            await ctx.respond("You can't do this! You need to have moderate members permissions!", ephemeral=True)
         else:
             raise error
 

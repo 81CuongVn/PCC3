@@ -11,32 +11,34 @@ class ban(commands.Cog):
         self.client = client
 
 
-    @commands.slash_command(name="ban", description="For moderation")
-    async def ban(self, ctx, member : discord.Member, *, reason= "No reason ..."):
+    @commands.command(name="ban")
+    async def ban(self, ctx, member: discord.Member, *, reason = "No reason specified"):
         user = ctx.author
         if any(role.id in rolelist for role in user.roles):
+            await ctx.message.delete()
             await self.new_warn_member(member)
             channel = self.client.get_channel(933768368970932254)
             try:
-                await member.send(f"You were banned on the PC Creater server")
-                await member.send(f"reason: {reason}")
+                await member.send(f"You were banned from the PC Creater server for:\n" + reason)
+
+                await member.ban(reason=reason)
+                await ctx.send(f"Banned {member.mention}", delete_after=10)
+
                 embed = discord.Embed(title="Banned", color=13565696)
                 embed.add_field(name="Banned:", value=f"{member.mention}")
                 embed.add_field(name="Moderator", value=f"{ctx.author.mention}")
                 embed.add_field(name="Reason:", value=reason, inline=False)
-
                 await channel.send(embed=embed)    
-                await ctx.respond(f"Banned {member.mention}")
-                await member.ban(reason=reason)   
+
             except:
+                await member.ban(reason=reason)
+                await ctx.send(f"Banned {member.mention}", delete_after=10)
+
                 embed = discord.Embed(title="Banned", color=13565696)
                 embed.add_field(name="Banned:", value=f"{member.mention}")
                 embed.add_field(name="Moderator", value=f"{ctx.author.mention}")
                 embed.add_field(name="Reason:", value=reason, inline=False)
-
                 await channel.send(embed=embed)    
-                await ctx.respond(f"Banned {member.mention}")
-                await member.ban(reason=reason) 
 
             await self.update_warns(member, reason)
         else:

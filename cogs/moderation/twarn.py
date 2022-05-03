@@ -16,8 +16,9 @@ class twarn(commands.Cog):
     async def twarn(self, ctx, member: discord.Member):
         user = ctx.author
         if any(role.id in rolelist for role in user.roles):
+            await ctx.message.delete()
             if member==None:
-                await ctx.send("Please use `,twarn @member`")
+                await ctx.send("Please use `,twarn @member`", delete_after=10)
                 return
 
             category = discord.utils.get(ctx.author.guild.categories, name="TICKETS")
@@ -32,13 +33,13 @@ class twarn(commands.Cog):
                     await self.new_warn_member(member)
                     await self.update_warns(member, reason)
 
-                    await ctx.send(f"Warned {member.mention} for {reason}")   
+                    await ctx.send(f"Warned {member.mention} for {reason}", delete_after=10)   
 
                 else:
-                    await ctx.send("You don't have the permissions to use this comman")    
+                    await ctx.send("You don't have the permissions to use this comman", delete_after=10)    
 
             else:
-                await ctx.send("You can't use this command here")
+                await ctx.send("You can't use this command here", delete_after=10)
         else:
             return
 
