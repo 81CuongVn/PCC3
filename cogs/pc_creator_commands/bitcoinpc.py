@@ -7,9 +7,9 @@ class bitcoinpc(commands.Cog):
         self.client = client
 
 
-    @commands.command(name="bitcoinpc", aliases=["miner", "bitcoinminer", "btcpc"])
+    """@commands.command(name="bitcoinpc", aliases=["miner", "bitcoinminer", "btcpc"])
     async def bitcoinpc(self, ctx):
-        await ctx.send("https://media.discordapp.net/attachments/802512035224223774/948613438295408690/Bitcoin_PC_4.jpg")
+        await ctx.send("https://media.discordapp.net/attachments/802512035224223774/948613438295408690/Bitcoin_PC_4.jpg")"""
 
 
     @commands.slash_command(name="miner_pcc1", description="Shows a chart with good mining setups for every level")

@@ -47,10 +47,7 @@ class levelsys(commands.Cog):
  
     @commands.slash_command(name="xp")
     async def ranklist(self, ctx, member: Option(discord.Member, required = True)):
-        if member == None:
-            user = ctx.author
-        else:
-            user = member
+        user = member
         if True:
             #try:
             with open(lsj, "r") as f:
@@ -70,8 +67,8 @@ class levelsys(commands.Cog):
 
             nextxp = levelnum[0]
             for userlevel in level[::-1]:
-                if userlevel.lower() in [y.name.lower() for y in ctx.author.roles]:
-                    if not level[::-1][0].lower() in [y.name.lower() for y in ctx.author.roles]:
+                if userlevel.lower() in [y.name.lower() for y in user.roles]:
+                    if not level[::-1][0].lower() in [y.name.lower() for y in user.roles]:
                         position = level.index(userlevel)
                         nextxp = levelnum[position + 1]
                         boxes = users[str(user.id)] / nextxp
@@ -89,7 +86,7 @@ class levelsys(commands.Cog):
             embed.add_field(name="XP", value=f"{users[str(user.id)]}/{nextxp}", inline=True)
             embed.add_field(name="Rank", value=f"{pos}/{ctx.guild.member_count}", inline=True)
             embed.add_field(name="Progress Bar", value=boxes * ":blue_square:" + (20-boxes) * ":white_large_square:", inline=False)
-            embed.set_thumbnail(url=ctx.author.avatar.url)
+            embed.set_thumbnail(url=user.avatar.url)
             await ctx.respond(embed=embed)
             #except:
                 #await ctx.channel.send("Something went wrong... Please try again.")

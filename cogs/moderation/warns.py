@@ -13,16 +13,16 @@ class warns(commands.Cog):
 
  
     @commands.command(name="warn")
-    async def warn(self, ctx, member: discord.Member, reason = None):
+    async def warn(self, ctx, member: discord.Member, *reason):
         user = ctx.author
         if any(role.id in rolelist for role in user.roles):
             await ctx.message.delete()
             if reason != None:
                 await self.new_warn_member(member)
                 await self.update_warns(member, reason)
-                await ctx.respond(f"Warned {member.mention} for {reason}", delete_after=10)
+                await ctx.send(f"Warned {member.mention} for {reason}", delete_after=10)
             else:
-                await ctx.respond(f"You have to specify a reason -_-", delete_after=10)
+                await ctx.send(f"You have to specify a reason -_-", delete_after=10)
         else:
             return
 

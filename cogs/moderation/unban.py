@@ -23,9 +23,9 @@ class unban(commands.Cog):
                 if(user.name, user.discriminator)==(member_name, member_disc):
 
                     await ctx.guild.unban(user)
-                    await ctx.respond(f"Unbanned {member_name}", delete_after=10)
+                    await ctx.send(f"Unbanned {member_name}", delete_after=10)
                     return
-            await ctx.respond(f"Can't find {member}", delete_after=10)
+            await ctx.send(f"Can't find {member}", delete_after=10)
         else:
             return
 
