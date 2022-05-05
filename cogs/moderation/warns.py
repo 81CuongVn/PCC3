@@ -13,7 +13,11 @@ class warns(commands.Cog):
 
  
     @commands.command(name="warn")
+<<<<<<< HEAD
     async def warn(self, ctx, member: discord.Member, *, reason = None):
+=======
+    async def warn(self, ctx, member: discord.Member, *reason):
+>>>>>>> a1e239450049002ea4b89985d00e04e9e4f3f853
         user = ctx.author
         if any(role.id in rolelist for role in user.roles):
             await ctx.message.delete()

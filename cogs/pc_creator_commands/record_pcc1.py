@@ -7,7 +7,7 @@ class record_pcc1(commands.Cog):
     def __init__(self, client):
         self.client = client
 
-    @commands.command()
+    """@commands.command()
     async def pcc1record(self, ctx): 
         embed = discord.Embed(title="__World Record__", description="This is the current World Record PC", color=13565696)
         embed.add_field(name=f":small_blue_diamond: Achieved by", value="<@695229647021015040> ¥£$#7660 (695229647021015040)", inline=False)
@@ -15,7 +15,7 @@ class record_pcc1(commands.Cog):
         embed.add_field(name=f":small_blue_diamond: Score achieved", value="`207,231`", inline=False)
         embed.set_image(url="https://cdn.discordapp.com/attachments/838857610358292532/905766073557729290/record.jpg")
 
-        await ctx.send(embed=embed)   
+        await ctx.send(embed=embed)"""  
 
 
     @commands.slash_command(name="record_pcc1", description="Shows the best PC in PCC1")

@@ -7,11 +7,11 @@ class cost(commands.Cog):
         self.client = client
 
 
-    @commands.command()
+    """@commands.command()
     async def cost(self, ctx):  
         embed = discord.Embed(title="PCC2", description="PC Creator 2 is a ~~paid game and costs **7,99€/7.99$**~~ **free to play** game", color=13565696)
         embed.set_image(url="https://cdn.discordapp.com/attachments/572536109754744839/935181436837830696/unknown.png")
-        await ctx.send(embed=embed)
+        await ctx.send(embed=embed)"""
 
 
     @commands.slash_command(name="cost", description="Sends a picture with information about the price of PCC2")
