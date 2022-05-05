@@ -23,16 +23,16 @@ class levelroles(commands.Cog):
      
     @commands.command(aliases=["levelroles", "lrs", "rank"])
     async def lrs_normal_command(self, ctx, member:discord.Member = None):
-        if not ctx.author.id == 695229647021015040:
-            return
+        #if not ctx.author.id == 695229647021015040:
+        #    return
         send = ctx.send
         await self.lrs(ctx , send, member)
 
 
     @commands.slash_command(name="lrs", description="Sends your current levelroles progress")
     async def lrs_slash_command(self, ctx, member: Option(discord.Member, required = False)):
-        if not ctx.author.id == 695229647021015040:
-            return
+        #if not ctx.author.id == 695229647021015040:
+        #    return
         send = ctx.respond
         await self.lrs(ctx , send, member)    
             
