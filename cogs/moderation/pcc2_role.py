@@ -15,7 +15,7 @@ class pcc2_role(commands.Cog):
         if any(role.id in rolelist for role in user.roles):
             await ctx.message.delete()
             role = ctx.guild.get_role(934902778764091413)
-            await ctx.send(f"Added role **PCC2** to **{member}**", delete_after=30)
+            await ctx.send(f"Added the **PCC2** role to **{member}**", delete_after=30)
             await member.add_roles(role)
         else:
             return
