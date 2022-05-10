@@ -16,8 +16,8 @@ class ppra(commands.Cog):
         if any(role.id in rolelist for role in user.roles):
             await ctx.message.delete()
             role = ctx.guild.get_role(775736993018806322)
-            await ctx.send(f"Added role **PRO PLAYER** to **{member}**")
-            await member.add_roles(role) 
+            await ctx.send(f"Added the **PRO PLAYER** role to **{member}**", delete_after=10)
+            await member.add_roles(role)
         else:
             return
 
