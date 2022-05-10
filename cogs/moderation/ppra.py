@@ -11,7 +11,7 @@ class ppra(commands.Cog):
         self.client = client
 
     @commands.command(name="ppra")
-    async def ppra(self, ctx, member: discord.Member):
+    async def ppra(self, ctx, member:discord.Member):
         user = ctx.author
         if any(role.id in rolelist for role in user.roles):
             await ctx.message.delete()
