@@ -102,12 +102,18 @@ async def bub(ctx):
 
 @client.event
 async def on_command_error(ctx, error):
+    
+    send_help = (commands.MissingRequiredArgument, commands.BadArgument, commands.TooManyArguments, commands.UserInputError)
+    
     if isinstance(error, commands.CommandOnCooldown):
         await ctx.send(f'This command is on cooldown, you can use it in {round(error.retry_after, 2)}')     
     elif isinstance(error, CommandNotFound):
         return
     elif isinstance(error, MemberNotFound):
         await ctx.send("Can't find this member")
+        return
+    elif isinstance(error, send_help):
+        await ctx.send(f"Hey! You made a mistake.\n{error}", delete_after=10)
         return
     else:
         try:
