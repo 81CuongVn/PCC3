@@ -10,7 +10,7 @@ class PreAnswer(commands.Cog):
 
     @commands.slash_command(name="preset_answer", description="For da ticket Mods")
     @permissions.has_any_role(951207540472029195, 951464246506565683, 697728131003580537)
-    async def preset_answer_slash(self, ctx, answer : Option(str, 'Choose the message', choices=["Hello", "Bye", "Contact SUPPORT", "Reinstall Game and create new User", "explain in detail", "send screenshot", "screenshot of payment (Pro Player)", "send video", "custom"], required=True), member : Option(discord.Member, required=False), custom : Option(str,"Custom Message", required=False)):
+    async def preset_answer_slash(self, ctx, answer : Option(str, 'Choose the message', choices=["Hello", "Bye", "Contact SUPPORT", "David Bug", "explain in detail", "send screenshot", "screenshot of payment (Pro Player)", "send video", "Device not supported", "custom"], required=True), member : Option(discord.Member, required=False), custom : Option(str,"Custom Message", required=False)):
 
         fileObj = None
         if answer == "Hello":
@@ -34,11 +34,11 @@ class PreAnswer(commands.Cog):
             else:
                 await ctx.respond("You need to type a message in the \"custom\" tab. -_-", ephemeral=True)
                 return
-        elif answer == "Reinstall Game and create new User":
+        elif answer == "David Bug":
             if member:
-                message = f"Hi <@{member.id}>!\nHow can I help you today?"
+                message = f"Hi <@{member.id}>!\nThis bug, the \"David Bug\", is currently only fixable by reinstalling the game and starting from scratch. There is also no guarantee that the bug will be fixed by only reinstalling. If you don't want to loose your progress, or don't want the risk of it happening again, you can wait for a bug-fix that will probably come out once the war in the Ukraine is over."
             else:
-                message = f"Hi!\nHow can I help you today?"
+                message = f"This bug, the \"David Bug\", is currently only fixable by reinstalling the game and starting from scratch. There is also no guarantee that the bug will be fixed by only reinstalling. If you don't want to loose your progress, or don't want the risk of it happening again, you can wait for a bug-fix that will probably come out once the war in the Ukraine is over."
         elif answer == "explain in detail":
             if member:
                 message = f"<@{member.id}>\nCan you give us more details about the problem?"
@@ -60,6 +60,11 @@ class PreAnswer(commands.Cog):
                 message = f"<@{member.id}>\nCan you send us a screen-recording of you reproducing the bug/problem please?"
             else:
                 message = f"Can you send us a screen-recording of you reproducing the bug/problem please?"
+        elif answer == "Device not supported":
+            if member:
+                message = f"<@{member.id}>\nThe following devices are not supported due to technical issues:\n> Redmi 9\n> Redmi 9A\n> Redmi 9C\n> Redmi 9C NFC\n> HUAWEI Y5 LITE\n\nIf you have one of those devices, we sadly cannot help since it is a hardware related issue."
+            else:
+                message = f"The following devices are not supported due to technical issues:\n> Redmi 9\n> Redmi 9A\n> Redmi 9C\n> Redmi 9C NFC\n> HUAWEI Y5 LITE\n\nIf you have one of those devices, we sadly cannot help since it is a hardware related issue."
 
 
 

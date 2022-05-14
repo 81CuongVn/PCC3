@@ -45,7 +45,7 @@ class botinfo(commands.Cog):
         uptime = uptime.split(".")[0]# + " HH/MM/SS"
 
         fields = [
-            ("Bot version:", "1.10.1", True),
+            ("Bot version:", "1.10.2", True),
             ("Python version:", python_version(), True),
             ("Discord-API version:", discord_version, False),
             ("Uptime:", uptime, False),
