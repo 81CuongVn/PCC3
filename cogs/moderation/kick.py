@@ -15,7 +15,7 @@ class kick(commands.Cog):
     async def kick(self, ctx, member: discord.Member, *, reason = "No reason specified"):
         user = ctx.author
         if any(role.id in rolelist for role in user.roles):
-            if any(role.id in rolelist for role in member.roles):
+            if not any(role.id in rolelist for role in member.roles):
                 await ctx.message.delete()
                 await self.new_warn_member(member)
                 channel = self.client.get_channel(933768368970932254)

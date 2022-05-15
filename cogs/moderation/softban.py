@@ -14,7 +14,7 @@ class softban(commands.Cog):
     async def softban(self, ctx, member: discord.Member, *, reason = "No reason specified"):
         user = ctx.author
         if any(role.id in rolelist for role in user.roles):
-            if any(role.id in rolelist for role in member.roles):
+            if not any(role.id in rolelist for role in member.roles):
                 await ctx.message.delete()
                 channel = self.client.get_channel(933768368970932254)
                 try:
