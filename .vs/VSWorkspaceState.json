@@ -3,9 +3,10 @@
     "",
     "\\cogs",
     "\\cogs\\advanced_systems",
+    "\\cogs\\coin_system",
     "\\cogs\\moderation",
     "\\cogs\\ticketsystem"
   ],
-  "SelectedNode": "\\cogs\\moderation\\warns.py",
+  "SelectedNode": "\\cogs\\ticketsystem\\ticketsystem.py",
   "PreviewInSolutionExplorer": false
 }

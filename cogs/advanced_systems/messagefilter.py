@@ -7,8 +7,12 @@ import re
 with open("json_files/mainconfig.json", encoding="utf-8-sig") as f:
     mainconfig = json.load(f)
 
-localmuchusedbadwords = ["ass","clit","cum","coon","coons","honkey","hooker","fuck","jizz","juggs","rape","scat","semen","spic","spunk","suck","sucks","swinger","skeet","slanteye","tit","tits","tushy","twat","twink","twinkie","nipple","nipples","nude","nudity","wank","wetback","queaf","queef","quim","xx","xxx","fuckin","fucking","shit","shitty","bbw","bdsm","dick","erotic","erotism","escort","cunt","cock","kike","dommes","faggot","pissing","penis","playboy","milf","pthc","pubes","pussy","humping","incest","nambla","nawashi","neonazi","nigga","nigger","raping","rapist","rectum","fecal","felch","fellatio","feltch","paki","panties","panty","orgy","slut","s&m","smut","snatch","sadism","santorum","schlong","scissoring","strap on","strapon","titties","titty","sex","sexo","busty","butt","yiffy","nigg","nig"]
-localbadwords = ["fuck","2g1c","2 girls 1 cup","acrotomophilia","motherfuck","alabama hot pocket","alaskan pipeline","anal","anilingus","anus","apeshit","arsehole","asshole","assmunch","auto erotic","autoerotic","babeland","baby batter","baby juice","ball gag","ball gravy","ball kicking","ball licking","ball sack","ball sucking","bangbros","bareback","barely legal","barenaked","bastard","bastardo","bastinado","beaner","beaners","beaver cleaver","beaver lips","bestiality","big black","big breasts","big knockers","big tits","bimbos","birdlock","bitch","bitches","black cock","blonde action","blonde on blonde action","blowjob","blow job","blow your load","blue waffle","blumpkin","bollocks","bondage","boner","boob","boobs","booty call","brown showers","brunette action","bukkake","bulldyke","bullet vibe","bullshit","bung hole","nigger","nigga","bunghole","buttcheeks","butthole","camel toe","camgirl","camslut","camwhore","carpet muncher","carpetmuncher","chocolate rosebuds","circlejerk","cleveland steamer","clitoris","clover clamps","clusterfuck","cocks","coprolagnia","coprophilia","cornhole","creampie","cumming","cunnilingus","darkie","date rape","daterape","deep throat","deepthroat","dendrophilia","dildo","dingleberry","dingleberries","dirty pillows","dirty sanchez","doggie style","doggiestyle","doggy style","doggystyle","dog style","dolcett","domination","dominatrix","donkey punch","double dong","double penetration","dp action","dry hump","dvda","eat my ass","ecchi","ejaculation","eunuch","female squirting","femdom","figging","fingerbang","fingering","fisting","foot fetish","footjob","frotting","fuck buttons","fucktards","fudge packer","fudgepacker","futanari","gang bang","gay sex","genitals","giant cock","girl on","girl on top","girls gone wild","goatcx","goatse","god damn","gokkun","golden shower","goodpoop","goo girl","goregasm","grope","group sex","g-spot","guro","hand job","handjob","hard core","hardcore","hentai","homoerotic","hot carl","hot chick","how to kill","how to murder","huge fat","intercourse","jack off","jail bait","jailbait","jelly donut","jerk off","jigaboo","jiggaboo","jiggerboo","kinbaku","kinkster","kinky","knobbing","leather restraint","leather straight jacket","lemon party","lolita","lovemaking","make me come","male squirting","masturbate","menage a trois","missionary position","motherfucker","mound of venus","mr hands","muff diver","muffdiving","nig nog","nimphomania","nsfw images","nympho","nymphomania","octopussy","omorashi","one cup two girls","one guy one jar","orgasm","paedophile","pedobear","pedophile","pegging","phone sex","piece of shit","piss pig","pisspig","pleasure chest","pole smoker","ponyplay","poontang","punany","poop chute","poopchute","porn","porno","pornography","prince albert piercing","raghead","raging boner","reverse cowgirl","rimjob","rimming","rosy palm","rosy palm and her 5 sisters","rusty trombone","shaved beaver","shaved pussy","shemale","shibari","shitblimp","shota","shrimping","snowballing","sodomize","sodomy","splooge","splooge moose","spooge","spread legs","strappado","strip club","style doggy","suicide girls","sultry women","tainted love","taste my","tea bagging","threesome","throating","tight white","tongue in a","topless","tosser","towelhead","tranny","tribadism","tub girl","tubgirl","two girls one cup","undressing","upskirt","urethra play","urophilia","vagina","venus mound","vibrator","violet wand","vorarephilia","voyeur","vulva","wet dream","white power","wrapping men","wrinkled starfish","yaoi","yellow showers","zoophilia"]
+with open("json_files/badwords.json", encoding="utf-8-sig") as e:
+    badwords = json.load(e)
+
+localmuchusedbadwords = badwords[0]["localmuchusedbadwords"]
+localbadwords = badwords[0]["localbadwords"]
+rolelist = [589435378147262464, 632674518317531137, 951207540472029195, 951464246506565683]
 allowedroles = mainconfig["allowed_filter"] #[951207540472029195, 589435378147262464, 632674518317531137] #, 951464246506565683] #botdev, moderator, admin, testserveradmin
 
 class messagefilter(commands.Cog):
@@ -34,7 +38,7 @@ class messagefilter(commands.Cog):
         if message != None:
             if not message.author.bot:
                 badwordarr = localbadwords #await self.get_badwords()
-                muchusedarr =localmuchusedbadwords #await self.get_muchusedbadwords()
+                muchusedarr = localmuchusedbadwords #await self.get_muchusedbadwords()
                 author = message.author
                 try:
                     webhooks = await message.channel.webhooks()
@@ -45,7 +49,7 @@ class messagefilter(commands.Cog):
                 #replacement = ":heart:"
                 explanation = "\n\nPlease stop using swear words (rule 5).\nYou can read the rules in <#605326085328207872>.​"
                 if any(role.id in allowedroles for role in author.roles):
-                    return
+                    return True
                 #nospacecontent = content.replace(" ", "")
                 for badword in badwordarr:
                     if badword.lower() in content.lower():
@@ -107,6 +111,82 @@ class messagefilter(commands.Cog):
                         return True
                 return True
             return False
+
+    @commands.command(name="new_badword")
+    async def new_item(self, ctx, list_name = "localbadwords", *, item_name = ""):
+        user = ctx.author
+        if any(role.id in rolelist for role in user.roles):
+            item_name = item_name.lower()
+            if item_name != "" and item_name != "nothing":
+                with open("json_files/badwords.json", "r", encoding="utf-8-sig") as badjson:
+                    items = json.load(badjson)
+                if type(items) is dict:
+                    items = [items]
+                
+                oglistname = list_name
+                if list_name == "localbadwords":
+                    list_name = 0
+                elif list_name == "localmuchusedbadwords":
+                    list_name = 1
+                else:
+                    await ctx.send(f"No such list: \"{item_name}\"\nMaybe try: `localbadwords` or `localmuchusedbadwords`")#, delete_after=10)
+                    return False
+
+                if item_name in items[list_name]:
+                    await ctx.send(f"Could not add " + item_name + ", since it is already added.")#, delete_after=10)
+                    return False
+
+                items[list_name][oglistname].append(item_name)
+                #print(items)
+                with open("json_files/badwords.json", "w", encoding="utf-8-sig") as superbadwords:
+                    json.dump(items, superbadwords)
+                    #print(f"Badword \"{item_name}\" was added to badwords.json")
+                await ctx.send(f"Added {item_name}. It will be used on the next restart")#, delete_after=10)
+            else:
+                await ctx.send(f"Cannot add nothing to the list since it would break the bot. Why would you even want to do that???")#, delete_after=10)
+                
+
+            
+
+    @commands.command(name="rem_badword")
+    async def rem_item(self, ctx, list_name = "localbadwords", *, item_name = "nothing"):
+        user = ctx.author
+        if any(role.id in rolelist for role in user.roles):
+            #try:
+            if True:
+                item_name = item_name.lower()
+                oglistname = list_name
+                if list_name == "localbadwords":
+                    list_name = 0
+                elif list_name == "localmuchusedbadwords":
+                    list_name = 1
+                else:
+                    await ctx.send(f"No such list: \"{item_name}\"\nMaybe try: `localbadwords` or `localmuchusedbadwords`")#, delete_after=10)
+                    return False
+
+                with open("json_files/badwords.json", "r", encoding="utf-8-sig") as badjson:
+                    items = json.load(badjson)
+                if type(items) is dict:
+                    items = [items]
+                if item_name in items[list_name][oglistname]:
+                    items[list_name][oglistname].remove(item_name)
+                    await ctx.send(f"Removed {item_name}")#, delete_after=10)
+                    #return True
+                else:
+                    await ctx.send(f"Could not remove {item_name}")#, delete_after=10)
+                    return False
+                with open("json_files/badwords.json", "w", encoding="utf-8-sig") as superbadwords:
+                    json.dump(items, superbadwords)
+            #except:
+                #await ctx.send(f"Something broke...", delete_after=10)
+
+    @commands.command(name="list_badword")
+    async def rem_item(self, ctx):
+        user = ctx.author
+        if any(role.id in rolelist for role in user.roles):
+            fileObject = discord.File(f"json_files/badwords.json")
+            await ctx.send("badwords file:", file=fileObject)
+
 
 def setup(client):
 	client.add_cog(messagefilter(client))
