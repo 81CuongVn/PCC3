@@ -15,32 +15,35 @@ class ban(commands.Cog):
     async def ban(self, ctx, member: discord.Member, *, reason = "No reason specified"):
         user = ctx.author
         if any(role.id in rolelist for role in user.roles):
-            await ctx.message.delete()
-            await self.new_warn_member(member)
-            channel = self.client.get_channel(933768368970932254)
-            try:
-                await member.send(f"You were banned from the PC Creater server for:\n" + reason)
+            if any(role.id in rolelist for role in member.roles):
+                await ctx.message.delete()
+                await self.new_warn_member(member)
+                channel = self.client.get_channel(933768368970932254)
+                try:
+                    await member.send(f"You were banned from the PC Creater server for:\n" + reason)
 
-                await member.ban(reason=reason)
-                await ctx.send(f"Banned {member.mention}", delete_after=10)
+                    await member.ban(reason=reason)
+                    await ctx.send(f"Banned {member.mention}", delete_after=10)
 
-                embed = discord.Embed(title="Banned", color=13565696)
-                embed.add_field(name="Banned:", value=f"{member.mention}")
-                embed.add_field(name="Moderator", value=f"{ctx.author.mention}")
-                embed.add_field(name="Reason:", value=reason, inline=False)
-                await channel.send(embed=embed)    
+                    embed = discord.Embed(title="Banned", color=13565696)
+                    embed.add_field(name="Banned:", value=f"{member.mention}")
+                    embed.add_field(name="Moderator", value=f"{ctx.author.mention}")
+                    embed.add_field(name="Reason:", value=reason, inline=False)
+                    await channel.send(embed=embed)    
 
-            except:
-                await member.ban(reason=reason)
-                await ctx.send(f"Banned {member.mention}", delete_after=10)
+                except:
+                    await member.ban(reason=reason)
+                    await ctx.send(f"Banned {member.mention}", delete_after=10)
 
-                embed = discord.Embed(title="Banned", color=13565696)
-                embed.add_field(name="Banned:", value=f"{member.mention}")
-                embed.add_field(name="Moderator", value=f"{ctx.author.mention}")
-                embed.add_field(name="Reason:", value=reason, inline=False)
-                await channel.send(embed=embed)    
+                    embed = discord.Embed(title="Banned", color=13565696)
+                    embed.add_field(name="Banned:", value=f"{member.mention}")
+                    embed.add_field(name="Moderator", value=f"{ctx.author.mention}")
+                    embed.add_field(name="Reason:", value=reason, inline=False)
+                    await channel.send(embed=embed)    
 
-            await self.update_warns(member, reason)
+                await self.update_warns(member, reason)
+            else:
+                await ctx.send(f"Cannot ban a member with Moderator permissions.", delete_after=10)
         else:
             return
 
