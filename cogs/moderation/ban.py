@@ -12,7 +12,7 @@ class ban(commands.Cog):
 
 
     @commands.command(name="ban")
-    async def ban(self, ctx, member: discord.Member, *, reason = "No reason specified"):
+    async def ban(self, ctx, member: discord.Member , *, reason = "No reason specified"):
         user = ctx.author
         if any(role.id in rolelist for role in user.roles):
             if any(role.id in rolelist for role in member.roles):

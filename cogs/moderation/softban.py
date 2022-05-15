@@ -11,7 +11,7 @@ class softban(commands.Cog):
 
 
     @commands.command(name="softban")
-    async def softban(self, ctx, member: discord.Member, reason = "No reason specified"):
+    async def softban(self, ctx, member: discord.Member, *, reason = "No reason specified"):
         user = ctx.author
         if any(role.id in rolelist for role in user.roles):
             if any(role.id in rolelist for role in member.roles):
