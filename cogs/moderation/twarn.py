@@ -36,7 +36,7 @@ class twarn(commands.Cog):
                     await ctx.send(f"Warned {member.mention} for {reason}", delete_after=10)   
 
                 else:
-                    await ctx.send("You don't have the permissions to use this comman", delete_after=10)    
+                    await ctx.send("You don't have the permissions to use this command", delete_after=10)    
 
             else:
                 await ctx.send("You can't use this command here", delete_after=10)

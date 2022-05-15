@@ -25,8 +25,8 @@ class timeout(commands.Cog):
             if member.id == ctx.author.id:
                 await ctx.respond("You can't timeout yourself!", ephemeral=True)
                 return
-            if member.guild_permissions.moderate_members:
-                await ctx.respond("You can't do this, this person is a moderator!", ephemeral=True)
+            if any(role.id in rolelist for role in member.roles):
+                await ctx.respond(f"Cannot ban a member with Moderator permissions.", delete_after=10)
                 return
             if days == None:
                 days = 0
