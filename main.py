@@ -66,7 +66,7 @@ async def sdb(ctx):
         #print(ans.content)
         #print(ctx.author.id)
         if int(ans.content) == int(ctx.author.id):
-            await ctx.send("Shutting down..."))
+            await ctx.send("Shutting down...")
             sys.exit()
         else:
             await ctx.send("Canceled")
