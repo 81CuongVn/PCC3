@@ -5,8 +5,10 @@
     "\\cogs\\advanced_systems",
     "\\cogs\\moderation",
     "\\cogs\\server_commands",
-    "\\cogs\\ticketsystem"
+    "\\cogs\\ticketsystem",
+    "\\cogs\\uselessfeatures",
+    "\\unused"
   ],
-  "SelectedNode": "\\cogs\\moderation\\ban.py",
+  "SelectedNode": "\\cogs\\advanced_systems\\logger.py",
   "PreviewInSolutionExplorer": false
 }
