@@ -4,10 +4,14 @@
     "\\cogs",
     "\\cogs\\advanced_systems",
     "\\cogs\\moderation",
+<<<<<<< Updated upstream
     "\\cogs\\server_commands",
     "\\cogs\\ticketsystem",
     "\\cogs\\uselessfeatures",
     "\\unused"
+=======
+    "\\cogs\\ticketsystem"
+>>>>>>> Stashed changes
   ],
   "SelectedNode": "\\cogs\\advanced_systems\\logger.py",
   "PreviewInSolutionExplorer": false
