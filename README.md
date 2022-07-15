@@ -1,5 +1,7 @@
 # PCC3
 
+# ATTENTION! THIS CODE IS NOT GETTING MAINTAINED ANYMORE AND IS READ-ONLY! USE AT YOUR OWN RISK!
+
 ## Information
 
 Testing version of the "PC Creator 2" Bot.
